@@ -1,0 +1,60 @@
+<div class="main">
+    <div class="Header">
+        <div class="Navigation">
+            <p class="recipes">Resipes</p>
+            <p class="links">Главная</p>
+            <p class="links CurrentLink">Рецепты</p>
+            <p class="links">Избранное</p>
+        </div>
+        <div class="User">
+            <p margin="inherit">Привет, Username</p>
+            <p>|</p>
+            <p class="exit">Выйти</p>
+        </div>
+    </div>
+
+    <div class="MainContainer">
+        <div style="height: 50px;"></div>
+        <div class="TopBar">
+            <p class="Recipe">Рецепты</p>
+            <button class="AddRecipeButton" routerLink="AddRecipe"> + Добавить рецепт</button>
+        </div>
+
+        <div class="CategoriesBar">
+            <p class="Category">Простые блюда</p>
+            <p class="Category">Детское</p>
+            <p class="Category">От шев-поваров</p>
+            <p class="Category">На праздник</p>
+        </div>
+
+        <div class="SearchBar">
+            <p class="SearchRecipe">Поиск рецепта</p>
+            <p style="width: 45px;"></p>
+            <input class="InpytRecipe"  placeholder="Название блюда..." />
+            <button class="SearchButton" > Поиск</button>
+        </div>
+
+        <div style="height: 50px;"></div>
+        <div class="RecipeList" *ngFor="let recipe of recipes;">
+            <div class="OneRecipeBox">
+                <div class="TitlePicture">
+                    <p>фото рецепта</p>
+                </div>
+                <div class="MainField">
+                    <p class="RecipeTitle" >{{recipe.title}}</p>
+                    <div style="height: 15px;"></div>
+                    <p class="RecipeContent">{{recipe.shortDescription}}</p>
+                    <div style="height: 30px;"></div>
+                    <p class="RecipeContent">Время приготовления:</p>
+                    <p class="RecipeContent">{{recipe.preparingTime}} минут</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="Footer">
+        <div style="height: 35px;"></div>
+        <div class="GreyBar"></div>
+        <p>@Resipes 2021 by Dmcharlie19 </p>
+    </div>
+</div>

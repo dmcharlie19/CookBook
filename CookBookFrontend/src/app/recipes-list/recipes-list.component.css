@@ -1,0 +1,154 @@
+.MainContainer{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+/*----------TopBar---------------------------------*/
+.TopBar{
+	display: flex;
+	justify-content: space-between;
+	align-items:center;
+	min-height: 50px;
+	margin: var(--standartMargin);
+	border:	inherit;
+	border-radius: inherit;
+}
+.Recipe{
+    font-weight: 700; 
+    font-size: 38px;
+}
+.AddRecipeButton{
+	width: 230px;
+	height: 50px;
+
+	background: var(--yellow);
+	color: white;
+
+	font-family:inherit;
+	font-size: 13pt;
+
+	border:	inherit;
+	border-radius: 16px;
+	padding: inherit;
+}
+
+/*----------CategoriesBar---------------------------------*/
+.CategoriesBar{
+	display: flex;
+    flex-direction: row;
+	justify-content: space-between;
+
+    margin-top: 20px;
+}
+
+.Category{
+    flex-basis: 22%;
+	
+    padding: 12px;
+
+    text-align: center;
+	border-radius: 8px;
+	
+    font-weight: 700;
+    font-size: 20px;
+
+    background: white;
+    box-shadow: 10px 4px 20px 3px rgb(224, 224, 224);
+}
+
+/*----------SearchBar---------------------------------*/
+
+.SearchBar{
+	display: flex;
+    flex-direction: row;
+	justify-content: space-between;
+
+    margin-top: 50px;
+}
+
+.SearchRecipe{
+    padding: 20px 0px; 
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.InpytRecipe
+{
+    min-height: 50px;
+
+    flex-basis: 65%;
+
+	/* margin: 15px 15px 0px 15px; */
+	border:1px solid #ccc;
+	border-radius: 12px;
+	padding: 5px;
+
+	font-size: 16px;
+}
+
+.SearchButton{
+    flex-basis: 15%;
+
+	background: var(--yellow);
+	color: white;
+
+	font-family:inherit;
+	font-size: 13pt;
+
+	border:	inherit;
+	border-radius: 16px;
+	padding: inherit;
+}
+
+.OneRecipeBox{
+	display: flex;
+	flex-direction: row;
+
+	min-height: 200px;
+
+	/* background: #e5edfa; */
+
+	margin: 10px 0;
+	border-radius: 36px  16px  16px 0px;
+	
+	box-shadow: 10px 4px 20px 3px rgb(224, 224, 224);
+}
+.TitlePicture{
+	flex-basis: 35%;
+	height: 300px;
+
+	background: #FFEFCC;
+	color: #F29E1F;
+
+	text-align: center;
+	vertical-align: middle;
+
+	margin: 0px;
+	border:	inherit;
+	border-radius: 36px 0px;
+	padding: inherit;
+}
+
+.MainField{
+	display: flex;
+	flex-direction: column;
+
+	flex-basis: 65%;
+	
+	/* background: #e5faeb; */
+
+	margin: inherit;
+	padding: 15px;
+}
+
+.RecipeTitle{
+    margin: 0;
+    font-size: 20px; 
+    font-weight: 700;
+}
+.RecipeContent{
+    margin: 0;
+    font-size: 14px; 
+    font-weight: 400;
+}

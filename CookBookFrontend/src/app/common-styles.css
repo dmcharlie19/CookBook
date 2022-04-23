@@ -1,0 +1,108 @@
+:root{
+    --yellow: #FDB100;
+    --grey: #9196A1;
+	--standartMargin: 5px 0;
+}
+
+.body{
+	max-width: 100%;
+	background: rgb(238, 238, 238);;
+}
+
+p {
+	margin: inherit;
+}
+
+.main{
+	--yellow: #FDB100;
+	--grey: #9196A1;
+	--standartMargin: 5px 0;
+
+	display: flex;
+	flex-direction: column;
+
+	font-family: Montserrat, Verdana;
+	
+	background-color: #FEFEFB;
+
+	
+	max-width: 1200px;
+	
+	margin: 20px auto; 
+
+	justify-content: center;
+}
+
+.Header{
+	display: flex;
+	justify-content: space-between;
+
+	/* background: #f9fae5; */
+
+	margin: 5px 0; /* внешний отступ */
+}
+
+.Navigation{
+	display: flex;
+	align-items:center;
+
+	/* margin: 0 8px;
+	border:	inherit;
+	border-radius: 8px;
+	padding: inherit; */
+}
+
+	.recipes
+	{
+		margin: 0px 50px 0px 1px;
+
+		font-weight: 700;
+		font-size: 15pt;
+
+		color:var(--yellow);
+	}
+
+	.links
+	{
+		margin: 0 8px;
+
+		font-weight: 400;
+		font-size: 13pt;
+
+		color: var(--grey);
+	}
+
+	.CurrentLink
+	{
+		font-weight: 600;
+		color: #3A3C41;
+	}
+
+.User{
+	display: flex;
+	align-items:center;
+
+	margin: 0 15px;
+
+	color:var(--yellow);
+	font-weight: 700;
+	font-size: 13pt;
+}
+.exit
+{
+	color:var(--grey);
+	font-weight: 300;
+}
+
+/*----------Footer---------------------------------*/
+.Footer
+{	
+	text-align: center;
+	margin: var(--standartMargin);
+}
+
+.GreyBar
+{
+	height: 1px; 
+	background-color: #ccc;
+}
