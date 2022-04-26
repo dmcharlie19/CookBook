@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using CookBookBackend.Repositories;
-using CookBookBackend.Services;
-using CookBookBackend.Storage;
+using CookBookBackend.Infrastructure.Foundation;
+using CookBookBackend.Application.Repositories;
+using CookBookBackend.Infrastructure.Repositories;
+using CookBookBackend.Application.AppService;
 
 var builder = WebApplication.CreateBuilder( args );
 

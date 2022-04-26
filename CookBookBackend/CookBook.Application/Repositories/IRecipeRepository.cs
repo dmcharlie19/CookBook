@@ -1,6 +1,7 @@
-using CookBookBackend.Domain;
+using System.Collections.Generic;
+using CookBookBackend.Core.Domain;
 
-namespace CookBookBackend.Repositories
+namespace CookBookBackend.Application.Repositories
 {
   public interface IRecipeRepository
   {

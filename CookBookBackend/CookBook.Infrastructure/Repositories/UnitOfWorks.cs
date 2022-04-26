@@ -1,4 +1,7 @@
-namespace CookBookBackend.Storage
+using CookBookBackend.Application.Repositories;
+using CookBookBackend.Infrastructure.Foundation;
+
+namespace CookBookBackend.Infrastructure.Repositories
 {
   public class UnitOfWork : IUnitOfWork
   {

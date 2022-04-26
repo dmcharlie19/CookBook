@@ -1,5 +1,8 @@
-using CookBookBackend.Domain;
-using CookBookBackend.Storage;
+using System.Collections.Generic;
+using System.Linq;
+using CookBookBackend.Application.Repositories;
+using CookBookBackend.Core.Domain;
+using CookBookBackend.Infrastructure.Foundation;
 
 namespace CookBookBackend.Repositories
 {

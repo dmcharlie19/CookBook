@@ -1,8 +1,8 @@
-using System.Reflection.Emit;
+using CookBookBackend.Core.Domain;
+using CookBookBackend.Infrastructure.Configurations;
 using Microsoft.EntityFrameworkCore;
-using CookBookBackend.Domain;
 
-namespace CookBookBackend.Storage
+namespace CookBookBackend.Infrastructure.Foundation
 {
   public class CookBookDbContext : DbContext
   {
@@ -16,7 +16,7 @@ namespace CookBookBackend.Storage
 
     protected override void OnModelCreating( ModelBuilder modelBuilder )
     {
-      modelBuilder.ApplyConfiguration( new CookBookDbConfiguration() );
+      modelBuilder.ApplyConfiguration( new RecipeConfiguration() );
     }
   }
 }

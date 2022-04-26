@@ -1,10 +1,9 @@
-using System.Collections.Generic;
-using CookBookBackend.Dto;
+using CookBookBackend.Api.Command;
+using CookBookBackend.Application.AppService;
+using CookBookBackend.Application.AppServices.Dto;
 using Microsoft.AspNetCore.Mvc;
-using CookBookBackend.Services;
-using CookBookBackend.Domain;
 
-namespace CookBookBackend.Controllers
+namespace CookBookBackend.Api.Controllers
 {
   [ApiController]
   [Route( "api/[controller]" )]
@@ -18,11 +17,11 @@ namespace CookBookBackend.Controllers
     }
 
     [HttpGet( "get-all" )]
-    public List<RecipeDto>? GetAll()
+    public List<RecipeCommand>? GetAll()
     {
       try
       {
-        return _recipeService.GetRecipes().Select( x => new RecipeDto
+        return _recipeService.GetRecipes().Select( x => new RecipeCommand
         {
           Id = x.Id,
           Title = x.Title,
@@ -38,17 +37,17 @@ namespace CookBookBackend.Controllers
     }
 
     [HttpGet( "{recipeId}" )]
-    public RecipeDto? GetById( [FromRoute] int recipeId )
+    public RecipeCommand? GetById( [FromRoute] int recipeId )
     {
       try
       {
-        var recipe = _recipeService.GetRecipe( recipeId );
-        return recipe is null ? null : new RecipeDto
+        var recieDto = _recipeService.GetRecipe( recipeId );
+        return recieDto is null ? null : new RecipeCommand
         {
-          Id = recipe.Id,
-          Title = recipe.Title,
-          ShortDescription = recipe.ShortDescription,
-          PreparingTime = recipe.PreparingTime
+          Id = recieDto.Id,
+          Title = recieDto.Title,
+          ShortDescription = recieDto.ShortDescription,
+          PreparingTime = recieDto.PreparingTime
         };
       }
       catch ( Exception ex )
@@ -59,18 +58,18 @@ namespace CookBookBackend.Controllers
     }
 
     [HttpPost( "create" )]
-    public IActionResult Create( [FromBody] RecipeDto recipe )
+    public IActionResult Create( [FromBody] RecipeCommand recipeCommand )
     {
-      if ( recipe.Title == null )
+      if ( recipeCommand.Title == null )
         return BadRequest();
 
       try
       {
-        int id = _recipeService.CreateRecipe( new Recipe
+        int id = _recipeService.CreateRecipe( new RecipeDto
         {
-          Title = recipe.Title,
-          ShortDescription = recipe.ShortDescription,
-          PreparingTime = recipe.PreparingTime
+          Title = recipeCommand.Title,
+          ShortDescription = recipeCommand.ShortDescription,
+          PreparingTime = recipeCommand.PreparingTime
         } );
         return Ok( id );
       }
@@ -82,7 +81,7 @@ namespace CookBookBackend.Controllers
     }
 
     [HttpPut( "/edit" )]
-    public IActionResult EditRecipe( [FromBody] RecipeDto recipe )
+    public IActionResult EditRecipe( [FromBody] RecipeCommand recipe )
     {
       //#Todo реализовать..
       return Problem();

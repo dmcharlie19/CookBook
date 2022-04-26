@@ -1,8 +1,8 @@
-namespace CookBookBackend.Core.Domain
+namespace CookBookBackend.Application.AppServices.Dto
 {
-  public class Recipe
+  public class RecipeDto
   {
-    public int Id { get; set; }
+    public int? Id { get; set; }
     public string? Title { get; set; }
     public string? ShortDescription { get; set; }
     public int PreparingTime { get; set; }

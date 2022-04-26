@@ -1,6 +1,6 @@
-namespace CookBookBackend.Dto
+namespace CookBookBackend.Api.Command
 {
-  public class RecipeDto
+  public class RecipeCommand
   {
     public int? Id { get; set; }
     public string? Title { get; set; }

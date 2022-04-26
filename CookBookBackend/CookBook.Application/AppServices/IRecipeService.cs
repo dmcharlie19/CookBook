@@ -1,14 +1,14 @@
-using CookBookBackend.Domain;
-using CookBookBackend.Dto;
+using System.Collections.Generic;
+using CookBookBackend.Application.AppServices.Dto;
 
-namespace CookBookBackend.Services
+namespace CookBookBackend.Application.AppService
 {
   public interface IRecipeService
   {
-    List<Recipe> GetRecipes();
-    Recipe? GetRecipe( int recipeId );
-    void EditRecipe( Recipe recipe );
-    int CreateRecipe( Recipe recipe );
+    List<RecipeDto> GetRecipes();
+    RecipeDto? GetRecipe( int recipeId );
+    void EditRecipe( RecipeDto recipeDto );
+    int CreateRecipe( RecipeDto recipeDto );
     void Delete( int recipeId );
   }
 }

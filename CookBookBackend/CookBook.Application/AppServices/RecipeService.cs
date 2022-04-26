@@ -1,8 +1,10 @@
-using CookBookBackend.Domain;
-using CookBookBackend.Repositories;
-using CookBookBackend.Storage;
+using System;
+using System.Collections.Generic;
+using CookBookBackend.Application.AppServices.Dto;
+using CookBookBackend.Application.Repositories;
+using CookBookBackend.Core.Domain;
 
-namespace CookBookBackend.Services
+namespace CookBookBackend.Application.AppService
 {
   public class RecipeService : IRecipeService
   {
@@ -14,14 +16,21 @@ namespace CookBookBackend.Services
       _unitOfWork = unitOfWork;
     }
 
-    public void EditRecipe( Recipe recipe )
+    public void EditRecipe( RecipeDto recipeDto )
     {
       //#Todo реализовать..
       throw new NotImplementedException();
     }
 
-    public int CreateRecipe( Recipe recipe )
+    public int CreateRecipe( RecipeDto recipeDto )
     {
+      Recipe recipe = new Recipe
+      {
+        Title = recipeDto.Title,
+        ShortDescription = recipeDto.ShortDescription,
+        PreparingTime = recipeDto.PreparingTime
+      };
+
       _recipeRepository.Create( recipe );
       _unitOfWork.Commit();
 
@@ -34,14 +43,27 @@ namespace CookBookBackend.Services
       _unitOfWork.Commit();
     }
 
-    public Recipe? GetRecipe( int recipeId )
+    public RecipeDto? GetRecipe( int recipeId )
     {
-      return _recipeRepository.Get( recipeId );
+      var recipe = _recipeRepository.Get( recipeId );
+      return new RecipeDto
+      {
+        Id = recipe.Id,
+        Title = recipe.Title,
+        ShortDescription = recipe.ShortDescription,
+        PreparingTime = recipe.PreparingTime
+      };
     }
 
-    public List<Recipe> GetRecipes()
+    public List<RecipeDto> GetRecipes()
     {
-      return _recipeRepository.GetRecipes();
+      return _recipeRepository.GetRecipes().ConvertAll( recipe => new RecipeDto
+      {
+        Id = recipe.Id,
+        Title = recipe.Title,
+        ShortDescription = recipe.ShortDescription,
+        PreparingTime = recipe.PreparingTime
+      } );
     }
   }
 }
