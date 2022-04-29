@@ -1,108 +1,112 @@
-:root{
-    --yellow: #FDB100;
-    --grey: #9196A1;
+:root {
+	--yellow: #FDB100;
+	--grey: #9196A1;
 	--standartMargin: 5px 0;
 }
 
-.body{
+.onHover-sizeUp{
+	transition: 0.1s;
+}
+.onHover-sizeUp:hover{
+	transform: scale(1.1);
+}
+
+.flex-column{
+	display: flex;
+	flex-direction: column;
+}
+
+.flex-row{
+	display: flex;
+}
+
+.body {
 	max-width: 100%;
-	background: rgb(238, 238, 238);;
+	background-color: #a8a8a8;
 }
 
 p {
-	margin: inherit;
+	margin: 0px;
 }
 
-.main{
+.main {
 	--yellow: #FDB100;
 	--grey: #9196A1;
+	--lightYellow: #FFEFCC;
 	--standartMargin: 5px 0;
 
 	display: flex;
 	flex-direction: column;
-
-	font-family: Montserrat, Verdana;
-	
-	background-color: #FEFEFB;
-
-	
-	max-width: 1200px;
-	
-	margin: 20px auto; 
-
 	justify-content: center;
+
+	font-family: Montserrat;
+
+	background-color: #FEFEFB;
+	max-width: 1200px;
+
+	margin: 20px auto;
+	padding: 44px 120px;
 }
 
-.Header{
+.Header {
 	display: flex;
 	justify-content: space-between;
-
-	/* background: #f9fae5; */
-
-	margin: 5px 0; /* внешний отступ */
+	margin: 5px 0;
+	/* внешний отступ */
 }
 
-.Navigation{
+.Navigation {
 	display: flex;
-	align-items:center;
-
-	/* margin: 0 8px;
-	border:	inherit;
-	border-radius: 8px;
-	padding: inherit; */
+	align-items: center;
 }
 
-	.recipes
-	{
-		margin: 0px 50px 0px 1px;
+.recipes {
+	margin: 0px 50px 0px 1px;
+	font-weight: 700;
+	font-size: 32px;
+	color: var(--yellow);
+}
 
-		font-weight: 700;
-		font-size: 15pt;
+.links {
+	margin: 0 8px;
+	font-weight: 400;
+	font-size: 13pt;
+	color: var(--grey);
+}
 
-		color:var(--yellow);
-	}
+.CurrentLink {
+	font-weight: 600;
+	color: #3A3C41;
+}
 
-	.links
-	{
-		margin: 0 8px;
-
-		font-weight: 400;
-		font-size: 13pt;
-
-		color: var(--grey);
-	}
-
-	.CurrentLink
-	{
-		font-weight: 600;
-		color: #3A3C41;
-	}
-
-.User{
+.User {
 	display: flex;
-	align-items:center;
-
+	align-items: center;
 	margin: 0 15px;
-
-	color:var(--yellow);
+	color: var(--yellow);
 	font-weight: 700;
 	font-size: 13pt;
 }
-.exit
-{
-	color:var(--grey);
+
+.exit {
+	color: var(--grey);
 	font-weight: 300;
 }
 
 /*----------Footer---------------------------------*/
-.Footer
-{	
-	text-align: center;
-	margin: var(--standartMargin);
-}
+.Footer {
 
-.GreyBar
-{
-	height: 1px; 
-	background-color: #ccc;
+	height: 110px;
+	margin: 110px 0 0 0;
+	
+}
+.GreyBar{
+	border: rgb(161, 161, 161) 1px solid;
+}
+.footer-text{
+	margin-top: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
 }

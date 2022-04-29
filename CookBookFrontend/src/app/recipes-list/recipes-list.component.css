@@ -1,123 +1,143 @@
-.MainContainer{
+.MainContainer {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 }
 
 /*----------TopBar---------------------------------*/
-.TopBar{
+.TopBar {
 	display: flex;
 	justify-content: space-between;
-	align-items:center;
+	align-items: center;
 	min-height: 50px;
 	margin: var(--standartMargin);
-	border:	inherit;
+	border: inherit;
 	border-radius: inherit;
 }
-.Recipe{
-    font-weight: 700; 
-    font-size: 38px;
+
+.Recipe {
+	font-weight: 700;
+	font-size: 42px;
 }
-.AddRecipeButton{
-	width: 230px;
-	height: 50px;
+
+.AddRecipeButton {
+	width: 278px;
+	height: 60px;
 
 	background: var(--yellow);
+	font-weight: 600;
+	font-size: 18px;
+	font-family: Montserrat;
 	color: white;
 
-	font-family:inherit;
-	font-size: 13pt;
-
-	border:	inherit;
+	border: inherit;
 	border-radius: 16px;
 	padding: inherit;
 }
 
 /*----------CategoriesBar---------------------------------*/
-.CategoriesBar{
-	display: flex;
-    flex-direction: row;
-	justify-content: space-between;
-
-    margin-top: 20px;
-}
-
-.Category{
-    flex-basis: 22%;
-	
-    padding: 12px;
-
-    text-align: center;
-	border-radius: 8px;
-	
-    font-weight: 700;
-    font-size: 20px;
-
-    background: white;
-    box-shadow: 10px 4px 20px 3px rgb(224, 224, 224);
-}
-
-/*----------SearchBar---------------------------------*/
-
-.SearchBar{
-	display: flex;
-    flex-direction: row;
-	justify-content: space-between;
-
-    margin-top: 50px;
-}
-
-.SearchRecipe{
-    padding: 20px 0px; 
-    font-size: 18px;
-    font-weight: 700;
-}
-
-.InpytRecipe
-{
-    min-height: 50px;
-
-    flex-basis: 65%;
-
-	/* margin: 15px 15px 0px 15px; */
-	border:1px solid #ccc;
-	border-radius: 12px;
-	padding: 5px;
-
-	font-size: 16px;
-}
-
-.SearchButton{
-    flex-basis: 15%;
-
-	background: var(--yellow);
-	color: white;
-
-	font-family:inherit;
-	font-size: 13pt;
-
-	border:	inherit;
-	border-radius: 16px;
-	padding: inherit;
-}
-
-.OneRecipeBox{
+.CategoriesBar {
 	display: flex;
 	flex-direction: row;
+	justify-content: space-between;
+	margin-top: 50px;
+}
 
-	min-height: 200px;
-
-	/* background: #e5edfa; */
-
-	margin: 10px 0;
-	border-radius: 36px  16px  16px 0px;
-	
+.Category {
+	width: 230px;
+	height: 116px;
+	padding: 24px;
+	border-radius: 24px;
+	background: white;
 	box-shadow: 10px 4px 20px 3px rgb(224, 224, 224);
 }
-.TitlePicture{
-	flex-basis: 35%;
-	height: 300px;
 
+.Rectangle {
+	width: 50px;
+	height: 50px;
+	background: var(--lightYellow);
+	border-radius: 12px;
+}
+
+.CategoryTitle {
+	font-weight: 700;
+	font-size: 24px;
+	margin: 24px 0px 0px 0px;
+}
+
+
+/*----------SearchBar---------------------------------*/
+.SearchBar {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	height: 100px;
+	margin-top: 50px;
+}
+
+.SearchRecipe {
+	margin: 22px 56px 0 0;
+	font-size: 24px;
+	font-weight: 700;
+}
+
+.SearchBarCenter {
+	flex-grow: 1;
+	margin-right: 16px;
+	display: flex;
+	flex-direction: column;
+}
+
+.InpytRecipe {
+	height: 16px;
+	border: 1px solid #ccc;
+	border-radius: 16px;
+	padding: 28px 34px;
+	flex-grow: 1;
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 22px;
+	text-transform: capitalize;
+}
+
+.searchBar-tags {
+	display: flex;
+	margin-left: 30px;
+	margin-top: 10px;
+}
+
+.searchBar-tag {
+	margin: 0 30px 0 0;
+	font-weight: 400;
+	font-size: 16px;
+	color: #808080;
+}
+
+.SearchButton {
+	height: 73px;
+	width: 152px;
+	background: var(--yellow);
+	color: white;
+	font-weight: 600;
+	font-size: 18px;
+	border-radius: 16px;
+	border: 0px;
+}
+
+.recipeBox {
+	display: flex;
+	flex-direction: row;
+	min-height: 200px;
+	margin: 40px 0 0 0;
+	border-radius: 36px 16px 16px 0px;
+	box-shadow: 10px 4px 20px 3px rgb(224, 224, 224);
+}
+
+.recipeBox-picture {
+	height: 430px;
+	width: 430px;
 	background: #FFEFCC;
 	color: #F29E1F;
 
@@ -125,30 +145,107 @@
 	vertical-align: middle;
 
 	margin: 0px;
-	border:	inherit;
+	border: inherit;
 	border-radius: 36px 0px;
 	padding: inherit;
 }
 
-.MainField{
+.MainField {
+	max-width: 681px;
 	display: flex;
 	flex-direction: column;
-
-	flex-basis: 65%;
-	
-	/* background: #e5faeb; */
-
-	margin: inherit;
-	padding: 15px;
+	padding: 36px 30px 0px 53px;
 }
 
-.RecipeTitle{
-    margin: 0;
-    font-size: 20px; 
-    font-weight: 700;
+.recipeBox-tags-likes {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
-.RecipeContent{
-    margin: 0;
-    font-size: 14px; 
-    font-weight: 400;
+
+.recipeBox-tag {
+	font-weight: 500;
+	font-size: 16px;
+	color: var(--yellow);
+	margin: 0 5px 0 0;
+	padding: 0px 5px;
+	border-radius: 5px;
+}
+
+.recipeBox-likes-favor {
+	display: flex;
+	border: 1px solid var(--yellow);
+	box-sizing: border-box;
+	border-radius: 16px;
+	padding: 10px 26px;
+	margin-left: 15px;
+}
+
+.recipeBox-likes-favor-font {
+	font-weight: 600;
+	font-size: 18px;
+	color: var(--yellow);
+	margin-left: 15px;
+}
+
+.recipeBox-title {
+	margin: 0;
+	font-weight: 700;
+	font-size: 24px;
+	text-transform: capitalize;
+}
+
+.recipeBox-content {
+	max-height: 100px;
+	margin: 16px 0 0 0;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 30px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.recipeBox-info {
+	display: flex;
+	margin-top: 40px;
+}
+
+.recipeBox-info-title {
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 28px;
+	opacity: 0.5;
+}
+
+.recipeBox-info-number {
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 28px;
+}
+
+.recipeBox-svg {
+	height: 56px;
+	width: 48px;
+	margin-right: 20px;
+}
+
+.recipeBox-miniBlock {
+	display: flex;
+	margin: 0 70px 0 0;
+}
+
+.loadMore {
+	margin: 60px 0 0 0;
+	text-align: center;
+}
+
+.loadMore-button {
+	border: var(--yellow) 1px solid;
+	box-sizing: border-box;
+	border-radius: 16px;
+	background-color: white;
+	font-weight: 600;
+	font-size: 18px;
+	color: var(--yellow);
+	padding: 22px 65px;
 }

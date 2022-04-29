@@ -410,4 +410,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /.editorconfig
 /.browserslistrc
-/TodoListBackend/wwwroot
+/CookBookBackend/wwwroot
