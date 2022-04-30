@@ -4,25 +4,21 @@
 	--standartMargin: 5px 0;
 }
 
-.onHover-sizeUp{
+.onHover-sizeUp {
 	transition: 0.1s;
 }
-.onHover-sizeUp:hover{
+
+.onHover-sizeUp:hover {
 	transform: scale(1.1);
 }
 
-.flex-column{
+.flex-column {
 	display: flex;
 	flex-direction: column;
 }
 
-.flex-row{
+.flex-row {
 	display: flex;
-}
-
-.body {
-	max-width: 100%;
-	background-color: #a8a8a8;
 }
 
 p {
@@ -46,67 +42,4 @@ p {
 
 	margin: 20px auto;
 	padding: 44px 120px;
-}
-
-.Header {
-	display: flex;
-	justify-content: space-between;
-	margin: 5px 0;
-	/* внешний отступ */
-}
-
-.Navigation {
-	display: flex;
-	align-items: center;
-}
-
-.recipes {
-	margin: 0px 50px 0px 1px;
-	font-weight: 700;
-	font-size: 32px;
-	color: var(--yellow);
-}
-
-.links {
-	margin: 0 8px;
-	font-weight: 400;
-	font-size: 13pt;
-	color: var(--grey);
-}
-
-.CurrentLink {
-	font-weight: 600;
-	color: #3A3C41;
-}
-
-.User {
-	display: flex;
-	align-items: center;
-	margin: 0 15px;
-	color: var(--yellow);
-	font-weight: 700;
-	font-size: 13pt;
-}
-
-.exit {
-	color: var(--grey);
-	font-weight: 300;
-}
-
-/*----------Footer---------------------------------*/
-.Footer {
-
-	height: 110px;
-	margin: 110px 0 0 0;
-	
-}
-.GreyBar{
-	border: rgb(161, 161, 161) 1px solid;
-}
-.footer-text{
-	margin-top: 10px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-
 }

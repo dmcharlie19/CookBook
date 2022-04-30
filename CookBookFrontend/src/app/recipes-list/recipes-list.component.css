@@ -4,23 +4,23 @@
 	justify-content: center;
 }
 
-/*----------TopBar---------------------------------*/
-.TopBar {
+/*----------topBar---------------------------------*/
+.topBar {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	min-height: 50px;
-	margin: var(--standartMargin);
+	margin: 90px 0 0 0;
 	border: inherit;
 	border-radius: inherit;
 }
 
-.Recipe {
+.topBar-title {
 	font-weight: 700;
 	font-size: 42px;
 }
 
-.AddRecipeButton {
+.topBar-addRecipeButton {
 	width: 278px;
 	height: 60px;
 
@@ -35,15 +35,15 @@
 	padding: inherit;
 }
 
-/*----------CategoriesBar---------------------------------*/
-.CategoriesBar {
+/*----------categoriesBar---------------------------------*/
+.categoriesBar {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	margin-top: 50px;
 }
 
-.Category {
+.categoriesBar-category {
 	width: 230px;
 	height: 116px;
 	padding: 24px;
@@ -52,22 +52,21 @@
 	box-shadow: 10px 4px 20px 3px rgb(224, 224, 224);
 }
 
-.Rectangle {
+.categoriesBar-rectangle {
 	width: 50px;
 	height: 50px;
 	background: var(--lightYellow);
 	border-radius: 12px;
 }
 
-.CategoryTitle {
+.categoriesBar-categoryTitle {
 	font-weight: 700;
 	font-size: 24px;
 	margin: 24px 0px 0px 0px;
 }
 
-
-/*----------SearchBar---------------------------------*/
-.SearchBar {
+/*----------searchBar---------------------------------*/
+.searchBar {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -75,20 +74,20 @@
 	margin-top: 50px;
 }
 
-.SearchRecipe {
+.searchBar-searchRecipe {
 	margin: 22px 56px 0 0;
 	font-size: 24px;
 	font-weight: 700;
 }
 
-.SearchBarCenter {
+.searchBar-center {
 	flex-grow: 1;
 	margin-right: 16px;
 	display: flex;
 	flex-direction: column;
 }
 
-.InpytRecipe {
+.searchBar-inputRecipe {
 	height: 16px;
 	border: 1px solid #ccc;
 	border-radius: 16px;
@@ -115,7 +114,7 @@
 	color: #808080;
 }
 
-.SearchButton {
+.searchBar-searchButton {
 	height: 73px;
 	width: 152px;
 	background: var(--yellow);
@@ -150,9 +149,10 @@
 	padding: inherit;
 }
 
-.MainField {
+.recipeBox-mainField {
 	max-width: 681px;
 	display: flex;
+	flex-grow: 1;
 	flex-direction: column;
 	padding: 36px 30px 0px 53px;
 }

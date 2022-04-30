@@ -1,48 +1,35 @@
 <div class="main">
-    <div class="Header">
-        <div class="Navigation">
-            <p class="recipes onHover-sizeUp">Resipes</p>
-            <p class="links onHover-sizeUp">Главная</p>
-            <p class="links CurrentLink onHover-sizeUp">Рецепты</p>
-            <p class="links onHover-sizeUp">Избранное</p>
-        </div>
-        <div class="User">
-            <p margin="inherit">Привет, Username</p>
-            <p>|</p>
-            <p class="exit onHover-sizeUp">Выйти</p>
-        </div>
-    </div>
+    <app-header [userName]="'userName'" [isRecipesList]="1"></app-header>
 
     <div class="MainContainer">
-        <div style="height: 50px;"></div>
-        <div class="TopBar">
-            <p class="Recipe">Рецепты</p>
-            <button class="AddRecipeButton onHover-sizeUp" routerLink="AddRecipe"> + Добавить рецепт</button>
+        <div class="topBar">
+            <p class="topBar-title">Рецепты</p>
+            <button class="topBar-addRecipeButton onHover-sizeUp" routerLink="AddRecipe"> + Добавить рецепт</button>
         </div>
 
-        <div class="CategoriesBar">
-            <div class="Category onHover-sizeUp">
-                <div class="Rectangle"> </div>
-                <p class="CategoryTitle">Простые блюда</p>
+        <div class="categoriesBar">
+            <div class="categoriesBar-category onHover-sizeUp">
+                <div class="categoriesBar-rectangle"> </div>
+                <p class="categoriesBar-categoryTitle">Простые блюда</p>
             </div>
-            <div class="Category onHover-sizeUp">
-                <div class="Rectangle"> </div>
-                <p class="CategoryTitle">Детское</p>
+            <div class="categoriesBar-category onHover-sizeUp">
+                <div class="categoriesBar-rectangle"> </div>
+                <p class="categoriesBar-categoryTitle">Детское</p>
             </div>
-            <div class="Category onHover-sizeUp">
-                <div class="Rectangle"> </div>
-                <p class="CategoryTitle">От шеф-поваров</p>
+            <div class="categoriesBar-category onHover-sizeUp">
+                <div class="categoriesBar-rectangle"> </div>
+                <p class="categoriesBar-categoryTitle">От шеф-поваров</p>
             </div>
-            <div class="Category onHover-sizeUp">
-                <div class="Rectangle"> </div>
-                <p class="CategoryTitle">На праздник</p>
+            <div class="categoriesBar-category onHover-sizeUp">
+                <div class="categoriesBar-rectangle"> </div>
+                <p class="categoriesBar-categoryTitle">На праздник</p>
             </div>
         </div>
 
-        <div class="SearchBar">
-            <p class="SearchRecipe">Поиск рецепта</p>
-            <div class="SearchBarCenter">
-                <input class="InpytRecipe" placeholder="Название блюда..." />
+        <div class="searchBar">
+            <p class="searchBar-searchRecipe">Поиск рецепта</p>
+            <div class="searchBar-center">
+                <input class="searchBar-inputRecipe" placeholder="Название блюда..." />
                 <div class="searchBar-tags">
                     <p class="searchBar-tag onHover-sizeUp">мясо</p>
                     <p class="searchBar-tag onHover-sizeUp">деликатесы</p>
@@ -51,7 +38,7 @@
                     <p class="searchBar-tag onHover-sizeUp">пост</p>
                 </div>
             </div>
-            <button class="SearchButton onHover-sizeUp"> Поиск</button>
+            <button class="searchBar-searchButton onHover-sizeUp"> Поиск</button>
         </div>
 
         <div style="height: 50px;"></div>
@@ -60,7 +47,7 @@
                 <div class="recipeBox-picture">
                     <p>фото рецепта</p>
                 </div>
-                <div class="MainField">
+                <div class="recipeBox-mainField">
                     <div class="recipeBox-tags-likes">
                         <div class="flex-row">
                             <div *ngFor="let tag of recipe.tags;">
@@ -104,12 +91,5 @@
         </div>
     </div>
 
-    
-    <div class="Footer">
-        <div class="GreyBar"></div>
-        <div class="footer-text">
-            <p class="recipes">Resipes</p>
-            <p>@Resipes 2021 by Dmcharlie19 </p>
-        </div>
-    </div>
+    <app-footer></app-footer>
 </div>

@@ -6,13 +6,13 @@ import { throwError } from 'rxjs';
 @Injectable()
 export class RecipeService {
 
-    private url = "/api/Recipe/";
-   
+    private url = "/api/Recipe";
+
     constructor(private http: HttpClient) {
     }
 
     GetRecipes() {
-        return this.http.get(this.url + "get-all").pipe(catchError(err => {  
+        return this.http.get(this.url).pipe(catchError(err => {
             console.log("ERROR!");
             return throwError(err);
         }));

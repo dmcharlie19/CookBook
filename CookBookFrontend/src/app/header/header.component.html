@@ -1,0 +1,16 @@
+<div class="header">
+    <div class="navigation">
+        <p class="recipes onHover-sizeUp">Resipes</p>
+        <p class="links onHover-sizeUp" [ngClass]=" {'currentLink': isMain}">Главная</p>
+        <p class="links onHover-sizeUp" [ngClass]=" {'currentLink': isRecipesList}">Рецепты</p>
+        <p class="links onHover-sizeUp" [ngClass]=" {'currentLink': isFavorite}">Избранное</p>
+    </div>
+    <div class=" account">
+        <div class="elipse">
+            <img src="assets/img/User.png">
+        </div>
+        <p class="userName">Привет, {{userName}}</p>
+        <div class="rectangle"></div>
+        <img class="exit  onHover-sizeUp" src="assets/img/exit.png">
+    </div>
+</div>
