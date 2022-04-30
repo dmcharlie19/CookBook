@@ -1,23 +1,22 @@
 using Microsoft.EntityFrameworkCore;
-using CookBookBackend.Repositories;
 using CookBookBackend.Infrastructure.Foundation;
 using CookBookBackend.Application.Repositories;
 using CookBookBackend.Infrastructure.Repositories;
-using CookBookBackend.Application.AppService;
+using CookBook.Application.Queries;
+using CookBook.Infrastructure.Queries;
 
 var builder = WebApplication.CreateBuilder( args );
 
 // Хранение
 string connection = builder.Configuration.GetConnectionString( "DefaultConnection" );
-builder.Services.AddDbContext<CookBookDbContext>( x => x.UseSqlServer( connection ) );
+builder.Services.AddDbContext<CookBookDbContext>( x => x.UseSqlServer( connection, b => b.MigrationsAssembly( "CookBookApi" ) ) );
 
-// Контороллеры
+// Контроллеры
 builder.Services.AddControllers();
 
 //DI
-builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IRecipeService, RecipeService>();
+builder.Services.AddScoped<IRecipeQuery, RecipeQuery>();
 
 // Swagger UI
 builder.Services.AddSwaggerGen();

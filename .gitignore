@@ -411,3 +411,4 @@ FodyWeavers.xsd
 /.editorconfig
 /.browserslistrc
 /CookBookBackend/wwwroot
+CookBookBackend/CookBook.Api/libman.json

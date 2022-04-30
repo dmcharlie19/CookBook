@@ -10,8 +10,8 @@ namespace CookBookBackend.Infrastructure.Configurations
     {
       builder.HasKey( x => x.Id );
 
-      builder.Property( x => x.Title ).HasMaxLength( 300 );
-      builder.Property( x => x.ShortDescription ).HasMaxLength( 1000 );
+      builder.Property( x => x.Title ).HasMaxLength( 120 );
+      builder.Property( x => x.ShortDescription ).HasMaxLength( 200 );
     }
   }
 }
