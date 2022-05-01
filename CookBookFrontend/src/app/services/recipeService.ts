@@ -6,7 +6,7 @@ import { throwError } from 'rxjs';
 @Injectable()
 export class RecipeService {
 
-    private url = "/api/Recipe";
+    private url = "/api/Recipes";
 
     constructor(private http: HttpClient) {
     }

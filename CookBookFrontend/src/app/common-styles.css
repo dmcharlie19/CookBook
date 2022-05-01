@@ -1,9 +1,3 @@
-:root {
-	--yellow: #FDB100;
-	--grey: #9196A1;
-	--standartMargin: 5px 0;
-}
-
 .onHover-sizeUp {
 	transition: 0.1s;
 }

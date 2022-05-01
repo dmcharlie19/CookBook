@@ -1,7 +1,7 @@
 <div class="main">
     <app-header [userName]="'userName'" [isRecipesList]="1"></app-header>
 
-    <div class="MainContainer">
+    <div class="mainContainer">
         <div class="topBar">
             <p class="topBar-title">Рецепты</p>
             <button class="topBar-addRecipeButton onHover-sizeUp" routerLink="AddRecipe"> + Добавить рецепт</button>
@@ -9,19 +9,27 @@
 
         <div class="categoriesBar">
             <div class="categoriesBar-category onHover-sizeUp">
-                <div class="categoriesBar-rectangle"> </div>
+                <div class="categoriesBar-rectangle">
+                    <img src="assets/img/menu.png">
+                </div>
                 <p class="categoriesBar-categoryTitle">Простые блюда</p>
             </div>
             <div class="categoriesBar-category onHover-sizeUp">
-                <div class="categoriesBar-rectangle"> </div>
+                <div class="categoriesBar-rectangle">
+                    <img src="assets/img/child.png">
+                </div>
                 <p class="categoriesBar-categoryTitle">Детское</p>
             </div>
             <div class="categoriesBar-category onHover-sizeUp">
-                <div class="categoriesBar-rectangle"> </div>
+                <div class="categoriesBar-rectangle">
+                    <img src="assets/img/chef.png">
+                </div>
                 <p class="categoriesBar-categoryTitle">От шеф-поваров</p>
             </div>
             <div class="categoriesBar-category onHover-sizeUp">
-                <div class="categoriesBar-rectangle"> </div>
+                <div class="categoriesBar-rectangle">
+                    <img src="assets/img/celebr.png">
+                </div>
                 <p class="categoriesBar-categoryTitle">На праздник</p>
             </div>
         </div>
@@ -41,49 +49,12 @@
             <button class="searchBar-searchButton onHover-sizeUp"> Поиск</button>
         </div>
 
-        <div style="height: 50px;"></div>
-        <div class="RecipeList" *ngFor="let recipe of recipes;">
-            <div class="recipeBox">
-                <div class="recipeBox-picture">
-                    <p>фото рецепта</p>
-                </div>
-                <div class="recipeBox-mainField">
-                    <div class="recipeBox-tags-likes">
-                        <div class="flex-row">
-                            <div *ngFor="let tag of recipe.tags;">
-                                <p class="recipeBox-tag">#{{tag}}</p>
-                            </div>
-                        </div>
-                        <div class="flex-row">
-                            <div class="recipeBox-likes-favor">
-                                <img src="assets/img/like.png">
-                                <p class="recipeBox-likes-favor-font">{{recipe.likesCount}}</p>
-                            </div>
-                            <div class="recipeBox-likes-favor">
-                                <img src="assets/img/star.png">
-                                <p class="recipeBox-likes-favor-font">{{recipe.favoritesCount}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="recipeBox-title">{{recipe.title}}</p>
-                    <p class="recipeBox-content">{{recipe.shortDescription}}</p>
-                    <div class="recipeBox-info">
-                        <div class="recipeBox-miniBlock">
-                            <img class="recipeBox-svg" src="assets/img/time.svg">
-                            <div>
-                                <p class="recipeBox-info-title">Время приготовления:</p>
-                                <p class="recipeBox-info-number">{{recipe.preparingTime}} минут</p>
-                            </div>
-                        </div>
-                        <div class="recipeBox-miniBlock">
-                            <img class="recipeBox-svg" src="assets/img/person.svg">
-                            <div>
-                                <p class="recipeBox-info-title">Рецепт на:</p>
-                                <p class="recipeBox-info-number">{{recipe.preparingTime}} персон</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="recipeList" *ngFor="let recipe of recipes;">
+            <app-recipe-card [recipe]=recipe></app-recipe-card>
+        </div>
+        <div *ngIf="isServerError">
+            <div class="errorMsg">
+                <p>Ой, на сервере что то пошло не так</p>
             </div>
         </div>
         <div class="loadMore">
