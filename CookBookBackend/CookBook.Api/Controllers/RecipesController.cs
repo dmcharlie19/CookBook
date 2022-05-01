@@ -6,7 +6,7 @@ namespace CookBookBackend.Api.Controllers
 {
   [ApiController]
   [Route( "api/[controller]" )]
-  public class RecipeController : ControllerBase
+  public class RecipesController : ControllerBase
   {
     private readonly IRecipeQuery _recipeQuery;
 
