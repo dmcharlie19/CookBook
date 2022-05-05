@@ -1,0 +1,24 @@
+<div class="main">
+    <p class="title">Войти</p>
+    <form class="form-group" [formGroup]="_loginForm">
+        <input placeholder="Логин" formControlName="login">
+        <div class="input-error">
+            <p *ngIf="_loginForm.controls['login'].invalid && _loginForm.controls['login'].touched">
+                Некорректный логин
+            </p>
+        </div>
+        <input type="password" placeholder="Пароль" formControlName="password">
+        <div class="input-error">
+            <p *ngIf="_loginForm.controls['password'].invalid && _loginForm.controls['password'].touched">
+                Некорректный пароль
+            </p>
+        </div>
+    </form>
+    <div class="buttons">
+        <button class="login-button hovered-bg-color-dark" (click)="onSubmit()">Войти</button>
+        <button class="cancel-button hovered-bg-color-light" routerLink="">Отмена</button>
+    </div>
+    <div class="no-account">
+        <p class="hovered-bg-color-light" routerLink="/register">У меня еще нет аккаунта</p>
+    </div>
+</div>
