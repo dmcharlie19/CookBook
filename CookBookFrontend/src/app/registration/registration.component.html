@@ -1,0 +1,35 @@
+<div class="main">
+    <p class="title">Регистрация</p>
+    <form class="form-group" [formGroup]="_registrationForm">
+        <input placeholder="Имя" formControlName="name">
+        <div class="input-error">
+            <p *ngIf="_registrationForm.controls['name'].invalid && _registrationForm.controls['name'].touched">
+                Некорректное имя
+            </p>
+        </div>
+        <input placeholder="Логин" formControlName="login">
+        <div class="input-error">
+            <p *ngIf="_registrationForm.controls['login'].invalid && _registrationForm.controls['login'].touched">
+                Некорректный логин
+            </p>
+        </div>
+        <div class="flex-column">
+            <div class="flex-row">
+                <input type="password" placeholder="Пароль" formControlName="password">
+                <input class="password-repeat" type="password" placeholder="Повторите пароль"
+                    formControlName="confirmPassword">
+            </div>
+            <p class="password-req">Минимум 5 символов</p>
+        </div>
+        <div class="input-error">
+            <p>{{showPasswordError()}}</p>
+        </div>
+    </form>
+    <div class="buttons">
+        <button class="submit-button hovered-bg-color-dark" (click)="onSubmit()">Зарегистрироваться</button>
+        <button class="cancel-button hovered-bg-color-light" routerLink="">Отмена</button>
+    </div>
+    <div class="no-account">
+        <p class="hovered-bg-color-light" routerLink="/login">У меня уже есть аккаунт аккаунт</p>
+    </div>
+</div>
