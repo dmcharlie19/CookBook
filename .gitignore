@@ -410,4 +410,5 @@ MigrationBackup/
 FodyWeavers.xsd
 /.editorconfig
 /.browserslistrc
-/TodoListBackend/wwwroot
+/CookBookBackend/wwwroot
+CookBookBackend/CookBook.Api/libman.json

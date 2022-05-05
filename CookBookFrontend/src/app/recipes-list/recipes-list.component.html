@@ -1,0 +1,60 @@
+<div class="mainContainer">
+    <div class="topBar">
+        <p class="topBar-title">Рецепты</p>
+        <button class="topBar-addRecipeButton hovered-scale" routerLink="AddRecipe"> + Добавить рецепт</button>
+    </div>
+
+    <div class="categoriesBar">
+        <div class="categoriesBar-category hovered-scale">
+            <div class="categoriesBar-rectangle">
+                <img src="assets/img/menu.png">
+            </div>
+            <p class="categoriesBar-categoryTitle">Простые блюда</p>
+        </div>
+        <div class="categoriesBar-category hovered-scale">
+            <div class="categoriesBar-rectangle">
+                <img src="assets/img/child.png">
+            </div>
+            <p class="categoriesBar-categoryTitle">Детское</p>
+        </div>
+        <div class="categoriesBar-category hovered-scale">
+            <div class="categoriesBar-rectangle">
+                <img src="assets/img/chef.png">
+            </div>
+            <p class="categoriesBar-categoryTitle">От шеф-поваров</p>
+        </div>
+        <div class="categoriesBar-category hovered-scale">
+            <div class="categoriesBar-rectangle">
+                <img src="assets/img/celebr.png">
+            </div>
+            <p class="categoriesBar-categoryTitle">На праздник</p>
+        </div>
+    </div>
+
+    <div class="searchBar">
+        <p class="searchBar-searchRecipe">Поиск рецепта</p>
+        <div class="searchBar-center">
+            <input class="searchBar-inputRecipe" placeholder="Название блюда..." />
+            <div class="searchBar-tags">
+                <p class="searchBar-tag hovered-scale">мясо</p>
+                <p class="searchBar-tag hovered-scale">деликатесы</p>
+                <p class="searchBar-tag hovered-scale">пироги</p>
+                <p class="searchBar-tag hovered-scale">рыба</p>
+                <p class="searchBar-tag hovered-scale">пост</p>
+            </div>
+        </div>
+        <button class="searchBar-searchButton hovered-scale"> Поиск</button>
+    </div>
+
+    <div class="recipeList" *ngFor="let recipe of recipes;">
+        <app-recipe-card [recipe]=recipe></app-recipe-card>
+    </div>
+    <div *ngIf="isLoaded">
+        <div class="errorMsg">
+            <p>Ой, на сервере что то пошло не так</p>
+        </div>
+    </div>
+    <div class="loadMore">
+        <button class="loadMore-button hovered-scale">Загрузить еще</button>
+    </div>
+</div>

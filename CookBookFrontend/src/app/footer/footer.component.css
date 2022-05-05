@@ -1,0 +1,23 @@
+.footer {
+    height: 110px;
+    margin: 110px 0 0 0;
+}
+
+.greyBar {
+    background-color: var(--grey);
+    height: 1.5px;
+}
+
+.recipes {
+    margin: 0px 50px 0px 1px;
+    font-weight: 700;
+    font-size: 32px;
+    color: var(--yellow);
+}
+
+.footer-text {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

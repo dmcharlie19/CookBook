@@ -1,0 +1,42 @@
+<div class="recipeBox">
+    <div class="recipeBox-picture">
+        <p>фото рецепта</p>
+    </div>
+    <div class="recipeBox-mainField">
+        <div class="recipeBox-tags-likes">
+            <div class="flex-row">
+                <div *ngFor="let tag of recipe.tags;">
+                    <p class="recipeBox-tag">#{{tag}}</p>
+                </div>
+            </div>
+            <div class="flex-row">
+                <div class="recipeBox-likes-favor">
+                    <img src="assets/img/like.png">
+                    <p class="recipeBox-likes-favor-font">{{recipe.likesCount}}</p>
+                </div>
+                <div class="recipeBox-likes-favor">
+                    <img src="assets/img/star.png">
+                    <p class="recipeBox-likes-favor-font">{{recipe.favoritesCount}}</p>
+                </div>
+            </div>
+        </div>
+        <p class="recipeBox-title">{{recipe.title}}</p>
+        <p class="recipeBox-content">{{recipe.shortDescription}}</p>
+        <div class="recipeBox-info">
+            <div class="recipeBox-miniBlock">
+                <img class="recipeBox-svg" src="assets/img/time.svg">
+                <div>
+                    <p class="recipeBox-info-title">Время приготовления:</p>
+                    <p class="recipeBox-info-number">{{recipe.preparingTime}} минут</p>
+                </div>
+            </div>
+            <div class="recipeBox-miniBlock">
+                <img class="recipeBox-svg" src="assets/img/person.svg">
+                <div>
+                    <p class="recipeBox-info-title">Рецепт на:</p>
+                    <p class="recipeBox-info-number">{{recipe.preparingTime}} персон</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,108 @@
+.recipeBox {
+    display: flex;
+    flex-direction: row;
+    min-height: 200px;
+    margin: 40px 0 0 0;
+    border-radius: 36px 16px 16px 0px;
+    box-shadow: 10px 4px 20px 3px rgb(224, 224, 224);
+}
+
+.recipeBox-picture {
+    height: 430px;
+    width: 430px;
+    background: #FFEFCC;
+    color: #F29E1F;
+
+    text-align: center;
+    vertical-align: middle;
+
+    margin: 0px;
+    border: inherit;
+    border-radius: 36px 0px;
+    padding: inherit;
+}
+
+.recipeBox-mainField {
+    max-width: 681px;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    padding: 36px 30px 0px 53px;
+}
+
+.recipeBox-tags-likes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.recipeBox-tag {
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--yellow);
+    margin: 0 5px 0 0;
+    padding: 0px 5px;
+    border-radius: 5px;
+}
+
+.recipeBox-likes-favor {
+    display: flex;
+    border: 1px solid var(--yellow);
+    box-sizing: border-box;
+    border-radius: 16px;
+    padding: 10px 26px;
+    margin-left: 15px;
+}
+
+.recipeBox-likes-favor-font {
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--yellow);
+    margin-left: 15px;
+}
+
+.recipeBox-title {
+    margin: 0;
+    font-weight: 700;
+    font-size: 24px;
+    text-transform: capitalize;
+}
+
+.recipeBox-content {
+    max-height: 100px;
+    margin: 16px 0 0 0;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.recipeBox-info {
+    display: flex;
+    margin-top: 40px;
+}
+
+.recipeBox-info-title {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 28px;
+    opacity: 0.5;
+}
+
+.recipeBox-info-number {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+}
+
+.recipeBox-svg {
+    height: 56px;
+    width: 48px;
+    margin-right: 20px;
+}
+
+.recipeBox-miniBlock {
+    display: flex;
+    margin: 0 70px 0 0;
+}

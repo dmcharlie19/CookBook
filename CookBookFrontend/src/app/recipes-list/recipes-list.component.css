@@ -1,0 +1,161 @@
+.mainContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+/*----------topBar---------------------------------*/
+.topBar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	min-height: 50px;
+	margin: 90px 0 0 0;
+	border: inherit;
+	border-radius: inherit;
+}
+
+.topBar-title {
+	font-weight: 700;
+	font-size: 42px;
+}
+
+.topBar-addRecipeButton {
+	width: 278px;
+	height: 60px;
+
+	background: var(--yellow);
+	font-weight: 600;
+	font-size: 18px;
+	font-family: Montserrat;
+	color: white;
+
+	border: inherit;
+	border-radius: 16px;
+	padding: inherit;
+}
+
+/*----------categoriesBar---------------------------------*/
+.categoriesBar {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: 50px;
+}
+
+.categoriesBar-category {
+	width: 230px;
+	height: 116px;
+	padding: 24px;
+	border-radius: 24px;
+	background: white;
+	box-shadow: 10px 4px 20px 3px rgb(224, 224, 224);
+}
+
+.categoriesBar-rectangle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 50px;
+	height: 50px;
+	background: var(--lightYellow);
+	border-radius: 12px;
+}
+
+.categoriesBar-categoryTitle {
+	font-weight: 700;
+	font-size: 24px;
+	margin: 24px 0px 0px 0px;
+}
+
+/*----------searchBar---------------------------------*/
+.searchBar {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	height: 100px;
+	margin-top: 50px;
+}
+
+.searchBar-searchRecipe {
+	margin: 22px 56px 0 0;
+	font-size: 24px;
+	font-weight: 700;
+}
+
+.searchBar-center {
+	flex-grow: 1;
+	margin-right: 16px;
+	display: flex;
+	flex-direction: column;
+}
+
+.searchBar-inputRecipe {
+	height: 16px;
+	border: 1px solid #ccc;
+	border-radius: 16px;
+	padding: 28px 34px;
+	flex-grow: 1;
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 22px;
+	text-transform: capitalize;
+}
+
+.searchBar-tags {
+	display: flex;
+	margin-left: 30px;
+	margin-top: 10px;
+}
+
+.searchBar-tag {
+	margin: 0 30px 0 0;
+	font-weight: 400;
+	font-size: 16px;
+	color: #808080;
+}
+
+.searchBar-searchButton {
+	height: 73px;
+	width: 152px;
+	background: var(--yellow);
+	color: white;
+	font-weight: 600;
+	font-size: 18px;
+	border-radius: 16px;
+	border: 0px;
+}
+
+.recipeList {
+	margin-top: 50px;
+}
+
+.errorMsg {
+	font-weight: 600;
+	font-size: 18px;
+	color: red;
+	background-color: pink;
+	border-radius: 16px;
+	text-align: center;
+	padding: 16px;
+	margin-top: 30px;
+	opacity: 0.5;
+}
+
+.loadMore {
+	margin: 60px 0 0 0;
+	text-align: center;
+}
+
+.loadMore-button {
+	border: var(--yellow) 1px solid;
+	box-sizing: border-box;
+	border-radius: 16px;
+	background-color: white;
+	font-weight: 600;
+	font-size: 18px;
+	color: var(--yellow);
+	padding: 22px 65px;
+}
