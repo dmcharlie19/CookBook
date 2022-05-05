@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace To_Do_List_Backend.Migrations
+namespace CookBookBackend.Migrations
 {
     [DbContext(typeof(CookBookDbContext))]
     partial class CookBookDbContextModelSnapshot : ModelSnapshot

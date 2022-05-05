@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace To_Do_List_Backend.Migrations
+namespace CookBookBackend.Migrations
 {
     [DbContext(typeof(CookBookDbContext))]
     [Migration("20220430140646_AddNewFieldsInRecipe")]

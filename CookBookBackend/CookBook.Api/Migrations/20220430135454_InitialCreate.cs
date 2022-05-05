@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace To_Do_List_Backend.Migrations
+namespace CookBookBackend.Migrations
 {
     public partial class InitialCreate : Migration
     {
