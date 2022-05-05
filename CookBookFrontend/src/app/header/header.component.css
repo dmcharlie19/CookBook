@@ -34,6 +34,12 @@
     align-items: center;
 }
 
+.account p {
+    color: var(--yellow);
+    font-weight: 600;
+    font-size: 18px;
+}
+
 .elipse {
     background-color: var(--yellow);
     border-radius: 50%;
@@ -46,19 +52,25 @@
 
 .userName {
     margin: 0 25px 0 15px;
-    color: var(--yellow);
-    font-weight: 600;
-    font-size: 18px;
 }
 
 .rectangle {
     width: 0px;
     height: 19px;
     border: 1px solid var(--yellow);
-    margin-right: 27px;
 }
 
-.exit {
+.exit-icon {
     height: 25px;
     width: 25px;
+    margin-left: 27px;
+}
+
+.login {
+    margin: 0 15px;
+}
+
+.registr {
+    margin-left: 15px;
+    font-size: 18px;
 }

@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
+import { AuthService } from '../services/authService';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: [
-    '../common-styles.css',
-    './header.component.css']
+  styleUrls: ['./header.component.css'],
+  providers: [AuthService]
 })
 export class HeaderComponent {
   @Input() userName: string = "";
@@ -13,6 +13,7 @@ export class HeaderComponent {
   @Input() isMain: Boolean;
   @Input() isRecipesList: Boolean;
   @Input() isFavorite: Boolean;
-  constructor() { }
+  constructor(public authServise: AuthService) {
+  }
 
 }

@@ -3,20 +3,19 @@ using CookBookBackend.Core.Domain;
 
 namespace CookBook.Application.Mappers
 {
-  public class RecipeMapper
+  public static class RecipeMapper
   {
-    public static RecipeDto Map( Recipe r )
+    public static RecipeDto Map( this Recipe recipe )
     {
       return new RecipeDto()
       {
-        Id = r.Id,
-        Title = r.Title,
-        ShortDescription = r.ShortDescription,
-        PreparingTime = r.PreparingTime,
-        Tags = r.Tags.Split( "_" ),
-        LikesCount = r.LikesCount,
-        FavoritesCount = r.FavoritesCount
-
+        Id = recipe.Id,
+        Title = recipe.Title,
+        ShortDescription = recipe.ShortDescription,
+        PreparingTime = recipe.PreparingTime,
+        Tags = recipe.Tags.Split( "_" ),
+        LikesCount = recipe.LikesCount,
+        FavoritesCount = recipe.FavoritesCount
       };
     }
   }

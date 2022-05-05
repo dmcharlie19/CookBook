@@ -10,13 +10,13 @@ namespace CookBookBackend.Api.Controllers
   {
     private readonly IRecipeQuery _recipeQuery;
 
-    public RecipeController( IRecipeQuery recipeQuery )
+    public RecipesController( IRecipeQuery recipeQuery )
     {
       _recipeQuery = recipeQuery;
     }
 
     [HttpGet( "" )]
-    public List<RecipeDto>? GetAll()
+    public IReadOnlyList<RecipeDto>? GetAll()
     {
       return _recipeQuery.GetAll();
     }

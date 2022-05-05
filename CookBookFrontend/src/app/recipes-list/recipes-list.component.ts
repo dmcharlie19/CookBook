@@ -5,13 +5,11 @@ import { Recipe } from '../models/recipe';
 @Component({
   selector: 'app-recipes-list',
   templateUrl: './recipes-list.component.html',
-  styleUrls: [
-    '../common-styles.css',
-    './recipes-list.component.css'],
+  styleUrls: ['./recipes-list.component.css'],
   providers: [RecipeService]
 })
 export class RecipesListComponent implements OnInit {
-  constructor(private todoService: RecipeService) {
+  constructor(private recipeService: RecipeService) {
     this.recipes = new Array<Recipe>();
 
     var str = new Array<String>("выпечка", "вкусно", "нямка");
@@ -34,7 +32,7 @@ export class RecipesListComponent implements OnInit {
   // Массив рецептов
   recipes: Recipe[];
   // Флаг ошибки сервера
-  isServerError: Boolean = false;
+  isLoaded: Boolean = false;
 
   ngOnInit(): void {
     this.loadRecipes();
@@ -42,17 +40,14 @@ export class RecipesListComponent implements OnInit {
 
   // получаем данные через сервис
   loadRecipes() {
-
-    this.todoService.GetRecipes().subscribe(
+    this.recipeService.GetRecipes().subscribe(
       (data: Recipe[]) => {
-        for (var i = 0; i < data.length; i++) {
-          this.recipes.push(data[i]);
-        }
-        this.isServerError = false;
+        this.recipes.push(...data);
+        this.isLoaded = false;
       },
       (error) => {
         console.log("failed load recipes");
-        this.isServerError = true;
+        this.isLoaded = true;
       });
   }
 

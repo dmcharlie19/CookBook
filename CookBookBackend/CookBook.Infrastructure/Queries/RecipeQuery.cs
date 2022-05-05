@@ -17,11 +17,11 @@ namespace CookBook.Infrastructure.Queries
       _dbContext = dbContext;
     }
 
-    public List<RecipeDto> GetAll()
+    public IReadOnlyList<RecipeDto> GetAll()
     {
       var es = _dbContext.Recipes.ToList();
 
-      return es.ConvertAll( r => RecipeMapper.Map( r ) );
+      return es.ConvertAll( r => r.Map() );
     }
   }
 }

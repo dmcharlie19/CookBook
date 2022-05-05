@@ -9,6 +9,6 @@ namespace CookBook.Application.Queries
 {
   public interface IRecipeQuery
   {
-    List<RecipeDto> GetAll();
+    IReadOnlyList<RecipeDto> GetAll();
   }
 }
