@@ -1,4 +1,4 @@
-namespace CookBookBackend.Api.Dto
+namespace CookBook.Api.Dto
 {
   public class AuthenticationResponseDto
   {
