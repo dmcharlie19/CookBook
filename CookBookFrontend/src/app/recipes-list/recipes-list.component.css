@@ -1,9 +1,3 @@
-.mainContainer {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-}
-
 /*----------topBar---------------------------------*/
 .topBar {
 	display: flex;

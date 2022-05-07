@@ -31,8 +31,6 @@ export class RecipesListComponent implements OnInit {
 
   // Массив рецептов
   recipes: Recipe[];
-  // Флаг ошибки сервера
-  isLoaded: Boolean = false;
 
   ngOnInit(): void {
     this.loadRecipes();
@@ -43,12 +41,7 @@ export class RecipesListComponent implements OnInit {
     this.recipeService.GetRecipes().subscribe(
       (data: Recipe[]) => {
         this.recipes.push(...data);
-        this.isLoaded = false;
-      },
-      (error) => {
-        console.log("failed load recipes");
-        this.isLoaded = true;
-      });
+      })
   }
 
 }

@@ -12,9 +12,6 @@ export class RecipeService {
     }
 
     GetRecipes() {
-        return this.http.get(this.url).pipe(catchError(err => {
-            console.log("ERROR!");
-            return throwError(err);
-        }));
+        return this.http.get(this.url);
     }
 }

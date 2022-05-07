@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RecipesListComponent } from './recipes-list/recipes-list.component';
@@ -11,8 +10,12 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { RecipeCardComponent } from './recipe-card/recipe-card.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { ErrorInterceptor } from './interceptors/error-interceptor';
+import { ErrorDisplayComponent } from './error-display/error-display.component'
+import { AccountService } from './services/AccountService';
+import { ErrorService } from './services/errorService';
 
-// определение маршрутов
+// Определение маршрутов
 const appRoutes: Routes = [
   { path: '', component: RecipesListComponent },
   { path: 'login', component: AuthenticationComponent },
@@ -22,7 +25,21 @@ const appRoutes: Routes = [
 
 @NgModule({
   imports: [BrowserModule, ReactiveFormsModule, HttpClientModule, RouterModule.forRoot(appRoutes)],
-  declarations: [AppComponent, AuthenticationComponent, RecipesListComponent, AuthenticationComponent, HeaderComponent, FooterComponent, RecipeCardComponent, RegistrationComponent],
+  declarations: [
+    AppComponent,
+    AuthenticationComponent,
+    RecipesListComponent,
+    AuthenticationComponent,
+    HeaderComponent,
+    FooterComponent,
+    RecipeCardComponent,
+    RegistrationComponent,
+    ErrorDisplayComponent],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    AccountService,
+    ErrorService
+  ],
   bootstrap: [AppComponent]
 })
 

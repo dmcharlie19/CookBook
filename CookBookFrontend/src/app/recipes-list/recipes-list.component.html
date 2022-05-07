@@ -1,4 +1,6 @@
-<div class="mainContainer">
+<div class="main">
+    <app-header [isRecipesList]="1"></app-header>
+
     <div class="topBar">
         <p class="topBar-title">Рецепты</p>
         <button class="topBar-addRecipeButton hovered-scale" routerLink="AddRecipe"> + Добавить рецепт</button>
@@ -49,12 +51,14 @@
     <div class="recipeList" *ngFor="let recipe of recipes;">
         <app-recipe-card [recipe]=recipe></app-recipe-card>
     </div>
-    <div *ngIf="isLoaded">
+    <!-- <div *ngIf="isLoaded">
         <div class="errorMsg">
             <p>Ой, на сервере что то пошло не так</p>
         </div>
-    </div>
+    </div> -->
     <div class="loadMore">
         <button class="loadMore-button hovered-scale">Загрузить еще</button>
     </div>
+
+    <app-footer></app-footer>
 </div>
