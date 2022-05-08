@@ -14,7 +14,7 @@ export class HeaderComponent {
   @Input() isFavorite: Boolean;
   constructor(public authServise: AccountService) {
 
-    this.userName = this.authServise.UserName;
+    this.userName = this.authServise.getUserName();
   }
 
 }

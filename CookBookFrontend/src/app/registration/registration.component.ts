@@ -33,7 +33,7 @@ export class RegistrationComponent {
     };
   }
 
-  showPasswordError(): String {
+  showPasswordError(): string {
     const password = this._registrationForm.controls["password"]
     if (password.invalid && password.touched) {
       return "Некорректный пароль";

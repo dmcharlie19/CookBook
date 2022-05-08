@@ -4,11 +4,16 @@ import { EventEmitter, Injectable } from '@angular/core';
 @Injectable()
 export class ErrorService {
 
-    onErrorOcured: EventEmitter<String> = new EventEmitter();;
+    public onErrorOcured: EventEmitter<String> = new EventEmitter();
+    public onErrorClear: EventEmitter<void> = new EventEmitter();
 
-    HandleError(error: HttpErrorResponse): void {
+    public clearError(): void {
+        this.onErrorClear.emit();
+    }
 
-        var errorMessage: String = "";
+    public handleError(error: HttpErrorResponse): void {
+
+        var errorMessage: string = "";
 
         if (Math.floor(error.status / 100) == 5)
             errorMessage = "На сервере что-то пошло не так"

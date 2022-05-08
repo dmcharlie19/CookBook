@@ -9,12 +9,20 @@ export class AccountService {
 
     private loginUrl = "/api/account/login";
 
-    private AccesToken: String = null;
-    public UserName: string = null;
+    private AccesToken: string = null;
+    private UserName: string = null;
     private expirTimeMinutes: Number = 0;
 
     constructor(private http: HttpClient) {
         console.log("create AuthService");
+    }
+
+    public getAccesToken(): string {
+        return this.AccesToken;
+    }
+
+    public getUserName(): string {
+        return this.UserName;
     }
 
     login(authenticate: AuthenticateRequestDto) {

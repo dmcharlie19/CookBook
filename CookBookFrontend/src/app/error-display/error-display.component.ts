@@ -8,7 +8,7 @@ import { ErrorService } from '../services/errorService';
 })
 export class ErrorDisplayComponent implements OnInit {
 
-  error: String = "";
+  error: string = "";
   constructor(private ei: ErrorService) { }
 
   ngOnInit(): void {
@@ -18,9 +18,11 @@ export class ErrorDisplayComponent implements OnInit {
       console.log(e);
       this.error = e;
     });
+
+    this.ei.onErrorClear.subscribe(x => this.error = "")
   }
 
-  public setError(error: String) {
+  public setError(error: string) {
     console.log("setError");
     this.error = error;
   }

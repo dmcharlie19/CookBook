@@ -11,7 +11,8 @@ using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder( args );
 
-// Аутентификация
+// Аутентификация и авторизация
+builder.Services.AddAuthorization();
 builder.Services.AddAuthentication( JwtBearerDefaults.AuthenticationScheme )
     .AddJwtBearer( options =>
     {
@@ -61,6 +62,7 @@ builder.Services.Configure<FormOptions>( o =>
 var app = builder.Build();
 
 app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseDefaultFiles();
 app.UseStaticFiles();

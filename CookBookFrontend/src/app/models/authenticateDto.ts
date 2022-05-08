@@ -1,12 +1,12 @@
 export class AuthenticateRequestDto {
     constructor(
-        public login: String,
-        public password: String) { }
+        public login: string,
+        public password: string) { }
 }
 
 export class AuthenticateResponseDto {
     constructor(
-        public accesToken: String,
+        public accesToken: string,
         public userName: string,
         public expirTimeMinutes: Number) { }
 }
