@@ -89,8 +89,17 @@ input.ng-touched.ng-invalid {
     color: var(--yellow);
 }
 
+.http-error {
+    margin-top: 10px;
+    height: 30px;
+    color: red;
+    flex-grow: 1;
+    text-align: center;
+}
+
+
 .no-account {
-    margin-top: 40px;
+    margin-top: 5px;
     margin-bottom: 0px;
 
     font-style: normal;

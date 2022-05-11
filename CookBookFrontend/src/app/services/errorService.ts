@@ -17,8 +17,13 @@ export class ErrorService {
 
         if (Math.floor(error.status / 100) == 5)
             errorMessage = "На сервере что-то пошло не так"
-        else
-            errorMessage = error.message;
+        else {
+            if (error.error)
+                errorMessage = error.error;
+            else
+                errorMessage = error.message;
+        }
+
 
         this.onErrorOcured.emit(errorMessage);
     }

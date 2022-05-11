@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { Router } from '@angular/router';
+import { RegistrationRequestDto } from '../models/registrationRequestDto';
+import { AccountService } from '../services/AccountService';
+import { ErrorService } from '../services/errorService';
 
 @Component({
   selector: 'app-registration',
@@ -9,8 +13,9 @@ import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, Valid
 export class RegistrationComponent {
 
   _registrationForm: FormGroup;
+  errorMsg: string = "";
 
-  constructor() {
+  constructor(private accountService: AccountService, private router: Router, private errorService: ErrorService) {
     this._registrationForm = new FormGroup({
       "name": new FormControl('', [Validators.required, Validators.minLength(3)]),
       "login": new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -19,6 +24,13 @@ export class RegistrationComponent {
     },
       this.passwordsValidator()
     );
+
+    this.errorService.onErrorOcured.subscribe(e => {
+      console.log(e);
+      this.errorMsg = e;
+    });
+
+    this.errorService.onErrorClear.subscribe(x => this.errorMsg = "")
   }
 
   public passwordsValidator(): ValidatorFn {
@@ -59,9 +71,13 @@ export class RegistrationComponent {
       return;
     }
 
-    console.log(this._registrationForm.value);
+    const request = new RegistrationRequestDto(
+      this._registrationForm.controls["login"].value,
+      this._registrationForm.controls["password"].value,
+      this._registrationForm.controls["name"].value);
 
-    // TODO: Взаимодействие с сервисом
+    this.accountService.registrate(request).subscribe(
+      () => this.router.navigateByUrl('/login'));
   }
-
 }
+

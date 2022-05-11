@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticateRequestDto, AuthenticateResponseDto } from '../models/authenticateDto';
+import { RegistrationRequestDto } from '../models/registrationRequestDto';
 import { tap, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
@@ -8,6 +9,7 @@ import { Observable } from 'rxjs';
 export class AccountService {
 
     private loginUrl = "/api/account/login";
+    private registrationUrl = "/api/account/registration";
 
     private AccesToken: string = null;
     private UserName: string = null;
@@ -25,13 +27,17 @@ export class AccountService {
         return this.UserName;
     }
 
-    login(authenticate: AuthenticateRequestDto) {
+    login(authenticate: AuthenticateRequestDto): Observable<Boolean> {
         return this.http.post(this.loginUrl, authenticate).pipe(
             map(
                 (res: AuthenticateResponseDto) => {
                     return this.startSession(res)
                 })
         );
+    }
+
+    registrate(registrationDto: RegistrationRequestDto): Observable<Object> {
+        return this.http.post(this.registrationUrl, registrationDto);
     }
 
     private startSession(authResponse: AuthenticateResponseDto): Boolean {

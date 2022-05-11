@@ -29,6 +29,11 @@
         <button class="submit-button hovered-bg-color-dark" (click)="onSubmit()">Зарегистрироваться</button>
         <button class="cancel-button hovered-bg-color-light" routerLink="">Отмена</button>
     </div>
+    <div class="http-error">
+        <p *ngIf="errorMsg != ''">
+            {{errorMsg}}
+        </p>
+    </div>
     <div class="no-account">
         <p class="hovered-bg-color-light" routerLink="/login">У меня уже есть аккаунт аккаунт</p>
     </div>

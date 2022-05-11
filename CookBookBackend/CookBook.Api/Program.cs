@@ -8,6 +8,8 @@ using CookBook.Application.Queries;
 using CookBook.Infrastructure.Queries;
 using CookBook.Application.Entities.Users;
 using Microsoft.AspNetCore.Http.Features;
+using CookBook.Application.Repositories;
+using CookBook.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder( args );
 
@@ -37,7 +39,7 @@ builder.Services.AddAuthentication( JwtBearerDefaults.AuthenticationScheme )
 
 // Хранение
 string connection = builder.Configuration.GetConnectionString( "DefaultConnection" );
-builder.Services.AddDbContext<CookBookDbContext>( x => x.UseSqlServer( connection, b => b.MigrationsAssembly( "CookBookApi" ) ) );
+builder.Services.AddDbContext<CookBookDbContext>( x => x.UseSqlServer( connection, b => b.MigrationsAssembly( "CookBook.Api" ) ) );
 
 // Контроллеры
 builder.Services.AddControllers();
@@ -45,6 +47,7 @@ builder.Services.AddControllers();
 //DI
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IRecipeQuery, RecipeQuery>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // Swagger UI
 builder.Services.AddSwaggerGen();

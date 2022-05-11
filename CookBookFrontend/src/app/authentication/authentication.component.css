@@ -67,7 +67,7 @@ input.ng-touched.ng-invalid {
     flex-grow: 1;
     height: 60px;
 
-    background: white;
+    background-color: white;
     border: 1px solid var(--yellow);
     border-radius: 16px;
 
@@ -77,8 +77,16 @@ input.ng-touched.ng-invalid {
     color: var(--yellow);
 }
 
+.http-error {
+    margin-top: 10px;
+    height: 30px;
+    color: red;
+    flex-grow: 1;
+    text-align: center;
+}
+
 .no-account {
-    margin-top: 40px;
+    margin-top: 5px;
     margin-bottom: 0px;
 
     font-style: normal;
