@@ -1,0 +1,67 @@
+<div class="main">
+    <app-header [isRecipesList]="1"></app-header>
+
+    <div class="topBar">
+        <p class="topBar-title">Добавить новый рецепт</p>
+        <button class="topBar-publish hovered-bg-color-dark" (click)="publishRecipe()">Опубликовать</button>
+    </div>
+    <form [formGroup]="addRecipeForm">
+        <div class="short-info">
+            <div class="picture">
+                <div class="dashed">
+                    <img src="assets/img/cloud.png">
+                    <img class="download" src="assets/img/download.png">
+                    <p>Загрузите фото готового блюда</p>
+                </div>
+            </div>
+            <div class="short-info-form">
+                <input placeholder="Название рецепта" formControlName="title">
+                <div class="bar-h20px "></div>
+                <textarea class="description" placeholder="Краткое описание"
+                    formControlName="shortDescription"></textarea>
+                <div class="bar-h20px "></div>
+                <input placeholder="Добавить тэги">
+                <div class="bar-h20px "></div>
+                <div class="numbers">
+                    <input placeholder="Время готовки" formControlName="preparingTime">
+                    <p>Минут</p>
+                    <div class="fill-bar"></div>
+                    <input placeholder="Порций в блюде" formControlName="personCount">
+                    <p>Персон</p>
+                </div>
+            </div>
+        </div>
+        <div class="ingridients-steps">
+            <div class="ingridients">
+                <p>Ингридиенты</p>
+                <div class="ingredient-box" *ngFor="let keys of ingridientsKeys; let i = index">
+                    <div class="flex-row">
+                        <div class="close-bar"></div>
+                        <img class="close-bar-img" src="assets/img/x.png" (click)="deleteIngridient(i)">
+                    </div>
+                    <input class="inpyt-style" placeholder="Заголовок для ингридиентов"
+                        formControlName="{{keys.titleKey}}" />
+                    <textarea class="inpyt-style" placeholder="Список продуктов для категории"
+                        formControlName="{{keys.bodyKey}}"></textarea>
+                </div>
+                <button class="add-button" (click)="addNewIngridient()">+ Добавить заголовок</button>
+            </div>
+
+            <div style="width: 15px;"></div>
+
+            <div class="steps">
+                <div class="step" *ngFor="let key of recipeStepsKeys; let i = index">
+                    <div class="flex-row">
+                        <div class="close-bar"></div>
+                        <img class="close-bar-img" src="assets/img/x.png" (click)="deleteRecipeStep(i)">
+                    </div>
+                    <p>Шаг {{i+1}}</p>
+                    <textarea class="inpyt-style" placeholder="Описание шага" formControlName="{{key}}"></textarea>
+                </div>
+                <div style="height: 15px;"></div>
+                <button class="add-button" (click)="addNewRecipeStep()">+ Добавить шаг</button>
+            </div>
+        </div>
+    </form>
+    <app-footer></app-footer>
+</div>

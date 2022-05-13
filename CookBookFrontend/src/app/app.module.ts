@@ -14,12 +14,15 @@ import { ErrorInterceptor } from './interceptors/error-interceptor';
 import { ErrorDisplayComponent } from './error-display/error-display.component'
 import { AccountService } from './services/AccountService';
 import { ErrorService } from './services/errorService';
+import { AddRecipeComponent } from './add-recipe/add-recipe.component';
+import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 
 // Определение маршрутов
 const appRoutes: Routes = [
   { path: '', component: RecipesListComponent },
   { path: 'login', component: AuthenticationComponent },
   { path: 'register', component: RegistrationComponent },
+  { path: 'addRecipe', component: AddRecipeComponent },
   { path: '**', redirectTo: '/' }
 ];
 
@@ -34,7 +37,9 @@ const appRoutes: Routes = [
     FooterComponent,
     RecipeCardComponent,
     RegistrationComponent,
-    ErrorDisplayComponent],
+    ErrorDisplayComponent,
+    AddRecipeComponent,
+    RecipeDetailComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     AccountService,

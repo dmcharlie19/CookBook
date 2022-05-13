@@ -22,7 +22,6 @@ export class AuthenticationComponent {
     });
 
     this.errorService.onErrorOcured.subscribe(e => {
-      console.log(e);
       this.errorMsg = e;
     });
 
