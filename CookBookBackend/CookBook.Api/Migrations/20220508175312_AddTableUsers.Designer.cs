@@ -3,6 +3,7 @@ using CookBookBackend.Infrastructure.Foundation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CookBookBackend.Migrations
 {
     [DbContext(typeof(CookBookDbContext))]
-    partial class CookBookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220508175312_AddTableUsers")]
+    partial class AddTableUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,9 +35,6 @@ namespace CookBookBackend.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("LikesCount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PersonCount")
                         .HasColumnType("int");
 
                     b.Property<int>("PreparingTime")

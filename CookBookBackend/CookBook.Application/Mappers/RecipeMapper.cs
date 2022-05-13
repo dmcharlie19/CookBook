@@ -13,6 +13,7 @@ namespace CookBook.Application.Mappers
         Title = recipe.Title,
         ShortDescription = recipe.ShortDescription,
         PreparingTime = recipe.PreparingTime,
+        PersonCount = recipe.PersonCount,
         Tags = recipe.Tags.Split( "_" ),
         LikesCount = recipe.LikesCount,
         FavoritesCount = recipe.FavoritesCount
