@@ -3,6 +3,7 @@ using CookBook.Infrastructure.Foundation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CookBook.Migrations
 {
     [DbContext(typeof(CookBookDbContext))]
-    partial class CookBookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220514133139_CreateTableRecipeSteps")]
+    partial class CreateTableRecipeSteps
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,30 +57,6 @@ namespace CookBook.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Recipes");
-                });
-
-            modelBuilder.Entity("CookBook.Core.Domain.RecipeIngredient", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RecipeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RecipeId");
-
-                    b.ToTable("RecipeIngredients");
                 });
 
             modelBuilder.Entity("CookBook.Core.Domain.RecipeStep", b =>
@@ -127,17 +105,6 @@ namespace CookBook.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("CookBook.Core.Domain.RecipeIngredient", b =>
-                {
-                    b.HasOne("CookBook.Core.Domain.Recipe", "Recipe")
-                        .WithMany("RecipeIngredients")
-                        .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Recipe");
-                });
-
             modelBuilder.Entity("CookBook.Core.Domain.RecipeStep", b =>
                 {
                     b.HasOne("CookBook.Core.Domain.Recipe", "Recipe")
@@ -151,8 +118,6 @@ namespace CookBook.Migrations
 
             modelBuilder.Entity("CookBook.Core.Domain.Recipe", b =>
                 {
-                    b.Navigation("RecipeIngredients");
-
                     b.Navigation("RecipeSteps");
                 });
 #pragma warning restore 612, 618

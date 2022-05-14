@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
-using CookBookBackend.Infrastructure.Foundation;
-using CookBookBackend.Application.Repositories;
-using CookBookBackend.Infrastructure.Repositories;
+using CookBook.Infrastructure.Foundation;
+using CookBook.Application.Repositories;
+using CookBook.Infrastructure.Repositories;
 using CookBook.Application.Queries;
 using CookBook.Infrastructure.Queries;
 using CookBook.Application.Entities.Users;
@@ -48,6 +48,9 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IRecipeQuery, RecipeQuery>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
+builder.Services.AddScoped<IRecipeStepRepository, RecipeStepRepository>();
+builder.Services.AddScoped<IRecipeIngredientRepository, RecipeIngredientRepository>();
 
 // Swagger UI
 builder.Services.AddSwaggerGen();

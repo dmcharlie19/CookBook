@@ -1,4 +1,6 @@
-namespace CookBookBackend.Core.Domain
+using System.Collections.Generic;
+
+namespace CookBook.Core.Domain
 {
   public class Recipe
   {
@@ -10,6 +12,9 @@ namespace CookBookBackend.Core.Domain
     public string? Tags { get; protected set; }
     public int LikesCount { get; protected set; }
     public int FavoritesCount { get; protected set; }
+
+    public List<RecipeStep> RecipeSteps { get; set; }
+    public List<RecipeIngredient> RecipeIngredients { get; set; }
 
     public Recipe(
         string title,
