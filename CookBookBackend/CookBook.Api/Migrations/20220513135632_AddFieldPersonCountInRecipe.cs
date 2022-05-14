@@ -1,26 +1,26 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace CookBookBackend.Migrations
+namespace CookBook.Migrations
 {
-    public partial class AddFieldPersonCountInRecipe : Migration
+  public partial class AddFieldPersonCountInRecipe : Migration
+  {
+    protected override void Up( MigrationBuilder migrationBuilder )
     {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.AddColumn<int>(
-                name: "PersonCount",
-                table: "Recipes",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropColumn(
-                name: "PersonCount",
-                table: "Recipes");
-        }
+      migrationBuilder.AddColumn<int>(
+          name: "PersonCount",
+          table: "Recipes",
+          type: "int",
+          nullable: false,
+          defaultValue: 0 );
     }
+
+    protected override void Down( MigrationBuilder migrationBuilder )
+    {
+      migrationBuilder.DropColumn(
+          name: "PersonCount",
+          table: "Recipes" );
+    }
+  }
 }

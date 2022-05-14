@@ -1,8 +1,8 @@
-using CookBookBackend.Core.Domain;
+using CookBook.Core.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CookBookBackend.Infrastructure.Configurations
+namespace CookBook.Infrastructure.Configurations
 {
   public class RecipeConfiguration : IEntityTypeConfiguration<Recipe>
   {

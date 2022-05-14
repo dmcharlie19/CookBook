@@ -1,4 +1,4 @@
-namespace CookBookBackend.Core.Domain
+namespace CookBook.Core.Domain
 {
   public class User
   {

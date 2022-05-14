@@ -3,7 +3,7 @@ using System.Linq;
 using CookBook.Application.Mappers;
 using CookBook.Application.Queries;
 using CookBook.Application.Queries.Dto;
-using CookBookBackend.Infrastructure.Foundation;
+using CookBook.Infrastructure.Foundation;
 
 namespace CookBook.Infrastructure.Queries
 {

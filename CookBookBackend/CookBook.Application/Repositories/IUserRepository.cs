@@ -1,4 +1,4 @@
-using CookBookBackend.Core.Domain;
+using CookBook.Core.Domain;
 
 namespace CookBook.Application.Repositories
 {

@@ -1,5 +1,5 @@
 using CookBook.Application.Queries.Dto;
-using CookBookBackend.Core.Domain;
+using CookBook.Core.Domain;
 
 namespace CookBook.Application.Mappers
 {

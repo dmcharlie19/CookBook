@@ -8,8 +8,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authorization;
 using CookBook.Application.Repositories;
 using CookBook.Infrastructure.Repositories;
-using CookBookBackend.Core.Domain;
-using CookBookBackend.Application.Repositories;
+using CookBook.Core.Domain;
+using CookBook.Application.Repositories;
 
 namespace CookBook.Api.Controllers
 {

@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CookBook.Application.Repositories;
-using CookBookBackend.Core.Domain;
-using CookBookBackend.Infrastructure.Foundation;
-using Microsoft.EntityFrameworkCore;
+using CookBook.Core.Domain;
+using CookBook.Infrastructure.Foundation;
 
 namespace CookBook.Infrastructure.Repositories
 {
