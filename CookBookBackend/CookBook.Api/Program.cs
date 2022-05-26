@@ -8,8 +8,6 @@ using CookBook.Application.Queries;
 using CookBook.Infrastructure.Queries;
 using CookBook.Application.Entities.Users;
 using Microsoft.AspNetCore.Http.Features;
-using CookBook.Application.Repositories;
-using CookBook.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder( args );
 
@@ -46,11 +44,13 @@ builder.Services.AddControllers();
 
 //DI
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IRecipeQuery, RecipeQuery>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IRecipeQuery, RecipeQuery>();
 builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
 builder.Services.AddScoped<IRecipeStepRepository, RecipeStepRepository>();
 builder.Services.AddScoped<IRecipeIngredientRepository, RecipeIngredientRepository>();
+builder.Services.AddScoped<ITagRepository, TagRepository>();
+builder.Services.AddScoped<ITagRecipeRepository, TagRecipeRepository>();
 
 // Swagger UI
 builder.Services.AddSwaggerGen();
