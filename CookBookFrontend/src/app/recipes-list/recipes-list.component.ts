@@ -38,7 +38,7 @@ export class RecipesListComponent implements OnInit {
 
   // получаем данные через сервис
   loadRecipes() {
-    this.recipeService.GetRecipes().subscribe(
+    this.recipeService.getRecipes().subscribe(
       (data: RecipeShortInfoResponceDto[]) => {
         this.recipes.push(...data);
       })

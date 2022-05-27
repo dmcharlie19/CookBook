@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AddRecipeRequestDto, RecipeIngridient } from '../models/recipe';
+import { RecipeService } from '../services/recipeService';
 
 class RecipeIngridientKeys {
   titleKey: string;
@@ -10,48 +12,62 @@ class RecipeIngridientKeys {
 @Component({
   selector: 'app-add-recipe',
   templateUrl: './add-recipe.component.html',
-  styleUrls: ['./add-recipe.component.css']
+  styleUrls: ['./add-recipe.component.css'],
+  providers: [RecipeService]
 })
 export class AddRecipeComponent implements OnInit {
 
   addRecipeForm: FormGroup;
+  public recipeTagsKeys: Array<string> = [];
   public recipeStepsKeys: Array<string> = [];
   public ingridientsKeys: RecipeIngridientKeys[] = [];
 
-  constructor() {
+  constructor(private recipeService: RecipeService, private router: Router) {
   }
 
   ngOnInit(): void {
     this.addRecipeForm = new FormGroup({
       "title": new FormControl('борщ', [Validators.required, Validators.minLength(3)]),
       "shortDescription": new FormControl('вкусный', [Validators.required, Validators.minLength(3)]),
-      "preparingTime": new FormControl('55', [Validators.required, Validators.pattern("[0-200]"), this.numberdValidator]),
-      "personCount": new FormControl('5', [Validators.required, Validators.pattern("[0-9]"), this.numberdValidator])
+      "preparingTime": new FormControl('30', [Validators.required, this.numberdValidator]),
+      "personCount": new FormControl('4', [Validators.required, this.numberdValidator])
     });
 
+    this.addNewTag();
     this.addNewIngridient();
     this.addNewRecipeStep();
   }
 
   private numberdValidator(control: FormControl): ValidationErrors {
-    console.log("numberdValidator");
-
-    // Проверка на содержание цифр
     const n = parseInt(control.value);
 
-    if (!n) {
+    if (!n || n > 200) {
       return { invalidNumber: true };
     }
-    if (n > 200)
-      return { invalidNumber: true };
-
     return null;
+  }
 
+  // Работа с тэгами
+  addNewTag(): void {
+    let key = 'recipeStep_' + this.recipeTagsKeys.length.toString();
+    console.log(key);
+
+    this.addRecipeForm.addControl(key, new FormControl("", Validators.required))
+    this.recipeTagsKeys.push(key);
+  }
+
+  deleteTag(id: number) {
+    if (this.recipeTagsKeys.length > 1) {
+      console.log("remove " + this.recipeTagsKeys[id]);
+
+      this.addRecipeForm.removeControl(this.recipeTagsKeys[id])
+      this.recipeTagsKeys.splice(id, 1);
+    }
   }
 
   // Работа с шагами приготовления
   addNewRecipeStep(): void {
-    let key = 'recipeStep_' + this.recipeStepsKeys.length.toString();
+    let key = 'tag_' + this.recipeStepsKeys.length.toString();
     console.log(key);
 
     this.addRecipeForm.addControl(key, new FormControl("сделать вкусно красиво", Validators.required))
@@ -105,6 +121,10 @@ export class AddRecipeComponent implements OnInit {
     request.preparingTime = this.addRecipeForm.controls["preparingTime"].value;
     request.personCount = this.addRecipeForm.controls["personCount"].value;
 
+    for (let i = 0; i < this.recipeTagsKeys.length; i++) {
+      request.tags.push(this.addRecipeForm.controls[this.recipeTagsKeys[i]].value);
+    }
+
     for (let i = 0; i < this.ingridientsKeys.length; i++) {
       let ingridient = new RecipeIngridient();
       ingridient.ingridientTitle = this.addRecipeForm.controls[this.ingridientsKeys[i].titleKey].value;
@@ -118,6 +138,10 @@ export class AddRecipeComponent implements OnInit {
     }
 
     console.log(request);
+
+    this.recipeService.addRecipe(request).subscribe(
+      () => this.router.navigateByUrl('/')
+    )
   }
 
 }

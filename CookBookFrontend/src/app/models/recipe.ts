@@ -19,10 +19,12 @@ export class AddRecipeRequestDto {
     public shortDescription: string;
     public preparingTime: Number;
     public personCount: Number;
+    public tags: string[];
     public cookingSteps: string[];
     public recipeIngridients: RecipeIngridient[];
 
     constructor() {
+        this.tags = [];
         this.cookingSteps = [];
         this.recipeIngridients = [];
     }

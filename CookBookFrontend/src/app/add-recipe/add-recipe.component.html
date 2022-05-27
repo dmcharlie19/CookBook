@@ -20,13 +20,21 @@
                 <textarea class="description" placeholder="Краткое описание"
                     formControlName="shortDescription"></textarea>
                 <div class="bar-h20px "></div>
-                <input placeholder="Добавить тэги">
+                <div class="tags">
+                    <div class="tag" *ngFor="let key of recipeTagsKeys; let i = index">
+                        <input placeholder="добавьте тэг" formControlName="{{key}}">
+                        <img class="close-bar-img" src="assets/img/x.png" (click)="deleteTag(i)">
+                    </div>
+                    <div *ngIf="recipeTagsKeys.length < 4">
+                        <button class=" add-tag-button" (click)="addNewTag()">+</button>
+                    </div>
+                </div>
                 <div class="bar-h20px "></div>
                 <div class="numbers">
-                    <input placeholder="Время готовки" formControlName="preparingTime">
+                    <input type="number" placeholder="Время готовки" formControlName="preparingTime">
                     <p>Минут</p>
                     <div class="fill-bar"></div>
-                    <input placeholder="Порций в блюде" formControlName="personCount">
+                    <input type="number" placeholder="Порций в блюде" formControlName="personCount">
                     <p>Персон</p>
                 </div>
             </div>

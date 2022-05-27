@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Authorization;
 using CookBook.Application.Repositories;
 using CookBook.Infrastructure.Repositories;
 using CookBook.Core.Domain;
-using CookBook.Application.Repositories;
 
 namespace CookBook.Api.Controllers
 {

@@ -91,6 +91,38 @@
     padding: 50px 70px 0px 53px;
 }
 
+.tags {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.tag {
+    margin-right: 10px;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    justify-content: center;
+    align-items: center;
+}
+
+.tag input {
+    width: 100px;
+    padding: 11px !important;
+}
+
+.add-tag-button {
+    background-color: white;
+    border: 1px solid var(--yellow);
+    border-radius: 50%;
+
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 28px;
+    color: var(--yellow);
+}
+
 .short-info-form input {
     border: 1px solid #ccc;
     border-radius: 16px;
@@ -156,12 +188,14 @@ textarea.ng-touched.ng-invalid {
 
 .close-bar {
     flex-grow: 1;
+    height: 30px;
 }
 
 .close-bar-img {
     height: 16px;
     width: 16px;
-    margin-bottom: 14px;
+    margin: 0 5px;
+
     cursor: pointer;
 }
 

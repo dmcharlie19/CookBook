@@ -51,7 +51,7 @@ namespace CookBook.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Recipes");
+                    b.ToTable("Recipes", (string)null);
                 });
 
             modelBuilder.Entity("CookBook.Core.Domain.RecipeIngredient", b =>
@@ -77,7 +77,7 @@ namespace CookBook.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("RecipeIngredients");
+                    b.ToTable("RecipeIngredients", (string)null);
                 });
 
             modelBuilder.Entity("CookBook.Core.Domain.RecipeStep", b =>
@@ -99,7 +99,7 @@ namespace CookBook.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("RecipeSteps");
+                    b.ToTable("RecipeSteps", (string)null);
                 });
 
             modelBuilder.Entity("CookBook.Core.Domain.Tag", b =>
@@ -116,7 +116,7 @@ namespace CookBook.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags");
+                    b.ToTable("Tags", (string)null);
                 });
 
             modelBuilder.Entity("CookBook.Core.Domain.TagRecipe", b =>
@@ -139,7 +139,7 @@ namespace CookBook.Migrations
 
                     b.HasIndex("TagId");
 
-                    b.ToTable("TagRecipes");
+                    b.ToTable("TagRecipes", (string)null);
                 });
 
             modelBuilder.Entity("CookBook.Core.Domain.User", b =>
@@ -164,7 +164,7 @@ namespace CookBook.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("CookBook.Core.Domain.RecipeIngredient", b =>
