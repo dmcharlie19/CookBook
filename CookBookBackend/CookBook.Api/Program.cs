@@ -8,6 +8,8 @@ using CookBook.Application.Queries;
 using CookBook.Infrastructure.Queries;
 using CookBook.Application.Entities.Users;
 using Microsoft.AspNetCore.Http.Features;
+using CookBook.Application.Services;
+using CookBook.Api.Middleware;
 
 var builder = WebApplication.CreateBuilder( args );
 
@@ -43,9 +45,12 @@ builder.Services.AddDbContext<CookBookDbContext>( x => x.UseSqlServer( connectio
 builder.Services.AddControllers();
 
 //DI
+builder.Services.AddScoped<IRecipeQuery, RecipeQuery>();
+builder.Services.AddScoped<IRecipeService, RecipeService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IRecipeQuery, RecipeQuery>();
 builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
 builder.Services.AddScoped<IRecipeStepRepository, RecipeStepRepository>();
 builder.Services.AddScoped<IRecipeIngredientRepository, RecipeIngredientRepository>();
@@ -79,6 +84,7 @@ app.Use( async ( context, next ) =>
   await next.Invoke();
 } );
 
+app.UseMiddleware<ExceptionMiddleware>();
 app.MapControllers();
 
 // CORS

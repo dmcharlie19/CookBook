@@ -36,7 +36,10 @@ p {
     --grey: #9196A1;
     --lightYellow: #FFEFCC;
     --darkYellow: #d69e1b;
+    --error-display-pink: rgb(253, 224, 229);
+
     --standartMargin: 5px 0;
+
 
     display: flex;
     flex-direction: column;

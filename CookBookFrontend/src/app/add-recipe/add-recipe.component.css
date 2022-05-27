@@ -5,7 +5,7 @@
     justify-content: space-between;
     align-items: left;
     min-height: 50px;
-    margin: 90px 0 0 0;
+    margin: 40px 0 0 0;
     border: inherit;
     border-radius: inherit;
 }
@@ -160,12 +160,12 @@
 }
 
 input.ng-touched.ng-invalid {
-    background-color: rgb(253, 224, 229);
+    background-color: var(--error-display-pink);
     border-color: red;
 }
 
 textarea.ng-touched.ng-invalid {
-    background-color: rgb(253, 224, 229);
+    background-color: var(--error-display-pink);
     border-color: red;
 }
 
