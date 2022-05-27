@@ -51,11 +51,6 @@
     <div class="recipeList" *ngFor="let recipe of recipes;">
         <app-recipe-card [recipe]=recipe></app-recipe-card>
     </div>
-    <!-- <div *ngIf="isLoaded">
-        <div class="errorMsg">
-            <p>Ой, на сервере что то пошло не так</p>
-        </div>
-    </div> -->
     <div class="loadMore">
         <button class="loadMore-button hovered-bg-color-light">Загрузить еще</button>
     </div>

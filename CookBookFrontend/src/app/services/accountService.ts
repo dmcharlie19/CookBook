@@ -69,10 +69,4 @@ export class AccountService {
     isLoggedOut(): Boolean {
         return this.AccesToken == null;
     }
-
-    // getExpiration() {
-    //     const expiration = localStorage.getItem("expires_at");
-    //     const expiresAt = JSON.parse(expiration);
-    //     return moment(expiresAt);
-    // }
 }

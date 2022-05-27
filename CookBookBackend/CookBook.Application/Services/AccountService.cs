@@ -35,8 +35,8 @@ namespace CookBook.Application.Services
       var claims = new List<Claim> { new Claim( ClaimTypes.Name, authRequestDto.Login ) };
       // создаем JWT-токен
       var jwt = new JwtSecurityToken(
-              issuer: AuthOptions.ISSUER,
-              audience: AuthOptions.AUDIENCE,
+              issuer: AuthOptions.Issuer,
+              audience: AuthOptions.Audience,
               claims: claims,
               expires: DateTime.UtcNow.Add( TimeSpan.FromMinutes( AuthOptions.LifeTimeInMinutes ) ),
               signingCredentials: new SigningCredentials( AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256 ) );

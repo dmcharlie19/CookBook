@@ -15,7 +15,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         console.log("intercept!");
         this.errorService.clearError();
 
-        var idToken = this.accountService.getAccesToken();
+        const idToken: string = this.accountService.getAccesToken();
 
         if (idToken) {
             const cloned = request.clone({
