@@ -1,8 +1,9 @@
 /*----------topBar---------------------------------*/
 .topBar {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: left;
     min-height: 50px;
     margin: 90px 0 0 0;
     border: inherit;
@@ -29,6 +30,26 @@
     border-radius: 16px;
     padding: inherit;
     margin-left: 18px;
+}
+
+.topBar-back {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 5px;
+}
+
+.topBar-back img {
+    width: 18px;
+    height: 12px;
+}
+
+.topBar-back p {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: var(--yellow);
+    margin-left: 10px;
 }
 
 /* ---------short-info---------------------------------------------*/
@@ -110,6 +131,10 @@
 .tag input {
     width: 100px;
     padding: 11px !important;
+    border-radius: 16px 0 0 16px !important;
+    border-top: 0px !important;
+    border-bottom: 0px !important;
+    border-left: 0px !important;
 }
 
 .add-tag-button {

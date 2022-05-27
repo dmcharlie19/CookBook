@@ -2,19 +2,12 @@ body {
     min-width: 1440px;
 }
 
-.hovered-scale {
-    cursor: pointer;
-    transition: 0.1s;
-}
-
-.hovered-scale:hover {
-    transform: scale(1.1);
-}
-
 .hovered-bg-color-light,
 hovered-bg-color-dark {
     cursor: pointer;
     transition: 0.1s;
+    border-radius: 5px;
+    padding: 5px;
 }
 
 .hovered-bg-color-light:hover {
