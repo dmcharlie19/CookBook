@@ -10,11 +10,11 @@ namespace CookBook.Core.Domain
 
         [Required]
         [StringLength( 120, MinimumLength = 3 )]
-        public string? Title { get; protected set; }
+        public string Title { get; protected set; }
 
         [Required]
         [StringLength( 200, MinimumLength = 3 )]
-        public string? ShortDescription { get; protected set; }
+        public string ShortDescription { get; protected set; }
 
         [Required]
         [Range( 1, 1000 )]
@@ -24,12 +24,18 @@ namespace CookBook.Core.Domain
         [Range( 1, 1000 )]
         public int PersonCount { get; set; }
 
+        [Required]
         public List<TagRecipe> Tags { get; set; }
+
+        [Required]
         public List<RecipeStep> RecipeSteps { get; protected set; }
+
+        [Required]
         public List<RecipeIngredient> RecipeIngredients { get; protected set; }
 
         private const int _maxStepsCount = 50;
         private const int _maxIngredientsCount = 10;
+        private const int _maxTagsCount = 4;
 
         public Recipe(
             string title,
@@ -66,6 +72,22 @@ namespace CookBook.Core.Domain
                 throw new InvalidClientParameterException( "Превышено максимальное количество ингредиентов" );
 
             RecipeIngredients = ingredients;
+        }
+
+        public void AddTags( List<Tag> tags )
+        {
+            if ( tags == null ||
+                tags.Count == 0 )
+                throw new InvalidClientParameterException( "тэги не должны быть пустыми" );
+
+            if ( tags.Count >= _maxTagsCount )
+                throw new InvalidClientParameterException( "Превышено максимальное количество тэгов" );
+
+            Tags = new();
+            foreach ( Tag tag in tags )
+            {
+                Tags.Add( new TagRecipe( tag.Id ) );
+            }
         }
     }
 }

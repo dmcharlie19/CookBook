@@ -47,6 +47,7 @@ builder.Services.AddControllers();
 //DI
 builder.Services.AddScoped<IRecipeQuery, RecipeQuery>();
 builder.Services.AddScoped<IRecipeService, RecipeService>();
+builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
