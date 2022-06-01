@@ -18,23 +18,23 @@ builder.Services.AddAuthorization();
 builder.Services.AddAuthentication( JwtBearerDefaults.AuthenticationScheme )
     .AddJwtBearer( options =>
     {
-      options.TokenValidationParameters = new TokenValidationParameters
-      {
-        // указывает, будет ли валидироваться издатель при валидации токена
-        ValidateIssuer = true,
-        // строка, представляющая издателя
-        ValidIssuer = AuthOptions.Issuer,
-        // будет ли валидироваться потребитель токена
-        ValidateAudience = true,
-        // установка потребителя токена
-        ValidAudience = AuthOptions.Audience,
-        // будет ли валидироваться время существования
-        ValidateLifetime = true,
-        // установка ключа безопасности
-        IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
-        // валидация ключа безопасности
-        ValidateIssuerSigningKey = true,
-      };
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            // указывает, будет ли валидироваться издатель при валидации токена
+            ValidateIssuer = true,
+            // строка, представляющая издателя
+            ValidIssuer = AuthOptions.Issuer,
+            // будет ли валидироваться потребитель токена
+            ValidateAudience = true,
+            // установка потребителя токена
+            ValidAudience = AuthOptions.Audience,
+            // будет ли валидироваться время существования
+            ValidateLifetime = true,
+            // установка ключа безопасности
+            IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+            // валидация ключа безопасности
+            ValidateIssuerSigningKey = true,
+        };
     } );
 
 // Хранение
@@ -52,8 +52,6 @@ builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
-builder.Services.AddScoped<IRecipeStepRepository, RecipeStepRepository>();
-builder.Services.AddScoped<IRecipeIngredientRepository, RecipeIngredientRepository>();
 builder.Services.AddScoped<ITagRepository, TagRepository>();
 builder.Services.AddScoped<ITagRecipeRepository, TagRecipeRepository>();
 
@@ -65,9 +63,9 @@ builder.Services.AddCors();
 
 builder.Services.Configure<FormOptions>( o =>
 {
-  o.ValueLengthLimit = int.MaxValue;
-  o.MultipartBodyLengthLimit = int.MaxValue;
-  o.MemoryBufferThreshold = int.MaxValue;
+    o.ValueLengthLimit = int.MaxValue;
+    o.MultipartBodyLengthLimit = int.MaxValue;
+    o.MemoryBufferThreshold = int.MaxValue;
 } );
 
 var app = builder.Build();
@@ -80,8 +78,8 @@ app.UseStaticFiles();
 
 app.Use( async ( context, next ) =>
 {
-  Console.WriteLine( context.Request.Path );
-  await next.Invoke();
+    Console.WriteLine( context.Request.Path );
+    await next.Invoke();
 } );
 
 app.UseMiddleware<ExceptionMiddleware>();

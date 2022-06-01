@@ -1,45 +1,45 @@
 using System.Net;
-using CookBook.Application.Exceptions;
+using CookBook.Core.Exceptions;
 
 namespace CookBook.Api.Middleware
 {
-  public class ExceptionMiddleware
-  {
-    private readonly RequestDelegate _next;
-
-    public ExceptionMiddleware( RequestDelegate next )
+    public class ExceptionMiddleware
     {
-      _next = next;
-    }
+        private readonly RequestDelegate _next;
 
-    public async Task InvokeAsync( HttpContext httpContext )
-    {
-      try
-      {
-        await _next( httpContext );
-      }
-      catch ( InvalidClientParameterException ex )
-      {
-        await HandleInvalidClientParameterException( httpContext, ex );
-      }
-      catch ( Exception ex )
-      {
-        await HandleGlobalExceptionAsync( httpContext, ex );
-      }
-    }
+        public ExceptionMiddleware( RequestDelegate next )
+        {
+            _next = next;
+        }
 
-    private static Task HandleInvalidClientParameterException( HttpContext context, Exception exception )
-    {
-      context.Response.ContentType = "text";
-      context.Response.StatusCode = ( int )HttpStatusCode.BadRequest;
-      return context.Response.WriteAsync( exception.Message );
-    }
+        public async Task InvokeAsync( HttpContext httpContext )
+        {
+            try
+            {
+                await _next( httpContext );
+            }
+            catch ( InvalidClientParameterException ex )
+            {
+                await HandleInvalidClientParameterException( httpContext, ex );
+            }
+            catch ( Exception ex )
+            {
+                await HandleGlobalExceptionAsync( httpContext, ex );
+            }
+        }
 
-    private static Task HandleGlobalExceptionAsync( HttpContext context, Exception exception )
-    {
-      context.Response.ContentType = "text";
-      context.Response.StatusCode = ( int )HttpStatusCode.InternalServerError;
-      return context.Response.WriteAsync( "Внутренняя ошибка сервера" );
+        private static Task HandleInvalidClientParameterException( HttpContext context, Exception exception )
+        {
+            context.Response.ContentType = "text";
+            context.Response.StatusCode = ( int )HttpStatusCode.BadRequest;
+            return context.Response.WriteAsync( exception.Message );
+        }
+
+        private static Task HandleGlobalExceptionAsync( HttpContext context, Exception exception )
+        {
+            context.Response.ContentType = "text";
+            context.Response.StatusCode = ( int )HttpStatusCode.InternalServerError;
+            return context.Response.WriteAsync( "Внутренняя ошибка сервера" );
+        }
     }
-  }
 }

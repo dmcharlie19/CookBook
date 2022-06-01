@@ -32,10 +32,5 @@ namespace CookBook.Infrastructure.Repositories
     {
       return _dbContext.Users.FirstOrDefault( user => user.Id == id );
     }
-
-    public void Remove( User user )
-    {
-      throw new NotImplementedException();
-    }
   }
 }
