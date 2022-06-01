@@ -59,6 +59,9 @@ namespace CookBook.Core.Domain
             if ( steps.Count >= _maxStepsCount )
                 throw new InvalidClientParameterException( "Превышено максимальное количество шагов приготовления" );
 
+            foreach ( var step in steps )
+                step.Validate();
+
             RecipeSteps = steps;
         }
 
@@ -70,6 +73,9 @@ namespace CookBook.Core.Domain
 
             if ( ingredients.Count >= _maxIngredientsCount )
                 throw new InvalidClientParameterException( "Превышено максимальное количество ингредиентов" );
+
+            foreach ( var ingredient in ingredients )
+                ingredient.Validate();
 
             RecipeIngredients = ingredients;
         }
@@ -88,6 +94,14 @@ namespace CookBook.Core.Domain
             {
                 Tags.Add( new TagRecipe( tag.Id ) );
             }
+        }
+
+        public void Validate()
+        {
+            var results = new List<ValidationResult>();
+            var context = new ValidationContext( this );
+            if ( !Validator.TryValidateObject( this, context, results, true ) )
+                throw new InvalidClientParameterException( results[ 0 ].ErrorMessage );
         }
     }
 }

@@ -9,18 +9,18 @@ using CookBook.Infrastructure.Foundation;
 
 namespace CookBook.Infrastructure.Repositories
 {
-  public class RecipeRepository : IRecipeRepository
-  {
-    private readonly CookBookDbContext _dbContext;
-
-    public RecipeRepository( CookBookDbContext dbContext )
+    public class RecipeRepository : IRecipeRepository
     {
-      _dbContext = dbContext;
-    }
+        private readonly CookBookDbContext _dbContext;
 
-    public void Add( Recipe recipe )
-    {
-      _dbContext.Recipes.Add( recipe );
+        public RecipeRepository( CookBookDbContext dbContext )
+        {
+            _dbContext = dbContext;
+        }
+
+        public void Add( Recipe recipe )
+        {
+            _dbContext.Recipes.Add( recipe );
+        }
     }
-  }
 }

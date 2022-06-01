@@ -14,24 +14,11 @@ namespace CookBook.Application.Services
 {
     public class RecipeService : IRecipeService
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IRecipeQuery _recipeQuery;
         private readonly IRecipeRepository _recipeRepository;
 
-        private readonly ITagRecipeRepository _tagRecipeRepository;
-
-        public RecipeService(
-          IUnitOfWork unitOfWork,
-          IRecipeQuery recipeQuery,
-          IRecipeRepository recipeRepository,
-          ITagRepository tagRepository,
-          ITagRecipeRepository tagRecipeRepository )
+        public RecipeService( IRecipeRepository recipeRepository )
         {
-            _unitOfWork = unitOfWork;
-            _recipeQuery = recipeQuery;
             _recipeRepository = recipeRepository;
-
-            _tagRecipeRepository = tagRecipeRepository;
         }
         public void AddRecipe( AddRecipeRequestDto addRecipeRequest, List<Tag> tags )
         {
@@ -45,20 +32,17 @@ namespace CookBook.Application.Services
               addRecipeRequest.PersonCount );
 
             recipe.AddRecipeSteps( addRecipeRequest.CookingSteps
-              .Select( recipeStep => new RecipeStep( recipeStep, recipe.Id ) )
+              .Select( recipeStep => new RecipeStep( recipeStep ) )
               .ToList() );
 
             recipe.AddRecipeIngredients( addRecipeRequest.RecipeIngridients
-              .Select( ri => new RecipeIngredient( ri.IngridientTitle, ri.IngridientBody, recipe.Id ) )
+              .Select( ri => new RecipeIngredient( ri.IngridientTitle, ri.IngridientBody ) )
               .ToList() );
 
-            //recipe.AddTags( tags );
+            recipe.AddTags( tags );
 
             // Валидация модели
-            var results = new List<ValidationResult>();
-            var context = new ValidationContext( recipe );
-            if ( !Validator.TryValidateObject( recipe, context, results, true ) )
-                throw new InvalidClientParameterException( results[ 0 ].ErrorMessage );
+            recipe.Validate();
 
             _recipeRepository.Add( recipe );
         }

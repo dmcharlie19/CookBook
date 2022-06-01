@@ -33,6 +33,7 @@ namespace CookBook.Infrastructure.Foundation
             modelBuilder.ApplyConfiguration( new TagRecipeConfiguration() );
 
             modelBuilder.ApplyConfiguration( new UserConfiguration() );
+
         }
     }
 }

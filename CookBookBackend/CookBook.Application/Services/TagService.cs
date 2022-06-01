@@ -32,6 +32,7 @@ namespace CookBook.Application.Services
                 if ( tag is null )
                 {
                     tag = new Tag( tagName );
+                    tag.Validate();
                     _tagRepository.Add( tag );
                 }
 

@@ -61,10 +61,13 @@ namespace CookBook.Application.Services
             if ( user is not null )
                 throw new InvalidClientParameterException( "Логин занят" );
 
-            _userRepository.Add( new User(
+            user = new User(
               registarationDto.Login,
               registarationDto.Password,
-              registarationDto.Name ) );
+              registarationDto.Name );
+
+            user.Validate();
+            _userRepository.Add( user );
         }
     }
 }
