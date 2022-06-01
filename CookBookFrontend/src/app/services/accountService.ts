@@ -2,29 +2,29 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticateRequestDto, AuthenticateResponseDto } from '../models/authenticateDto';
 import { RegistrationRequestDto } from '../models/registrationRequestDto';
-import { tap, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Injectable()
 export class AccountService {
 
+    private _accesTokenKey = "accesToken";
+    private _userNameKey = "userName";
+
     private loginUrl = "/api/account/login";
     private registrationUrl = "/api/account/registration";
 
-    private AccesToken: string = null;
-    private UserName: string = null;
     private expirTimeMinutes: Number = 0;
 
     constructor(private http: HttpClient) {
-        console.log("create AuthService");
     }
 
     public getAccesToken(): string {
-        return this.AccesToken;
+        return localStorage.getItem("accesToken");
     }
 
     public getUserName(): string {
-        return this.UserName;
+        return localStorage.getItem(this._userNameKey);
     }
 
     login(authenticate: AuthenticateRequestDto): Observable<Boolean> {
@@ -50,23 +50,23 @@ export class AccountService {
         if (authResponse.expirTimeMinutes == 0)
             return false;
 
-        this.AccesToken = authResponse.accesToken;
-        this.UserName = authResponse.userName;
+        localStorage.setItem(this._accesTokenKey, authResponse.accesToken);
+        localStorage.setItem(this._userNameKey, authResponse.userName);
+        
         this.expirTimeMinutes = authResponse.expirTimeMinutes;
         return true;
     }
 
     public logout() {
-
-        this.AccesToken = null;
-        this.UserName = null;
+        localStorage.setItem(this._accesTokenKey, "");
+        localStorage.setItem(this._userNameKey, "");
     }
 
     public isLoggedIn(): Boolean {
-        return this.AccesToken != null;
+        return localStorage.getItem(this._accesTokenKey) != "";
     }
 
     isLoggedOut(): Boolean {
-        return this.AccesToken == null;
+        return !this.isLoggedIn;
     }
 }

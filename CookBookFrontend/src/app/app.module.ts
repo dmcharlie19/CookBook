@@ -15,7 +15,7 @@ import { ErrorDisplayComponent } from './error-display/error-display.component'
 import { AccountService } from './services/AccountService';
 import { ErrorService } from './services/errorService';
 import { AddRecipeComponent } from './add-recipe/add-recipe.component';
-import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
+//import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 
 // Определение маршрутов
 const appRoutes: Routes = [
@@ -39,7 +39,8 @@ const appRoutes: Routes = [
     RegistrationComponent,
     ErrorDisplayComponent,
     AddRecipeComponent,
-    RecipeDetailComponent],
+    //RecipeDetailComponent
+  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     AccountService,
