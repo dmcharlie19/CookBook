@@ -1,0 +1,53 @@
+/*----------topBar---------------------------------*/
+.topBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 50px;
+    margin: 90px 0 0 0;
+    border: inherit;
+    border-radius: inherit;
+}
+
+.topBar-title {
+    font-weight: 700;
+    font-size: 42px;
+    flex-grow: 1;
+}
+
+.topBar-delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 60px;
+    height: 60px;
+
+    border: 1px solid rgba(145, 150, 161, 0.7);
+    border-radius: 16px;
+}
+
+.edit-img {
+    width: 18px;
+    height: 18px;
+    margin-right: 21px;
+}
+
+.topBar-edit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 278px;
+    height: 60px;
+
+    background: var(--yellow);
+    font-weight: 600;
+    font-size: 18px;
+    font-family: Montserrat;
+    color: white;
+
+    border: inherit;
+    border-radius: 16px;
+    padding: inherit;
+    margin-left: 18px;
+}
