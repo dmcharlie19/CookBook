@@ -8,12 +8,23 @@ export class RecipeShortInfoResponceDto {
         public likesCount: Number,
         public favoritesCount: Number,
         public authorId: Number,
-        public authorName : string) { }
+        public authorName: string) { }
 }
 
-export class RecipeIngridient {
-    public ingridientTitle: string;
-    public ingridientBody: string;
+export class RecipeFullInfoResponceDto {
+    public shortInfo: RecipeShortInfoResponceDto;
+    public cookingSteps: string[];
+    public recipeIngridients: RecipeIngredient[];
+
+}
+
+export class RecipeIngredient {
+    public title: string;
+    public ingredients: string[];
+
+    constructor() {
+        this.ingredients = [];
+    }
 }
 
 export class AddRecipeRequestDto {
@@ -23,7 +34,7 @@ export class AddRecipeRequestDto {
     public personCount: Number;
     public tags: string[];
     public cookingSteps: string[];
-    public recipeIngridients: RecipeIngridient[];
+    public recipeIngridients: RecipeIngredient[];
 
     constructor() {
         this.tags = [];

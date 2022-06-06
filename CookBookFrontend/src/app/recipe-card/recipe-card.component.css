@@ -68,6 +68,10 @@
     text-transform: capitalize;
 }
 
+.recipeBox-title-empty {
+    height: 30px;
+}
+
 .recipeBox-content {
     max-height: 100px;
     margin: 16px 0 0 0;
@@ -106,10 +110,10 @@
     margin: 0 70px 0 0;
 }
 
-.recipeBox-author{
+.recipeBox-author {
     display: flex;
     margin-top: 20px;
-  
+
     font-size: 20px;
     font-weight: 400;
 }

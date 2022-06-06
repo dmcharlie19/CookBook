@@ -16,6 +16,10 @@ export class RecipeService {
         return this.http.get(this.url);
     }
 
+    getRecipeFullInfo(id: Number) {
+        return this.http.get(`${this.url}/${id}`);
+    }
+
     addRecipe(registrationDto: AddRecipeRequestDto): Observable<Object> {
         return this.http.post(this.addRecipeUrl, registrationDto);
     }

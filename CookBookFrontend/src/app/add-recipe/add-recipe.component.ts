@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AddRecipeRequestDto, RecipeIngridient } from '../models/recipe';
+import { AddRecipeRequestDto, RecipeIngredient } from '../models/recipe';
 import { RecipeService } from '../services/recipeService';
 
 class RecipeIngridientKeys {
@@ -126,11 +126,11 @@ export class AddRecipeComponent implements OnInit {
     }
 
     for (let i = 0; i < this.ingridientsKeys.length; i++) {
-      let ingridient = new RecipeIngridient();
-      ingridient.ingridientTitle = this.addRecipeForm.controls[this.ingridientsKeys[i].titleKey].value;
-      ingridient.ingridientBody = this.addRecipeForm.controls[this.ingridientsKeys[i].bodyKey].value;
+      let ingredient = new RecipeIngredient();
+      ingredient.title = this.addRecipeForm.controls[this.ingridientsKeys[i].titleKey].value;
+      ingredient.ingredients = this.addRecipeForm.controls[this.ingridientsKeys[i].bodyKey].value;
 
-      request.recipeIngridients.push(ingridient);
+      request.recipeIngridients.push(ingredient);
     }
 
     for (let i = 0; i < this.recipeStepsKeys.length; i++) {

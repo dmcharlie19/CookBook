@@ -15,7 +15,7 @@ export class ErrorDisplayComponent implements OnInit {
     console.log("ngOnInit");
 
     this._errorService.onErrorOcured.subscribe(e => {
-      console.log(e);
+      console.log(`ErrorDisplayComponent: ${e}`);
       this.error = e;
     });
 

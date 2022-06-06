@@ -21,8 +21,10 @@
             </div>
         </div>
         <div class="flex-row">
-            <p class="recipeBox-title hovered-underline"> {{recipe.title}} </p>
+            <p *ngIf="showTitle" class="recipeBox-title hovered-underline" (click)="onRecipeDetail()"> {{recipe.title}}
+            </p>
         </div>
+        <div *ngIf="!showTitle" class="recipeBox-title-empty"> </div>
         <p class="recipeBox-content">{{recipe.shortDescription}}</p>
         <div class="recipeBox-info">
             <div class="recipeBox-miniBlock">
