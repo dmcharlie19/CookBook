@@ -4,9 +4,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using CookBook.Api.Dto;
 using CookBook.Application.Entities.Users;
-using CookBook.Core.Exceptions;
 using CookBook.Application.Repositories;
 using CookBook.Core.Domain;
+using CookBook.Core.Exceptions;
 using Microsoft.IdentityModel.Tokens;
 
 namespace CookBook.Application.Services
@@ -30,7 +30,9 @@ namespace CookBook.Application.Services
             if ( user.Password != authRequestDto.Password )
                 throw new InvalidClientParameterException( "Неверный пароль" );
 
-            var claims = new List<Claim> { new Claim( ClaimTypes.Name, authRequestDto.Login ) };
+            var claims = new List<Claim> { new Claim( ClaimTypes.Name, authRequestDto.Login ),
+                                           new Claim( UserClaim.UserId, user.Id.ToString() )};
+
             // создаем JWT-токен
             var jwt = new JwtSecurityToken(
                     issuer: AuthOptions.Issuer,

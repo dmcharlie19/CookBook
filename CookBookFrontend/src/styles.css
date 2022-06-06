@@ -2,6 +2,15 @@ body {
     min-width: 1440px;
 }
 
+.hovered-underline{
+    cursor: pointer;
+}
+
+.hovered-underline:hover {
+    border-bottom: #FDB100 1px solid !important;
+}
+
+
 .hovered-bg-color-light,
 hovered-bg-color-dark {
     cursor: pointer;

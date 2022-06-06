@@ -20,7 +20,9 @@
                 </div>
             </div>
         </div>
-        <p class="recipeBox-title">{{recipe.title}}</p>
+        <div class="flex-row">
+            <p class="recipeBox-title hovered-underline"> {{recipe.title}} </p>
+        </div>
         <p class="recipeBox-content">{{recipe.shortDescription}}</p>
         <div class="recipeBox-info">
             <div class="recipeBox-miniBlock">
@@ -37,6 +39,10 @@
                     <p class="recipeBox-info-number">{{recipe.preparingTime}} персон</p>
                 </div>
             </div>
+        </div>
+        <div class="recipeBox-author ho">
+            <p class="recipeBox-author-title">Автор:</p>
+            <p class="hovered-underline">{{recipe.authorName}}</p>
         </div>
     </div>
 </div>

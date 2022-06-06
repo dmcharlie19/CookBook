@@ -31,6 +31,11 @@ namespace CookBook.Core.Domain
         public List<RecipeStep> RecipeSteps { get; protected set; }
 
         [Required]
+        public int UserId { get; protected set; }
+
+        public User User { get; protected set; }
+
+        [Required]
         public List<RecipeIngredient> RecipeIngredients { get; protected set; }
 
         private const int _maxStepsCount = 50;
@@ -41,13 +46,14 @@ namespace CookBook.Core.Domain
             string title,
             string shortDescription,
             int preparingTime,
-            int personCount
-            )
+            int personCount,
+            int userId )
         {
             Title = title;
             ShortDescription = shortDescription;
             PreparingTime = preparingTime;
             PersonCount = personCount;
+            UserId = userId;
         }
 
         public void AddRecipeSteps( List<RecipeStep> steps )

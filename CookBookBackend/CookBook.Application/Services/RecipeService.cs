@@ -1,14 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CookBook.Api.Dto;
-using CookBook.Application.Queries;
 using CookBook.Application.Repositories;
-using CookBook.Core.Exceptions;
 using CookBook.Core.Domain;
-using System.ComponentModel.DataAnnotations;
+using CookBook.Core.Exceptions;
 
 namespace CookBook.Application.Services
 {
@@ -20,16 +15,17 @@ namespace CookBook.Application.Services
         {
             _recipeRepository = recipeRepository;
         }
-        public void AddRecipe( AddRecipeRequestDto addRecipeRequest, List<Tag> tags )
+        public void AddRecipe( int userId, AddRecipeRequestDto addRecipeRequest, List<Tag> tags )
         {
             if ( addRecipeRequest is null )
                 throw new InvalidClientParameterException( "запрос не должен быть Null" );
 
             var recipe = new Recipe(
-              addRecipeRequest.Title,
-              addRecipeRequest.ShortDescription,
-              addRecipeRequest.PreparingTime,
-              addRecipeRequest.PersonCount );
+                addRecipeRequest.Title,
+                addRecipeRequest.ShortDescription,
+                addRecipeRequest.PreparingTime,
+                addRecipeRequest.PersonCount,
+                userId );
 
             recipe.AddRecipeSteps( addRecipeRequest.CookingSteps
               .Select( recipeStep => new RecipeStep( recipeStep ) )

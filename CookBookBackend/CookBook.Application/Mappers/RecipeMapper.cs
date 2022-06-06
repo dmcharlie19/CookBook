@@ -5,9 +5,9 @@ namespace CookBook.Application.Mappers
 {
     public static class RecipeMapper
     {
-        public static RecipeDto Map( this Recipe recipe )
+        public static RecipeShortDto Map( this Recipe recipe )
         {
-            return new RecipeDto()
+            return new RecipeShortDto()
             {
                 Id = recipe.Id,
                 Title = recipe.Title,

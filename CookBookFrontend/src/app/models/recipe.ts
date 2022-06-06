@@ -6,7 +6,9 @@ export class RecipeShortInfoResponceDto {
         public preparingTime: Number,
         public tags: string[],
         public likesCount: Number,
-        public favoritesCount: Number) { }
+        public favoritesCount: Number,
+        public authorId: Number,
+        public authorName : string) { }
 }
 
 export class RecipeIngridient {

@@ -62,7 +62,7 @@
 }
 
 .recipeBox-title {
-    margin: 0;
+    border: 1px solid white;
     font-weight: 700;
     font-size: 24px;
     text-transform: capitalize;
@@ -86,7 +86,6 @@
 .recipeBox-info-title {
     font-weight: 400;
     font-size: 14px;
-    line-height: 28px;
     opacity: 0.5;
 }
 
@@ -105,4 +104,17 @@
 .recipeBox-miniBlock {
     display: flex;
     margin: 0 70px 0 0;
+}
+
+.recipeBox-author{
+    display: flex;
+    margin-top: 20px;
+  
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.recipeBox-author-title {
+    opacity: 0.5;
+    margin-right: 10px;
 }
