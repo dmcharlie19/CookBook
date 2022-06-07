@@ -47,7 +47,7 @@ namespace CookBook.Application.Services
             {
                 AccesToken = encodedToken,
                 UserName = user.Name,
-                ExpiresAt = ( int )new DateTimeOffset( jwt.ValidTo ).ToUnixTimeSeconds()
+                ExpiresAt = jwt.ValidTo
             };
             return response;
         }

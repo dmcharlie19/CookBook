@@ -10,11 +10,10 @@ export class AccountService {
 
     private _accesTokenKey = "accesToken";
     private _userNameKey = "userName";
+    private _expiresAtKey = "expiresAt";
 
     private loginUrl = "/api/account/login";
     private registrationUrl = "/api/account/registration";
-
-    private expirTimeMinutes: Number = 0;
 
     constructor(private http: HttpClient) {
     }
@@ -41,19 +40,19 @@ export class AccountService {
     }
 
     private startSession(authResponse: AuthenticateResponseDto): Boolean {
-        console.log("setSession");
-
         if (authResponse.accesToken == null)
             return false;
         if (authResponse.userName == null)
             return false;
-        if (authResponse.expirTimeMinutes == 0)
+
+        let date = new Date();
+        if (authResponse.expiresAt < date)
             return false;
 
         localStorage.setItem(this._accesTokenKey, authResponse.accesToken);
         localStorage.setItem(this._userNameKey, authResponse.userName);
-        
-        this.expirTimeMinutes = authResponse.expirTimeMinutes;
+        localStorage.setItem(this._expiresAtKey, authResponse.expiresAt.toString());
+
         return true;
     }
 
@@ -63,7 +62,19 @@ export class AccountService {
     }
 
     public isLoggedIn(): Boolean {
-        return localStorage.getItem(this._accesTokenKey) != "";
+
+        let expiresAtStr = localStorage.getItem(this._expiresAtKey);
+
+        if (expiresAtStr != null && expiresAtStr != "") {
+            let expiresAt: Number = Date.parse(expiresAtStr);
+            if (expiresAt < Date.now()) {
+                this.logout();
+                return false
+            }
+
+            return localStorage.getItem(this._accesTokenKey) != "";
+        }
+        return false;
     }
 
     isLoggedOut(): Boolean {

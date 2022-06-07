@@ -13,7 +13,7 @@ export class ErrorService {
 
     public handleError(error: HttpErrorResponse): void {
 
-        var errorMessage: string = "";
+        let errorMessage: string = "";
 
         if (Math.floor(error.status / 100) == 5)
             errorMessage = "На сервере что-то пошло не так"
@@ -23,7 +23,6 @@ export class ErrorService {
             else
                 errorMessage = error.message;
         }
-
 
         this.onErrorOcured.emit(errorMessage);
     }

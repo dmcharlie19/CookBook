@@ -8,5 +8,5 @@ export class AuthenticateResponseDto {
     constructor(
         public accesToken: string,
         public userName: string,
-        public expirTimeMinutes: Number) { }
+        public expiresAt: Date) { }
 }

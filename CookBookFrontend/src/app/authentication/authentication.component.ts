@@ -36,8 +36,6 @@ export class AuthenticationComponent {
       return;
     }
 
-    console.log(this._loginForm.value);
-
     this.authService.login(new AuthenticateRequestDto(
       this._loginForm.controls["login"].value,
       this._loginForm.controls["password"].value)).subscribe(

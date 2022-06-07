@@ -26,7 +26,6 @@ export class RegistrationComponent {
     );
 
     this.errorService.onErrorOcured.subscribe(e => {
-      console.log(e);
       this.errorMsg = e;
     });
 

@@ -12,7 +12,6 @@ export class ErrorInterceptor implements HttpInterceptor {
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log("intercept!");
         this.errorService.clearError();
 
         const accesToken: string = this.accountService.getAccesToken();

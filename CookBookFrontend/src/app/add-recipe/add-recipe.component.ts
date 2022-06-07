@@ -50,16 +50,12 @@ export class AddRecipeComponent implements OnInit {
   // Работа с тэгами
   addNewTag(): void {
     let key = 'recipeStep_' + this.recipeTagsKeys.length.toString();
-    console.log(key);
-
     this.addRecipeForm.addControl(key, new FormControl("вкусно", Validators.required))
     this.recipeTagsKeys.push(key);
   }
 
   deleteTag(id: number) {
     if (this.recipeTagsKeys.length > 1) {
-      console.log("remove " + this.recipeTagsKeys[id]);
-
       this.addRecipeForm.removeControl(this.recipeTagsKeys[id])
       this.recipeTagsKeys.splice(id, 1);
     }
@@ -68,16 +64,12 @@ export class AddRecipeComponent implements OnInit {
   // Работа с шагами приготовления
   addNewRecipeStep(): void {
     let key = 'tag_' + this.recipeStepsKeys.length.toString();
-    console.log(key);
-
     this.addRecipeForm.addControl(key, new FormControl("сделать вкусно красиво", Validators.required))
     this.recipeStepsKeys.push(key);
   }
 
   deleteRecipeStep(id: number) {
     if (this.recipeStepsKeys.length > 1) {
-      console.log("remove " + this.recipeStepsKeys[id]);
-
       this.addRecipeForm.removeControl(this.recipeStepsKeys[id])
       this.recipeStepsKeys.splice(id, 1);
     }
@@ -89,7 +81,6 @@ export class AddRecipeComponent implements OnInit {
     let keys: RecipeIngridientKeys = new RecipeIngridientKeys();
     keys.titleKey = 'recipeIngridientTitle_' + this.ingridientsKeys.length.toString();
     keys.bodyKey = 'recipeIngridientBody_' + this.ingridientsKeys.length.toString();
-    console.log(keys);
 
     this.ingridientsKeys.push(keys);
     this.addRecipeForm.addControl(keys.titleKey, new FormControl("тесто", Validators.required))
@@ -113,8 +104,6 @@ export class AddRecipeComponent implements OnInit {
       return;
     }
 
-    console.log(this.addRecipeForm.value);
-
     let request = new AddRecipeRequestDto();
     request.title = this.addRecipeForm.controls["title"].value;
     request.shortDescription = this.addRecipeForm.controls["shortDescription"].value;
@@ -137,8 +126,6 @@ export class AddRecipeComponent implements OnInit {
     for (let i = 0; i < this.recipeStepsKeys.length; i++) {
       request.cookingSteps.push(this.addRecipeForm.controls[this.recipeStepsKeys[i]].value);
     }
-
-    console.log(request);
 
     this.recipeService.addRecipe(request).subscribe(
       () => this.router.navigateByUrl('/')
