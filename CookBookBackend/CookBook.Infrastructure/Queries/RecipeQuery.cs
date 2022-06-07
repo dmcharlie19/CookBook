@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using CookBook.Api.Dto;
 using CookBook.Application.Mappers;
 using CookBook.Application.Queries;
 using CookBook.Application.Queries.Dto;
@@ -50,6 +51,11 @@ namespace CookBook.Infrastructure.Queries
 
             recipeFull.RecipeShortInfo = recipeShort;
             recipeFull.CookingSteps = _dbContext.RecipeSteps.Where( step => step.RecipeId == id ).Select( step => step.Content ).ToArray();
+            recipeFull.RecipeIngridients = _dbContext.RecipeIngredients.Where( ingr => ingr.RecipeId == id ).Select( ingr => new RecipeIngridientDto
+            {
+                Title = ingr.Title,
+                Ingredients = ingr.GetIngredients()
+            } ).ToArray();
 
             return recipeFull;
         }

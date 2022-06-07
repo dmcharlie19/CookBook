@@ -1,7 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Reflection.Metadata;
+using System.Linq;
 using CookBook.Core.Exceptions;
 
 namespace CookBook.Core.Domain
@@ -34,5 +33,19 @@ namespace CookBook.Core.Domain
             if ( !Validator.TryValidateObject( this, context, results, true ) )
                 throw new InvalidClientParameterException( results[ 0 ].ErrorMessage );
         }
+
+        public string[] GetIngredients()
+        {
+            return Content.Split( "_" );
+        }
+
+        public static string Convert( string[] ingredients )
+        {
+            if ( ingredients.Where( i => i.Contains( "_" ) ).Count() != 0 )
+                throw new InvalidClientParameterException( "Недопустимый символ '_' в ингридиентах" );
+
+            return string.Join( "_", ingredients );
+        }
     }
+
 }

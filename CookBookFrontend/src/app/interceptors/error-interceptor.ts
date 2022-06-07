@@ -15,12 +15,12 @@ export class ErrorInterceptor implements HttpInterceptor {
         console.log("intercept!");
         this.errorService.clearError();
 
-        const idToken: string = this.accountService.getAccesToken();
+        const accesToken: string = this.accountService.getAccesToken();
 
-        if (idToken) {
+        if (accesToken) {
             const cloned = request.clone({
                 headers: request.headers.set("Authorization",
-                    "Bearer " + idToken)
+                    "Bearer " + accesToken)
             });
 
             return next.handle(cloned).pipe(

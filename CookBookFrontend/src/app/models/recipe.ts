@@ -12,7 +12,7 @@ export class RecipeShortInfoResponceDto {
 }
 
 export class RecipeFullInfoResponceDto {
-    public shortInfo: RecipeShortInfoResponceDto;
+    public recipeShortInfo: RecipeShortInfoResponceDto;
     public cookingSteps: string[];
     public recipeIngridients: RecipeIngredient[];
 

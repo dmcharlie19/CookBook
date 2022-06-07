@@ -52,7 +52,7 @@ export class AddRecipeComponent implements OnInit {
     let key = 'recipeStep_' + this.recipeTagsKeys.length.toString();
     console.log(key);
 
-    this.addRecipeForm.addControl(key, new FormControl("", Validators.required))
+    this.addRecipeForm.addControl(key, new FormControl("вкусно", Validators.required))
     this.recipeTagsKeys.push(key);
   }
 
@@ -93,7 +93,7 @@ export class AddRecipeComponent implements OnInit {
 
     this.ingridientsKeys.push(keys);
     this.addRecipeForm.addControl(keys.titleKey, new FormControl("тесто", Validators.required))
-    this.addRecipeForm.addControl(keys.bodyKey, new FormControl("капуста", Validators.required))
+    this.addRecipeForm.addControl(keys.bodyKey, new FormControl("капуста\r\nмясо\r\nрыба", Validators.required))
   }
 
   deleteIngridient(id: number): void {
@@ -128,7 +128,8 @@ export class AddRecipeComponent implements OnInit {
     for (let i = 0; i < this.ingridientsKeys.length; i++) {
       let ingredient = new RecipeIngredient();
       ingredient.title = this.addRecipeForm.controls[this.ingridientsKeys[i].titleKey].value;
-      ingredient.ingredients = this.addRecipeForm.controls[this.ingridientsKeys[i].bodyKey].value;
+      ingredient.ingredients = this.addRecipeForm.controls[this.ingridientsKeys[i].bodyKey].value.split(/\r|\n/);
+      ingredient.ingredients = ingredient.ingredients.filter(function (entry) { return entry.trim() != ''; });
 
       request.recipeIngridients.push(ingredient);
     }

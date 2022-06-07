@@ -23,6 +23,7 @@ export class RecipeDetailComponent implements OnInit {
 
     this.recipeService.getRecipeFullInfo(this.recipeId).subscribe(
       (data: RecipeFullInfoResponceDto) => {
+        console.log(data);
         this.recipeFullInfoResponceDto = data;
       }
     )
@@ -50,7 +51,7 @@ export class RecipeDetailComponent implements OnInit {
     ingr.push({ title: "Для панна коты", ingredients: ["Сливки-20-30% - 500мл.", " Молоко - 100мл.", " Желатин - 2ч.л.", "Сахар - 3ст.л.", "Ванильный сахар - 2 ч.л."] },
       { title: "Для клубничного желе", ingredients: ["Сливки-20-30% - 500мл.", " Молоко - 100мл.", " Желатин - 2ч.л.", "Сахар - 3ст.л.", "Ванильный сахар - 2 ч.л."] });
 
-    return { shortInfo: short, cookingSteps: steps, recipeIngridients: ingr };
+    return { recipeShortInfo: short, cookingSteps: steps, recipeIngridients: ingr };
   }
 
 }
