@@ -30,19 +30,37 @@ namespace CookBook.Infrastructure.Queries
 
             return recipeQuerry.ConvertAll( rq =>
               {
-                  var tags = _dbContext.TagRecipes
-                    .Where( tagRecipe => tagRecipe.RecipeId == rq.Recipe.Id )
-                    .Join( _dbContext.Tags, tagRecipe => tagRecipe.TagId, tag => tag.Id, ( tagRecipe, tag ) => tag.Name )
-                    .ToArray();
-
-
                   var recipeDto = rq.Recipe.Map();
                   recipeDto.AuthorId = rq.User.Id;
                   recipeDto.AuthorName = rq.User.Name;
-                  recipeDto.Tags = tags;
+                  recipeDto.Tags = GetTags( rq.Recipe.Id );
                   return recipeDto;
               }
              );
         }
+
+        public RecipeFullDto GetRecipeDetail( int id )
+        {
+            RecipeFullDto recipeFull = new();
+            RecipeShortDto recipeShort = new();
+
+            recipeShort = _dbContext.Recipes.FirstOrDefault( recipe => recipe.Id == id ).Map();
+            recipeShort.AuthorName = _dbContext.Users.FirstOrDefault( user => user.Id == recipeShort.AuthorId ).Name;
+            recipeShort.Tags = GetTags( id );
+
+            recipeFull.RecipeShortInfo = recipeShort;
+            recipeFull.CookingSteps = _dbContext.RecipeSteps.Where( step => step.RecipeId == id ).Select( step => step.Content ).ToArray();
+
+            return recipeFull;
+        }
+
+        private string[] GetTags( int recipeId )
+        {
+            return _dbContext.TagRecipes
+                .Where( tagRecipe => tagRecipe.RecipeId == recipeId )
+                .Join( _dbContext.Tags, tagRecipe => tagRecipe.TagId, tag => tag.Id, ( tagRecipe, tag ) => tag.Name )
+                .ToArray();
+        }
+
     }
 }

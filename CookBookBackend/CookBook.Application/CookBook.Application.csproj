@@ -11,8 +11,4 @@
   <ItemGroup>
     <ProjectReference Include="..\CookBook.Core\CookBook.Core.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\Dto\" />
-  </ItemGroup>
 </Project>

@@ -31,10 +31,16 @@ namespace CookBook.Api.Controllers
             _tagService = tagService;
         }
 
-        [HttpGet, Route( "" )]
+        [HttpGet]
         public IReadOnlyList<RecipeShortDto>? GetAll()
         {
             return _recipeQuery.GetAll();
+        }
+
+        [HttpGet, Route( "{recipeId}" )]
+        public RecipeFullDto GetRecipeDetail( [FromRoute] int recipeId )
+        {
+            return _recipeQuery.GetRecipeDetail( recipeId );
         }
 
         [HttpPost, Authorize, Route( "AddRecipe" )]

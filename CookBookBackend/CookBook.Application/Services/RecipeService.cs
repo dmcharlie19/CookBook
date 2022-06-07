@@ -31,9 +31,9 @@ namespace CookBook.Application.Services
               .Select( recipeStep => new RecipeStep( recipeStep ) )
               .ToList() );
 
-            recipe.AddRecipeIngredients( addRecipeRequest.RecipeIngridients
-              .Select( ri => new RecipeIngredient( ri.IngridientTitle, ri.IngridientBody ) )
-              .ToList() );
+            //recipe.AddRecipeIngredients( addRecipeRequest.RecipeIngridients
+            //  .Select( ri => new RecipeIngredient( ri.Title, ri.Ingredients ) )
+            //  .ToList() );
 
             recipe.AddTags( tags );
 
