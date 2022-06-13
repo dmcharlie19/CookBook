@@ -27,6 +27,7 @@ namespace CookBook.Application.Services
             if ( user is null )
                 throw new InvalidClientParameterException( "Пользователь не найден" );
 
+            // #Todo шифровка пароля
             if ( user.Password != authRequestDto.Password )
                 throw new InvalidClientParameterException( "Неверный пароль" );
 
@@ -45,6 +46,7 @@ namespace CookBook.Application.Services
 
             var response = new AuthenticationResponseDto
             {
+                Id = user.Id,
                 AccesToken = encodedToken,
                 UserName = user.Name,
                 ExpiresAt = jwt.ValidTo

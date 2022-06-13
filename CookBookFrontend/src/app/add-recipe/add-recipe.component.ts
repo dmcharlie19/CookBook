@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AddRecipeRequestDto, RecipeIngredient } from '../models/recipe';
+import { NavigationService } from '../services/navigationSrvice';
 import { RecipeService } from '../services/recipeService';
 
 class RecipeIngridientKeys {
@@ -22,13 +23,15 @@ export class AddRecipeComponent implements OnInit {
   public recipeStepsKeys: Array<string> = [];
   public ingridientsKeys: RecipeIngridientKeys[] = [];
 
-  constructor(private recipeService: RecipeService, private router: Router) {
+  constructor(private recipeService: RecipeService,
+    private router: Router,
+    public navigation: NavigationService) {
   }
 
   ngOnInit(): void {
     this.addRecipeForm = new FormGroup({
       "title": new FormControl('борщ', [Validators.required, Validators.minLength(3)]),
-      "shortDescription": new FormControl('вкусный', [Validators.required, Validators.minLength(3)]),
+      "shortDescription": new FormControl('вкусный', [Validators.required, Validators.minLength(3), Validators.maxLength(200)]),
       "preparingTime": new FormControl('30', [Validators.required, this.numberdValidator]),
       "personCount": new FormControl('4', [Validators.required, this.numberdValidator])
     });

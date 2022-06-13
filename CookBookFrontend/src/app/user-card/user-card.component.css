@@ -1,0 +1,59 @@
+.user-box {
+    display: flex;
+    flex-direction: row;
+    min-height: 200px;
+    margin: 40px 0 0 0;
+    border-radius: 72px;
+    box-shadow: 10px 4px 20px 3px rgb(224, 224, 224);
+}
+
+.avatar {
+    height: 350px;
+    width: 350px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0px;
+    border: solid 1px black;
+    border-radius: 72px;
+    padding: inherit;
+}
+
+.avatar img {
+    height: 150px;
+    width: 150px;
+}
+
+.mainField {
+    max-width: 681px;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    padding: 36px 30px 0px 53px;
+}
+
+.user-name {
+    margin: 15px;
+    font-weight: 700;
+    font-size: 24px;
+    text-transform: capitalize;
+}
+
+.user-descr {
+    margin: 15px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 30px;
+    height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-info {
+    margin: 15px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 30px;
+}

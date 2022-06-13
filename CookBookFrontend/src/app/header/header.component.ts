@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { AccountService } from '../services/AccountService';
 
 @Component({
@@ -12,9 +13,13 @@ export class HeaderComponent {
   @Input() isMain: Boolean;
   @Input() isRecipesList: Boolean;
   @Input() isFavorite: Boolean;
-  constructor(public authServise: AccountService) {
 
+  constructor(public authServise: AccountService, private router: Router) {
     this.userName = this.authServise.getUserName();
+  }
+
+  public onMyRecipes(): void {
+    this.router.navigateByUrl("/myRecipes")
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeFullInfoResponceDto, RecipeIngredient, RecipeShortInfoResponceDto } from '../models/recipe';
+import { NavigationService } from '../services/navigationSrvice';
 import { RecipeService } from '../services/recipeService';
 
 @Component({
@@ -11,7 +12,9 @@ import { RecipeService } from '../services/recipeService';
 })
 export class RecipeDetailComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private recipeService: RecipeService) { }
+  constructor(private route: ActivatedRoute,
+    private recipeService: RecipeService,
+    public navigation: NavigationService) { }
 
   public recipeFullInfoResponceDto: RecipeFullInfoResponceDto = null;
 
@@ -26,6 +29,10 @@ export class RecipeDetailComponent implements OnInit {
         this.recipeFullInfoResponceDto = data;
       }
     )
+  }
+
+  back(): void {
+    this.navigation.back()
   }
 
   getTestData(): RecipeFullInfoResponceDto {

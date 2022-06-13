@@ -11,11 +11,15 @@ import { FooterComponent } from './footer/footer.component';
 import { RecipeCardComponent } from './recipe-card/recipe-card.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ErrorInterceptor } from './interceptors/error-interceptor';
+
 import { ErrorDisplayComponent } from './error-display/error-display.component'
 import { AccountService } from './services/AccountService';
 import { ErrorService } from './services/errorService';
+import { NavigationService } from './services/navigationSrvice';
 import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
+import { MyRecipesComponent } from './my-recipes/my-recipes.component';
+import { UserCardComponent } from './user-card/user-card.component';
 
 // Определение маршрутов
 const appRoutes: Routes = [
@@ -24,6 +28,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegistrationComponent },
   { path: 'addRecipe', component: AddRecipeComponent },
   { path: 'recipeDetail/:id', component: RecipeDetailComponent },
+  { path: 'myRecipes', component: MyRecipesComponent },
   { path: '**', redirectTo: '/' }
 ];
 
@@ -40,12 +45,15 @@ const appRoutes: Routes = [
     RegistrationComponent,
     ErrorDisplayComponent,
     AddRecipeComponent,
-    RecipeDetailComponent
+    RecipeDetailComponent,
+    MyRecipesComponent,
+    UserCardComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     AccountService,
-    ErrorService
+    ErrorService,
+    NavigationService
   ],
   bootstrap: [AppComponent]
 })
