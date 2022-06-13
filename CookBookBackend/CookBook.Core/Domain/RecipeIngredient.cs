@@ -42,7 +42,7 @@ namespace CookBook.Core.Domain
         public static string Convert( string[] ingredients )
         {
             if ( ingredients.Where( i => i.Contains( "_" ) ).Count() != 0 )
-                throw new InvalidClientParameterException( "Недопустимый символ '_' в ингридиентах" );
+                throw new InvalidClientParameterException( "РќРµРґРѕРїСѓСЃС‚РёРјС‹Р№ СЃРёРјРІРѕР» '_' РІ РёРЅРіСЂРёРґРёРµРЅС‚Р°С…" );
 
             return string.Join( "_", ingredients );
         }
