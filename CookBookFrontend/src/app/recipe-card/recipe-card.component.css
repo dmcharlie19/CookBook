@@ -3,7 +3,7 @@
     flex-direction: row;
     min-height: 200px;
     margin: 40px 0 0 0;
-    border-radius: 36px 16px 16px 0px;
+    border-radius: 72px 16px 16px 0px;
     box-shadow: 10px 4px 20px 3px rgb(224, 224, 224);
 }
 
@@ -18,7 +18,7 @@
 
     margin: 0px;
     border: inherit;
-    border-radius: 36px 0px;
+    border-radius: 72px 0px;
     padding: inherit;
 }
 
@@ -62,10 +62,14 @@
 }
 
 .recipeBox-title {
-    margin: 0;
+    border: 1px solid white;
     font-weight: 700;
     font-size: 24px;
     text-transform: capitalize;
+}
+
+.recipeBox-title-empty {
+    height: 30px;
 }
 
 .recipeBox-content {
@@ -86,7 +90,6 @@
 .recipeBox-info-title {
     font-weight: 400;
     font-size: 14px;
-    line-height: 28px;
     opacity: 0.5;
 }
 
@@ -105,4 +108,17 @@
 .recipeBox-miniBlock {
     display: flex;
     margin: 0 70px 0 0;
+}
+
+.recipeBox-author {
+    display: flex;
+    margin-top: 20px;
+
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.recipeBox-author-title {
+    opacity: 0.5;
+    margin-right: 10px;
 }

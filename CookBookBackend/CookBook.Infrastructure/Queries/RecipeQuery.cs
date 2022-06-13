@@ -1,27 +1,72 @@
 using System.Collections.Generic;
 using System.Linq;
+using CookBook.Api.Dto;
 using CookBook.Application.Mappers;
 using CookBook.Application.Queries;
 using CookBook.Application.Queries.Dto;
-using CookBookBackend.Infrastructure.Foundation;
+using CookBook.Infrastructure.Foundation;
 
 namespace CookBook.Infrastructure.Queries
 {
-  public class RecipeQuery : IRecipeQuery
-  {
-
-    private readonly CookBookDbContext _dbContext;
-
-    public RecipeQuery( CookBookDbContext dbContext )
+    public class RecipeQuery : IRecipeQuery
     {
-      _dbContext = dbContext;
-    }
 
-    public IReadOnlyList<RecipeDto> GetAll()
-    {
-      var es = _dbContext.Recipes.ToList();
+        private readonly CookBookDbContext _dbContext;
 
-      return es.ConvertAll( r => r.Map() );
+        public RecipeQuery( CookBookDbContext dbContext )
+        {
+            _dbContext = dbContext;
+        }
+
+        public IReadOnlyList<RecipeShortDto> GetAll()
+        {
+            var recipeQuerry = _dbContext.Recipes.
+                Join( _dbContext.Users, recipe => recipe.UserId, user => user.Id, ( recipe, user ) =>
+                new
+                {
+                    Recipe = recipe,
+                    User = user
+                } )
+                .ToList();
+
+            return recipeQuerry.ConvertAll( rq =>
+              {
+                  var recipeDto = rq.Recipe.Map();
+                  recipeDto.AuthorId = rq.User.Id;
+                  recipeDto.AuthorName = rq.User.Name;
+                  recipeDto.Tags = GetTags( rq.Recipe.Id );
+                  return recipeDto;
+              }
+             );
+        }
+
+        public RecipeFullDto GetRecipeDetail( int id )
+        {
+            RecipeFullDto recipeFull = new();
+            RecipeShortDto recipeShort = new();
+
+            recipeShort = _dbContext.Recipes.FirstOrDefault( recipe => recipe.Id == id ).Map();
+            recipeShort.AuthorName = _dbContext.Users.FirstOrDefault( user => user.Id == recipeShort.AuthorId ).Name;
+            recipeShort.Tags = GetTags( id );
+
+            recipeFull.RecipeShortInfo = recipeShort;
+            recipeFull.CookingSteps = _dbContext.RecipeSteps.Where( step => step.RecipeId == id ).Select( step => step.Content ).ToArray();
+            recipeFull.RecipeIngridients = _dbContext.RecipeIngredients.Where( ingr => ingr.RecipeId == id ).Select( ingr => new RecipeIngridientDto
+            {
+                Title = ingr.Title,
+                Ingredients = ingr.GetIngredients()
+            } ).ToArray();
+
+            return recipeFull;
+        }
+
+        private string[] GetTags( int recipeId )
+        {
+            return _dbContext.TagRecipes
+                .Where( tagRecipe => tagRecipe.RecipeId == recipeId )
+                .Join( _dbContext.Tags, tagRecipe => tagRecipe.TagId, tag => tag.Id, ( tagRecipe, tag ) => tag.Name )
+                .ToArray();
+        }
+
     }
-  }
 }

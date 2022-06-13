@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookBookApi", "CookBook.Api\CookBookApi.csproj", "{3B5D4230-7730-41D6-A43A-BB4D0C75D8DF}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookBook.Application", "CookBook.Application\CookBook.Application.csproj", "{1BEB76D1-9B37-459C-B257-7A9409B79DB6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookBook.Core", "CookBook.Core\CookBook.Core.csproj", "{E873CD30-3EF6-4916-8D9A-CFF2A751B818}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookBook.Infrastructure", "CookBook.Infrastructure\CookBook.Infrastructure.csproj", "{9A743799-6D63-49EC-AF84-1F4F89121F86}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookBook.Api", "CookBook.Api\CookBook.Api.csproj", "{32FE63EF-CFD4-447D-96D1-2AF70922B59B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3B5D4230-7730-41D6-A43A-BB4D0C75D8DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3B5D4230-7730-41D6-A43A-BB4D0C75D8DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3B5D4230-7730-41D6-A43A-BB4D0C75D8DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3B5D4230-7730-41D6-A43A-BB4D0C75D8DF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1BEB76D1-9B37-459C-B257-7A9409B79DB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1BEB76D1-9B37-459C-B257-7A9409B79DB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BEB76D1-9B37-459C-B257-7A9409B79DB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{9A743799-6D63-49EC-AF84-1F4F89121F86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A743799-6D63-49EC-AF84-1F4F89121F86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A743799-6D63-49EC-AF84-1F4F89121F86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32FE63EF-CFD4-447D-96D1-2AF70922B59B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32FE63EF-CFD4-447D-96D1-2AF70922B59B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32FE63EF-CFD4-447D-96D1-2AF70922B59B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32FE63EF-CFD4-447D-96D1-2AF70922B59B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

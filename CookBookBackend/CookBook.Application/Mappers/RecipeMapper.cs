@@ -1,22 +1,21 @@
 using CookBook.Application.Queries.Dto;
-using CookBookBackend.Core.Domain;
+using CookBook.Core.Domain;
 
 namespace CookBook.Application.Mappers
 {
-  public static class RecipeMapper
-  {
-    public static RecipeDto Map( this Recipe recipe )
+    public static class RecipeMapper
     {
-      return new RecipeDto()
-      {
-        Id = recipe.Id,
-        Title = recipe.Title,
-        ShortDescription = recipe.ShortDescription,
-        PreparingTime = recipe.PreparingTime,
-        Tags = recipe.Tags.Split( "_" ),
-        LikesCount = recipe.LikesCount,
-        FavoritesCount = recipe.FavoritesCount
-      };
+        public static RecipeShortDto Map( this Recipe recipe )
+        {
+            return new RecipeShortDto()
+            {
+                Id = recipe.Id,
+                Title = recipe.Title,
+                ShortDescription = recipe.ShortDescription,
+                PreparingTime = recipe.PreparingTime,
+                PersonCount = recipe.PersonCount,
+                AuthorId = recipe.UserId
+            };
+        }
     }
-  }
 }

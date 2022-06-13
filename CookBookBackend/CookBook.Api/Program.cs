@@ -1,22 +1,59 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
-using CookBookBackend.Infrastructure.Foundation;
-using CookBookBackend.Application.Repositories;
-using CookBookBackend.Infrastructure.Repositories;
+using CookBook.Infrastructure.Foundation;
+using CookBook.Application.Repositories;
+using CookBook.Infrastructure.Repositories;
 using CookBook.Application.Queries;
 using CookBook.Infrastructure.Queries;
+using CookBook.Application.Entities.Users;
+using Microsoft.AspNetCore.Http.Features;
+using CookBook.Application.Services;
+using CookBook.Api.Middleware;
 
 var builder = WebApplication.CreateBuilder( args );
 
+// Аутентификация и авторизация
+builder.Services.AddAuthorization();
+builder.Services.AddAuthentication( JwtBearerDefaults.AuthenticationScheme )
+    .AddJwtBearer( options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            // указывает, будет ли валидироваться издатель при валидации токена
+            ValidateIssuer = true,
+            // строка, представляющая издателя
+            ValidIssuer = AuthOptions.Issuer,
+            // будет ли валидироваться потребитель токена
+            ValidateAudience = true,
+            // установка потребителя токена
+            ValidAudience = AuthOptions.Audience,
+            // будет ли валидироваться время существования
+            ValidateLifetime = true,
+            // установка ключа безопасности
+            IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+            // валидация ключа безопасности
+            ValidateIssuerSigningKey = true,
+        };
+    } );
+
 // Хранение
 string connection = builder.Configuration.GetConnectionString( "DefaultConnection" );
-builder.Services.AddDbContext<CookBookDbContext>( x => x.UseSqlServer( connection, b => b.MigrationsAssembly( "CookBookApi" ) ) );
+builder.Services.AddDbContext<CookBookDbContext>( x => x.UseSqlServer( connection, b => b.MigrationsAssembly( "CookBook.Api" ) ) );
 
 // Контроллеры
 builder.Services.AddControllers();
 
 //DI
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IRecipeQuery, RecipeQuery>();
+builder.Services.AddScoped<IRecipeService, RecipeService>();
+builder.Services.AddScoped<ITagService, TagService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
+builder.Services.AddScoped<ITagRepository, TagRepository>();
 
 // Swagger UI
 builder.Services.AddSwaggerGen();
@@ -24,17 +61,28 @@ builder.Services.AddSwaggerGen();
 // CORS
 builder.Services.AddCors();
 
+builder.Services.Configure<FormOptions>( o =>
+{
+    o.ValueLengthLimit = int.MaxValue;
+    o.MultipartBodyLengthLimit = int.MaxValue;
+    o.MemoryBufferThreshold = int.MaxValue;
+} );
+
 var app = builder.Build();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
 app.Use( async ( context, next ) =>
 {
-  Console.WriteLine( context.Request.Path );
-  await next.Invoke();
+    Console.WriteLine( context.Request.Path );
+    await next.Invoke();
 } );
 
+app.UseMiddleware<ExceptionMiddleware>();
 app.MapControllers();
 
 // CORS

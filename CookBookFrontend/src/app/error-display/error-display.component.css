@@ -1,0 +1,12 @@
+.error {
+    background-color: var(--error-display-pink);
+    text-align: center;
+    padding: 15px;
+    color: red;
+    border-radius: 10px;
+}
+
+.error p {
+    font-weight: 600;
+    font-size: 18px;
+}

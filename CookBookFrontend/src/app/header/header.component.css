@@ -13,14 +13,14 @@
 .recipes {
     margin: 0px 50px 0px 1px;
     font-weight: 700;
-    font-size: 32px;
+    font-size: 24px;
     color: var(--yellow);
 }
 
 .links {
     margin: 0 8px;
     font-weight: 400;
-    font-size: 18pt;
+    font-size: 18px;
     color: var(--grey);
 }
 

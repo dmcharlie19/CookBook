@@ -1,5 +1,4 @@
 .footer {
-    height: 110px;
     margin: 110px 0 0 0;
 }
 
@@ -16,6 +15,7 @@
 }
 
 .footer-text {
+    height: 90px;
     margin-top: 10px;
     display: flex;
     justify-content: space-between;

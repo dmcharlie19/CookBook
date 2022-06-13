@@ -1,4 +1,4 @@
-namespace CookBookBackend.Application.Repositories
+namespace CookBook.Application.Repositories
 {
   public interface IUnitOfWork
   {

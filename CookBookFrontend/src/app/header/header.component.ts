@@ -1,19 +1,20 @@
 import { Component, Input } from '@angular/core';
-import { AuthService } from '../services/authService';
+import { AccountService } from '../services/AccountService';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
-  providers: [AuthService]
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  @Input() userName: string = "";
+  userName: string = "";
 
   @Input() isMain: Boolean;
   @Input() isRecipesList: Boolean;
   @Input() isFavorite: Boolean;
-  constructor(public authServise: AuthService) {
+  constructor(public authServise: AccountService) {
+
+    this.userName = this.authServise.getUserName();
   }
 
 }

@@ -1,0 +1,45 @@
+<div class="main">
+    <app-header [isRecipesList]="1"></app-header>
+    <app-error-display></app-error-display>
+
+    <div *ngIf="recipeFullInfoResponceDto != null">
+        <div class="topBar">
+            <div class="flex-row">
+                <div class="topBar-back hovered-bg-color-light" routerLink="/">
+                    <img src=" assets/img/back.png">
+                    <p>Назад</p>
+                </div>
+            </div>
+            <div class="flex-row">
+                <p class="topBar-title">{{recipeFullInfoResponceDto.recipeShortInfo.title}}</p>
+                <div class="topBar-delete">
+                    <img src="assets/img/delete.png">
+                </div>
+                <button class="topBar-edit hovered-bg-color-light" routerLink="addRecipe">
+                    <img class="edit-img" src="assets/img/edit.png">
+                    <p>Редактировать</p>
+                </button>
+            </div>
+        </div>
+        <app-recipe-card [recipe]=recipeFullInfoResponceDto.recipeShortInfo [showTitle]="false"></app-recipe-card>
+
+        <div class="ingridients-steps">
+            <div class="ingridients">
+                <h1>Ингридиенты</h1>
+                <div class="ingridient" *ngFor="let ingr of recipeFullInfoResponceDto.recipeIngridients; let i = index">
+                    <h2>{{ingr.title}}: </h2>
+                    <div class="" *ngFor=" let ingredient of ingr.ingredients; let i=index">
+                        <p>{{i+1}}) {{ingredient}} </p>
+                    </div>
+                </div>
+            </div>
+            <div class="steps">
+                <div class="step" *ngFor="let step of recipeFullInfoResponceDto.cookingSteps; let i = index">
+                    <h1>Шаг {{i+1}} </h1>
+                    <p>{{step}} </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</div>
