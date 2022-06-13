@@ -20,6 +20,11 @@ import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { MyRecipesComponent } from './my-recipes/my-recipes.component';
 import { UserCardComponent } from './user-card/user-card.component';
+import { NotAtentificateComponent } from './not-atentificate/not-atentificate.component';
+
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { MatDialogModule } from "@angular/material/dialog";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 // Определение маршрутов
 const appRoutes: Routes = [
@@ -33,7 +38,14 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [BrowserModule, ReactiveFormsModule, HttpClientModule, RouterModule.forRoot(appRoutes)],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes),
+    MatDialogModule
+  ],
   declarations: [
     AppComponent,
     AuthenticationComponent,
@@ -48,9 +60,11 @@ const appRoutes: Routes = [
     RecipeDetailComponent,
     MyRecipesComponent,
     UserCardComponent,
+    NotAtentificateComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
     AccountService,
     ErrorService,
     NavigationService

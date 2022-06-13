@@ -1,9 +1,12 @@
 <div class="main">
+
+    <!-- <app-not-atentificate></app-not-atentificate> -->
     <app-header [isRecipesList]="1"></app-header>
 
     <div class="topBar">
         <p class="topBar-title">Рецепты</p>
-        <button class="topBar-addRecipeButton hovered-bg-color-light" routerLink="addRecipe"> + Добавить рецепт</button>
+        <button class="topBar-addRecipeButton hovered-bg-color-light" (click)="addRecipeClick()"> + Добавить
+            рецепт</button>
     </div>
 
     <div class="categoriesBar">
