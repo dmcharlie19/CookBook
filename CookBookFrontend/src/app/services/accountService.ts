@@ -78,12 +78,14 @@ export class AccountService {
                 return false
             }
 
+            console.log(localStorage.getItem(this._accesTokenKey));
+
             return localStorage.getItem(this._accesTokenKey) != "";
         }
         return false;
     }
 
     isLoggedOut(): Boolean {
-        return !this.isLoggedIn;
+        return !this.isLoggedIn();
     }
 }

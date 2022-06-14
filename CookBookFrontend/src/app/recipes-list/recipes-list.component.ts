@@ -4,6 +4,7 @@ import { RecipeShortInfoResponceDto } from '../models/recipe';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { NotAtentificateComponent } from '../not-atentificate/not-atentificate.component';
+import { AccountService } from '../services/AccountService';
 
 @Component({
   selector: 'app-recipes-list',
@@ -14,7 +15,8 @@ import { NotAtentificateComponent } from '../not-atentificate/not-atentificate.c
 export class RecipesListComponent implements OnInit {
   constructor(private recipeService: RecipeService,
     public dialog: MatDialog,
-    private router: Router) {
+    private router: Router,
+    private accountService: AccountService) {
     this.recipes = new Array<RecipeShortInfoResponceDto>();
 
     // var str = new Array<string>("выпечка", "вкусно", "нямка");
@@ -55,8 +57,14 @@ export class RecipesListComponent implements OnInit {
 
   addRecipeClick() {
 
-    const dialogRef = this.dialog.open(NotAtentificateComponent, { disableClose: false });
-    //this.router.navigateByUrl("/addRecipe")
+    if (this.accountService.isLoggedOut()) {
+      this.dialog.open(NotAtentificateComponent, { disableClose: false });
+    }
+    else {
+      this.router.navigateByUrl("/addRecipe")
+    }
+
+
   }
 
 }

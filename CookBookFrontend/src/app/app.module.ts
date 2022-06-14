@@ -64,7 +64,6 @@ const appRoutes: Routes = [
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
     AccountService,
     ErrorService,
     NavigationService
