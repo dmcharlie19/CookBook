@@ -12,8 +12,10 @@ namespace CookBook.Application.Services
             _folderName = Path.Combine( "Resources", "Images" );
         }
 
-        public void SaveImage( Stream imageStream, string fileName )
+        public string SaveImage( Stream imageStream, string fileName )
         {
+            Directory.CreateDirectory( _folderName );
+
             string fileExtension = fileName.Split( "." )[ 1 ];
             string newFileName = $"{Guid.NewGuid().ToString()}.{fileExtension}";
             var newFilePath = Path.Combine( _folderName, newFileName );
@@ -23,7 +25,12 @@ namespace CookBook.Application.Services
                 imageStream.CopyTo( fs );
             }
 
-            // результат!
+            return newFilePath;
+        }
+
+        public FileInfo LoadImage( string path )
+        {
+            return new FileInfo( path );
         }
 
     }

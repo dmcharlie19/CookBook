@@ -81,6 +81,13 @@ namespace CookBook.Infrastructure.Queries
                  );
         }
 
+        public string GetRecipeImagePath( int recipeId )
+        {
+            var recipe = _dbContext.Recipes.FirstOrDefault( r => r.Id == recipeId );
+
+            return recipe.ImagePath;
+        }
+
         private string[] GetTags( int recipeId )
         {
             return _dbContext.TagRecipes

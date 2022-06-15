@@ -9,6 +9,7 @@ export class RecipeService {
     private readonly url = "/api/Recipes";
     private readonly recipesByUserUrl = "/api/Recipes/User";
     private readonly addRecipeUrl = "/api/Recipes/AddRecipe";
+    private readonly imageUrl = "/api/Recipes/Image";
 
     constructor(private http: HttpClient) {
     }
@@ -30,13 +31,13 @@ export class RecipeService {
         const formData = new FormData();
         formData.append('image', imageFile);
 
-        const data: string = JSON.stringify(
-            {
-                registrationDto
-            }
-        );
+        const data: string = JSON.stringify(registrationDto);
         formData.append('data', data);
 
         return this.http.post(this.addRecipeUrl, formData);
+    }
+
+    getRecipeImage(id: Number): Observable<Blob> {
+        return this.http.get(`${this.imageUrl}/${id}`, { responseType: 'blob' });
     }
 }

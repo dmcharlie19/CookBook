@@ -15,7 +15,7 @@ namespace CookBook.Application.Services
         {
             _recipeRepository = recipeRepository;
         }
-        public void AddRecipe( int userId, AddRecipeRequestDto addRecipeRequest, List<Tag> tags )
+        public void AddRecipe( int userId, AddRecipeRequestDto addRecipeRequest, List<Tag> tags, string imgPath )
         {
             if ( addRecipeRequest is null )
                 throw new InvalidClientParameterException( "запрос не должен быть Null" );
@@ -25,7 +25,8 @@ namespace CookBook.Application.Services
                 addRecipeRequest.ShortDescription,
                 addRecipeRequest.PreparingTime,
                 addRecipeRequest.PersonCount,
-                userId );
+                userId,
+                imgPath );
 
             recipe.AddRecipeSteps( addRecipeRequest.CookingSteps
               .Select( recipeStep => new RecipeStep( recipeStep ) )

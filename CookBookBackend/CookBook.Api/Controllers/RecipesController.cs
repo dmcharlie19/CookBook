@@ -49,7 +49,8 @@ namespace CookBook.Api.Controllers
         }
 
         [HttpPost, Authorize, Route( "AddRecipe" )]
-        public void AddRecipe( /*[FromBody] AddRecipeRequestDto addRecipeRequest*/ )
+        [DisableRequestSizeLimit]
+        public void AddRecipe()
         {
             string? userIdString = User.FindFirst( UserClaim.UserId )?.Value;
             if ( userIdString == null )
@@ -63,13 +64,13 @@ namespace CookBook.Api.Controllers
                 throw new InvalidClientParameterException( "Недостаточно данных" );
             AddRecipeRequestDto addRecipeRequest = JsonConvert.DeserializeObject<AddRecipeRequestDto>( Request.Form[ "data" ] );
 
-            _imageService.SaveImage( imgFile.OpenReadStream(), imgFile.FileName );
+            string imgPath = _imageService.SaveImage( imgFile.OpenReadStream(), imgFile.FileName );
 
-            //var tags = _tagService.AddTags( addRecipeRequest.Tags );
-            //_unitOfWork.Commit();
+            var tags = _tagService.AddTags( addRecipeRequest.Tags );
+            _unitOfWork.Commit();
 
-            //_recipeService.AddRecipe( int.Parse( userIdString ), addRecipeRequest, tags );
-            //_unitOfWork.Commit();
+            _recipeService.AddRecipe( int.Parse( userIdString ), addRecipeRequest, tags, imgPath );
+            _unitOfWork.Commit();
 
         }
 
@@ -77,6 +78,19 @@ namespace CookBook.Api.Controllers
         public IReadOnlyList<RecipeShortDto>? GetRecipesByUserId( [FromRoute] int userId )
         {
             return _recipeQuery.GetRecipesByUserId( userId );
+        }
+
+        [HttpGet, Route( "Image/{recipeId}" )]
+        public void GetRecipeImage( [FromRoute] int recipeId )
+        {
+            var path = _recipeQuery.GetRecipeImagePath( recipeId );
+            if ( path != "" )
+            {
+                // var file = _imageService.LoadImage( path );
+                Response.ContentType = "image/jpeg";
+                Response.SendFileAsync( path );
+            }
+
         }
     }
 }

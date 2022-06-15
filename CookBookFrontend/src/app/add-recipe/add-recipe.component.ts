@@ -160,6 +160,8 @@ export class AddRecipeComponent implements OnInit {
     reader.onload = () => {
       this.imageUrl = reader.result as string;
       this.isImageAdded = true;
+      console.log(this.imageUrl);
+
     }
     reader.readAsDataURL(this.imageFile)
   }

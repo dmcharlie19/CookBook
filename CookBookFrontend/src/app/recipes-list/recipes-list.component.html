@@ -52,7 +52,7 @@
     </div>
 
     <div class="recipeList" *ngFor="let recipe of recipes;">
-        <app-recipe-card [recipe]=recipe></app-recipe-card>
+        <app-recipe-card [recipe]=recipe [imageUrl]=images[recipe.id]></app-recipe-card>
     </div>
     <div class="loadMore">
         <button class="loadMore-button hovered-bg-color-light">Загрузить еще</button>

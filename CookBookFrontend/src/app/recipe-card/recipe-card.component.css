@@ -22,6 +22,14 @@
     padding: inherit;
 }
 
+.image-preview {
+    height: 430px;
+    width: 430px;
+    margin: 0px;
+    border-radius: 72px 0px;
+    padding: inherit;
+}
+
 .recipeBox-mainField {
     max-width: 681px;
     display: flex;

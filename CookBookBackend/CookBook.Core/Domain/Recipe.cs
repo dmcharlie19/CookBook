@@ -25,6 +25,9 @@ namespace CookBook.Core.Domain
         public int PersonCount { get; set; }
 
         [Required]
+        public string ImagePath { get; protected set; }
+
+        [Required]
         public List<TagRecipe> Tags { get; set; }
 
         [Required]
@@ -47,13 +50,15 @@ namespace CookBook.Core.Domain
             string shortDescription,
             int preparingTime,
             int personCount,
-            int userId )
+            int userId,
+            string imagePath )
         {
             Title = title;
             ShortDescription = shortDescription;
             PreparingTime = preparingTime;
             PersonCount = personCount;
             UserId = userId;
+            ImagePath = imagePath;
         }
 
         public void AddRecipeSteps( List<RecipeStep> steps )
