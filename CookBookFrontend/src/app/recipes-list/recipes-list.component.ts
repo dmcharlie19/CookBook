@@ -56,15 +56,12 @@ export class RecipesListComponent implements OnInit {
   }
 
   addRecipeClick() {
-
     if (this.accountService.isLoggedOut()) {
       this.dialog.open(NotAtentificateComponent, { disableClose: false });
     }
     else {
       this.router.navigateByUrl("/addRecipe")
     }
-
-
   }
 
 }

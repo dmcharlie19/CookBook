@@ -8,7 +8,10 @@ import { MatDialogRef } from '@angular/material/dialog';;
 })
 export class NotAtentificateComponent implements OnInit {
 
+
   constructor(public dialogRef: MatDialogRef<NotAtentificateComponent>) {
+    console.log(dialogRef.disableClose);
+
   }
 
   ngOnInit(): void {

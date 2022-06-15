@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AddRecipeRequestDto, RecipeIngredient } from '../models/recipe';
+import { NotAtentificateComponent } from '../not-atentificate/not-atentificate.component';
+import { AccountService } from '../services/AccountService';
 import { NavigationService } from '../services/navigationSrvice';
 import { RecipeService } from '../services/recipeService';
 
@@ -25,10 +28,20 @@ export class AddRecipeComponent implements OnInit {
 
   constructor(private recipeService: RecipeService,
     private router: Router,
-    public navigation: NavigationService) {
+    public navigation: NavigationService,
+    private accountService: AccountService,
+    private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
+
+    if (this.accountService.isLoggedOut()) {
+      this.dialog.open(NotAtentificateComponent, { disableClose: true });
+    }
+    else {
+      this.router.navigateByUrl("/addRecipe")
+    }
+
     this.addRecipeForm = new FormGroup({
       "title": new FormControl('борщ', [Validators.required, Validators.minLength(3)]),
       "shortDescription": new FormControl('вкусный', [Validators.required, Validators.minLength(3), Validators.maxLength(200)]),

@@ -1,5 +1,8 @@
 <div class="main">
-
+    <div class="flex-row" *ngIf="dialogRef.disableClose == false">
+        <div class="close-bar"></div>
+        <img class="close-bar-img" src="assets/img/x.png" (click)="onButtonClick()">
+    </div>
     <h1>Войдите в профиль</h1>
     <p>Добавлять рецепты могут только зарегистрированные пользователи.</p>
     <div class="buttons">
