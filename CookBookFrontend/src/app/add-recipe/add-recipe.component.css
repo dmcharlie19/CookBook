@@ -71,13 +71,50 @@
     background: #FFEFCC;
     color: #F29E1F;
 
+    position: relative;
+
     text-align: center;
     vertical-align: middle;
 
     margin: 0px;
     border-radius: 72px 0px;
     padding: inherit;
+}
+
+.image-delete {
+    display: flex;
+    position: absolute;
+    z-index: 2;
+    top: 9px;
+    left: 375px;
+}
+
+.white-back {
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
     cursor: pointer;
+}
+
+.image-preview {
+    height: 430px;
+    width: 430px;
+    margin: 0px;
+    border-radius: 72px 0px;
+    padding: inherit;
+}
+
+.upload-file-input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
 }
 
 .dashed {
@@ -86,6 +123,7 @@
     align-items: center;
     justify-content: center;
 
+    cursor: pointer;
     height: 269px;
     width: 269px;
     border: 1px dashed var(--yellow);

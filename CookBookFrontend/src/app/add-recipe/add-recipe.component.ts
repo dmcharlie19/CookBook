@@ -25,6 +25,9 @@ export class AddRecipeComponent implements OnInit {
   public recipeTagsKeys: Array<string> = [];
   public recipeStepsKeys: Array<string> = [];
   public ingridientsKeys: RecipeIngridientKeys[] = [];
+  private imageFile: File;
+  public imageUrl: String = "";
+  public isImageAdded: Boolean = false;
 
   constructor(private recipeService: RecipeService,
     private router: Router,
@@ -35,18 +38,19 @@ export class AddRecipeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if (this.accountService.isLoggedOut()) {
-      this.dialog.open(NotAtentificateComponent, { disableClose: true });
-    }
-    else {
-      this.router.navigateByUrl("/addRecipe")
-    }
+    // if (this.accountService.isLoggedOut()) {
+    //   this.dialog.open(NotAtentificateComponent, { disableClose: true });
+    // }
+    // else {
+    //   this.router.navigateByUrl("/addRecipe")
+    // }
 
     this.addRecipeForm = new FormGroup({
       "title": new FormControl('борщ', [Validators.required, Validators.minLength(3)]),
       "shortDescription": new FormControl('вкусный', [Validators.required, Validators.minLength(3), Validators.maxLength(200)]),
       "preparingTime": new FormControl('30', [Validators.required, this.numberdValidator]),
-      "personCount": new FormControl('4', [Validators.required, this.numberdValidator])
+      "personCount": new FormControl('4', [Validators.required, this.numberdValidator]),
+      "avatar": new FormControl()
     });
 
     this.addNewTag();
@@ -143,9 +147,25 @@ export class AddRecipeComponent implements OnInit {
       request.cookingSteps.push(this.addRecipeForm.controls[this.recipeStepsKeys[i]].value);
     }
 
-    this.recipeService.addRecipe(request).subscribe(
+    this.recipeService.addRecipe(request, this.imageFile).subscribe(
       () => this.router.navigateByUrl('/')
     )
+  }
+
+  showImagePreview(event) {
+    this.imageFile = (event.target as HTMLInputElement).files[0];
+
+    // File Preview
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageUrl = reader.result as string;
+      this.isImageAdded = true;
+    }
+    reader.readAsDataURL(this.imageFile)
+  }
+
+  onDeleteImageClick(): void {
+    this.isImageAdded = false;
   }
 
 }

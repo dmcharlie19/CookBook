@@ -25,7 +25,18 @@ export class RecipeService {
         return this.http.get(`${this.url}/${id}`);
     }
 
-    addRecipe(registrationDto: AddRecipeRequestDto): Observable<Object> {
-        return this.http.post(this.addRecipeUrl, registrationDto);
+    addRecipe(registrationDto: AddRecipeRequestDto, imageFile: File): Observable<Object> {
+
+        const formData = new FormData();
+        formData.append('image', imageFile);
+
+        const data: string = JSON.stringify(
+            {
+                registrationDto
+            }
+        );
+        formData.append('data', data);
+
+        return this.http.post(this.addRecipeUrl, formData);
     }
 }
