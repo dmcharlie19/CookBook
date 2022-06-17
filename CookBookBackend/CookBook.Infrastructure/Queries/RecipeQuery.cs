@@ -6,6 +6,7 @@ using CookBook.Application.Queries;
 using CookBook.Application.Queries.Dto;
 using CookBook.Core.Exceptions;
 using CookBook.Infrastructure.Foundation;
+using Microsoft.EntityFrameworkCore;
 
 namespace CookBook.Infrastructure.Queries
 {
@@ -19,23 +20,21 @@ namespace CookBook.Infrastructure.Queries
             _dbContext = dbContext;
         }
 
-        public IReadOnlyList<RecipeShortDto> GetAll()
+        public IReadOnlyList<RecipeShortDto> GetAll( int page )
         {
-            var recipeQuery = _dbContext.Recipes.
-                Join( _dbContext.Users, recipe => recipe.UserId, user => user.Id, ( recipe, user ) =>
-                new
-                {
-                    Recipe = recipe,
-                    User = user
-                } )
+            int pageSize = 3;   // количество элементов на странице
+
+            var recipeQuery = _dbContext.Recipes.Include( r => r.User );
+            var items = recipeQuery.Skip( ( page - 1 ) * pageSize )
+                .Take( pageSize )
                 .ToList();
 
-            return recipeQuery.ConvertAll( rq =>
+            return items.ConvertAll( r =>
               {
-                  var recipeDto = rq.Recipe.Map();
-                  recipeDto.AuthorId = rq.User.Id;
-                  recipeDto.AuthorName = rq.User.Name;
-                  recipeDto.Tags = GetTags( rq.Recipe.Id );
+                  var recipeDto = r.Map();
+                  recipeDto.AuthorId = r.User.Id;
+                  recipeDto.AuthorName = r.User.Name;
+                  recipeDto.Tags = GetTags( r.Id );
                   return recipeDto;
               }
              );

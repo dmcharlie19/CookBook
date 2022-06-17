@@ -6,8 +6,9 @@ import { AddRecipeRequestDto } from '../models/recipe';
 @Injectable()
 export class RecipeService {
 
-    private readonly url = "/api/Recipes";
+    private readonly getRecipesUrl = "/api/Recipes/getRecipes";
     private readonly recipesByUserUrl = "/api/Recipes/User";
+    private readonly recipeFullUrl = "/api/Recipes/User";
     private readonly addRecipeUrl = "/api/Recipes/AddRecipe";
     private readonly imageUrl = "/api/Recipes/Image";
     private readonly deleteUrl = "/api/Recipes/delete";
@@ -15,8 +16,8 @@ export class RecipeService {
     constructor(private http: HttpClient) {
     }
 
-    getRecipes() {
-        return this.http.get(this.url);
+    getRecipes(page: Number) {
+        return this.http.get(`${this.getRecipesUrl}/${page}`);
     }
 
     getRecipesByUserId(userId: Number) {
@@ -24,7 +25,7 @@ export class RecipeService {
     }
 
     getRecipeFullInfo(id: Number) {
-        return this.http.get(`${this.url}/${id}`);
+        return this.http.get(`${this.recipeFullUrl}/${id}`);
     }
 
     addRecipe(registrationDto: AddRecipeRequestDto, imageFile: File): Observable<Object> {

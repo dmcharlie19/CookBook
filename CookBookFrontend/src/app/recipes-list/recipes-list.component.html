@@ -1,5 +1,6 @@
 <div class="main">
     <app-header [isRecipesList]="1"></app-header>
+    <app-error-display></app-error-display>
 
     <div class="topBar">
         <p class="topBar-title">Рецепты</p>
@@ -50,10 +51,10 @@
     </div>
 
     <div class="recipeList" *ngFor="let recipe of recipes;">
-        <app-recipe-card [recipe]=recipe [imageUrl]=images[recipe.id]></app-recipe-card>
+        <app-recipe-card [recipe]=recipe></app-recipe-card>
     </div>
     <div class="loadMore">
-        <button class="loadMore-button hovered-bg-color-light">Загрузить еще</button>
+        <button class="loadMore-button hovered-bg-color-light" (click)="onLoadMore()">Загрузить еще</button>
     </div>
 
     <app-footer></app-footer>

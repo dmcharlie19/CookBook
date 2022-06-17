@@ -37,9 +37,10 @@ namespace CookBook.Api.Controllers
         }
 
         [HttpGet]
-        public IReadOnlyList<RecipeShortDto>? GetAll()
+        [Route( "getRecipes/{page}" )]
+        public IReadOnlyList<RecipeShortDto>? GetAll( [FromRoute] int page )
         {
-            return _recipeQuery.GetAll();
+            return _recipeQuery.GetAll( page );
         }
 
         [HttpGet, Route( "{recipeId}" )]

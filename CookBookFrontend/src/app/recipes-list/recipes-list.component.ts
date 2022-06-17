@@ -6,11 +6,6 @@ import { Router } from '@angular/router';
 import { AccountService } from '../services/AccountService';
 import { NotAtentificateComponent } from '../dialog-components/not-atentificate/not-atentificate.component';
 
-export class imagesUrl {
-  recipeId: number;
-  imageUrl: string;
-}
-
 @Component({
   selector: 'app-recipes-list',
   templateUrl: './recipes-list.component.html',
@@ -21,7 +16,7 @@ export class RecipesListComponent implements OnInit {
 
   // Массив рецептов
   recipes: RecipeShortInfoResponceDto[];
-  images = {};
+  private page: number = 1;
 
   constructor(private recipeService: RecipeService,
     public dialog: MatDialog,
@@ -35,10 +30,11 @@ export class RecipesListComponent implements OnInit {
   }
 
   // получаем данные через сервис
-  loadRecipes() {
-    this.recipeService.getRecipes().subscribe(
+  private loadRecipes() {
+    this.recipeService.getRecipes(this.page).subscribe(
       (data: RecipeShortInfoResponceDto[]) => {
         this.recipes.push(...data);
+        this.page++;
       });
   }
 
@@ -49,6 +45,10 @@ export class RecipesListComponent implements OnInit {
     else {
       this.router.navigateByUrl("/addRecipe")
     }
+  }
+
+  onLoadMore() {
+    this.loadRecipes();
   }
 
 }
