@@ -12,13 +12,15 @@
             </div>
             <div class="flex-row">
                 <p class="topBar-title">{{recipeFullInfoResponceDto.recipeShortInfo.title}}</p>
-                <div class="topBar-delete">
-                    <img src="assets/img/delete.png">
+                <div class="flex-row" *ngIf="isMyRecipe">
+                    <div class="topBar-delete hovered-bg-color-light" (click)="onDeleteRecipe()">
+                        <img src="assets/img/delete.png">
+                    </div>
+                    <button class="topBar-edit hovered-bg-color-light" routerLink="addRecipe">
+                        <img class="edit-img" src="assets/img/edit.png">
+                        <p>Редактировать</p>
+                    </button>
                 </div>
-                <button class="topBar-edit hovered-bg-color-light" routerLink="addRecipe">
-                    <img class="edit-img" src="assets/img/edit.png">
-                    <p>Редактировать</p>
-                </button>
             </div>
         </div>
         <app-recipe-card [recipe]=recipeFullInfoResponceDto.recipeShortInfo [showTitle]="false"></app-recipe-card>

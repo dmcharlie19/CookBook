@@ -19,7 +19,7 @@ export class HeaderComponent {
   }
 
   public onMyRecipes(): void {
-    this.router.navigateByUrl("/myRecipes")
+    this.router.navigateByUrl(`/user/${this.authServise.getUserId()}`)
   }
 
 }

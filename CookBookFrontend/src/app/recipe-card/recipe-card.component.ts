@@ -32,7 +32,6 @@ export class RecipeCardComponent implements OnInit {
     const reader = new FileReader();
     reader.onload = () => {
       this.imageUrl = reader.result as string;
-      console.log(this.imageUrl);
     }
     reader.readAsDataURL(imageFile)
   }
@@ -40,5 +39,9 @@ export class RecipeCardComponent implements OnInit {
 
   onRecipeDetail(): void {
     this.router.navigate(["/recipeDetail", this.recipe.id])
+  }
+
+  onRecipeAuthor(): void {
+    this.router.navigate(["/user", this.recipe.authorId])
   }
 }

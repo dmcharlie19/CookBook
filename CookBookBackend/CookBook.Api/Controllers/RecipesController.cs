@@ -88,9 +88,21 @@ namespace CookBook.Api.Controllers
             {
                 // var file = _imageService.LoadImage( path );
                 Response.ContentType = "image/jpeg";
-                Response.SendFileAsync( path );
+                Response.SendFileAsync( path ).Wait();
             }
+        }
 
+        [HttpPut]
+        [Route( "delete" )]
+        // [Authorize]
+        public void DeleteRecipe( [FromBody] int recipeId )
+        {
+            string? userIdString = User.FindFirst( UserClaim.UserId )?.Value;
+            if ( userIdString == null )
+                throw new InvalidClientParameterException( "user id not found" );
+
+            _recipeService.DeleteRecipe( int.Parse( userIdString ), recipeId );
+            _unitOfWork.Commit();
         }
     }
 }

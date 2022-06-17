@@ -43,5 +43,18 @@ namespace CookBook.Application.Services
 
             _recipeRepository.Add( recipe );
         }
+
+        public void DeleteRecipe( int userId, int recipeId )
+        {
+            var recipe = _recipeRepository.Get( recipeId );
+
+            if ( recipe is null )
+                throw new InvalidClientParameterException( "Рецепт не найден" );
+
+            if ( recipe.User.Id != userId )
+                throw new InvalidClientParameterException( "Удалить рецепт может только автор рецепта" );
+
+            _recipeRepository.Delete( recipe );
+        }
     }
 }

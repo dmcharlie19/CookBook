@@ -3,8 +3,8 @@ import { RecipeService } from '../services/recipeService';
 import { RecipeShortInfoResponceDto } from '../models/recipe';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { NotAtentificateComponent } from '../not-atentificate/not-atentificate.component';
 import { AccountService } from '../services/AccountService';
+import { NotAtentificateComponent } from '../dialog-components/not-atentificate/not-atentificate.component';
 
 export class imagesUrl {
   recipeId: number;

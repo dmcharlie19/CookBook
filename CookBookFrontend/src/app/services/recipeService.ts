@@ -10,6 +10,7 @@ export class RecipeService {
     private readonly recipesByUserUrl = "/api/Recipes/User";
     private readonly addRecipeUrl = "/api/Recipes/AddRecipe";
     private readonly imageUrl = "/api/Recipes/Image";
+    private readonly deleteUrl = "/api/Recipes/delete";
 
     constructor(private http: HttpClient) {
     }
@@ -39,5 +40,9 @@ export class RecipeService {
 
     getRecipeImage(id: Number): Observable<Blob> {
         return this.http.get(`${this.imageUrl}/${id}`, { responseType: 'blob' });
+    }
+
+    deleteRecipe(id: Number) {
+        return this.http.put(this.deleteUrl, id);
     }
 }

@@ -1,0 +1,65 @@
+.main {
+    padding: 36px;
+    max-width: 600px;
+}
+
+.close-bar {
+    flex-grow: 1;
+    height: 30px;
+}
+
+.close-bar-img {
+    height: 16px;
+    width: 16px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.main h1 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+}
+
+.main p {
+    margin-top: 30px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+}
+
+.buttons {
+    display: flex;
+    flex-basis: 100;
+    margin-top: 40px;
+}
+
+.cancel {
+    flex-grow: 1;
+    height: 60px;
+    margin-left: 20px;
+
+    background: var(--yellow);
+    border: 0px;
+    border-radius: 16px;
+
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 28px;
+    color: white;
+}
+
+.delete {
+    flex-grow: 1;
+    height: 60px;
+
+    background-color: white;
+    border: 1px solid var(--yellow);
+    border-radius: 16px;
+
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--yellow);
+}

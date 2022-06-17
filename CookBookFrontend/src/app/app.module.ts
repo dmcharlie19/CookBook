@@ -20,11 +20,11 @@ import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { MyRecipesComponent } from './my-recipes/my-recipes.component';
 import { UserCardComponent } from './user-card/user-card.component';
-import { NotAtentificateComponent } from './not-atentificate/not-atentificate.component';
+import { NotAtentificateComponent } from './dialog-components/not-atentificate/not-atentificate.component';
 
-import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { MatDialogModule } from "@angular/material/dialog";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { DeleteRecipeDialogComponent } from './dialog-components/delete-recipe-dialog/delete-recipe-dialog.component';
 
 // Определение маршрутов
 const appRoutes: Routes = [
@@ -33,7 +33,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegistrationComponent },
   { path: 'addRecipe', component: AddRecipeComponent },
   { path: 'recipeDetail/:id', component: RecipeDetailComponent },
-  { path: 'myRecipes', component: MyRecipesComponent },
+  { path: 'user/:id', component: MyRecipesComponent },
   { path: '**', redirectTo: '/' }
 ];
 
@@ -61,6 +61,7 @@ const appRoutes: Routes = [
     MyRecipesComponent,
     UserCardComponent,
     NotAtentificateComponent,
+    DeleteRecipeDialogComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

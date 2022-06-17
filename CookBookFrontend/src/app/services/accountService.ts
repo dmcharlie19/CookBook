@@ -5,30 +5,57 @@ import { RegistrationRequestDto } from '../models/registrationRequestDto';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
+export class UserInfoStorage {
+
+    private _userInfoKey = "userInfo";
+
+    constructor() {
+    }
+
+    public setUserInfo(userInfo: AuthenticateResponseDto): void {
+        localStorage.setItem(this._userInfoKey, JSON.stringify(userInfo));
+    }
+
+    public getUserInfo(): AuthenticateResponseDto | null {
+        try {
+            let userInfo: AuthenticateResponseDto = JSON.parse(localStorage.getItem(this._userInfoKey));
+            return userInfo;
+        }
+        catch {
+            return null;
+        }
+    }
+
+    public clearUserInfo(): void {
+        localStorage.setItem(this._userInfoKey, "");
+    }
+}
+
 @Injectable()
 export class AccountService {
 
-    private _accesTokenKey = "accesToken";
-    private _userNameKey = "userName";
-    private _userIdKey = "userId";
-    private _expiresAtKey = "expiresAt";
-
     private loginUrl = "/api/account/login";
     private registrationUrl = "/api/account/registration";
+    private userInfoStorage: UserInfoStorage;
 
     constructor(private http: HttpClient) {
+
+        this.userInfoStorage = new UserInfoStorage();
     }
 
-    public getAccesToken(): string {
-        return localStorage.getItem("accesToken");
+    public getAccesToken(): string | null {
+        let userInfo: AuthenticateResponseDto = this.userInfoStorage.getUserInfo();
+        return userInfo ? userInfo.accesToken : null;
     }
 
-    public getUserName(): string {
-        return localStorage.getItem(this._userNameKey);
+    public getUserName(): string | null {
+        let userInfo: AuthenticateResponseDto = this.userInfoStorage.getUserInfo();
+        return userInfo ? userInfo.userName : null;
     }
 
-    public getUserId(): Number {
-        return Number(localStorage.getItem(this._userIdKey));
+    public getUserId(): Number | null {
+        let userInfo: AuthenticateResponseDto = this.userInfoStorage.getUserInfo();
+        return userInfo ? userInfo.id : null;
     }
 
     login(authenticate: AuthenticateRequestDto): Observable<Boolean> {
@@ -54,31 +81,25 @@ export class AccountService {
         if (authResponse.expiresAt < date)
             return false;
 
-        localStorage.setItem(this._accesTokenKey, authResponse.accesToken);
-        localStorage.setItem(this._userNameKey, authResponse.userName);
-        localStorage.setItem(this._expiresAtKey, authResponse.expiresAt.toString());
-        localStorage.setItem(this._userIdKey, authResponse.id.toString());
-
+        this.userInfoStorage.setUserInfo(authResponse);
         return true;
     }
 
     public logout() {
-        localStorage.setItem(this._accesTokenKey, "");
-        localStorage.setItem(this._userNameKey, "");
+        this.userInfoStorage.clearUserInfo();
     }
 
     public isLoggedIn(): Boolean {
 
-        let expiresAtStr = localStorage.getItem(this._expiresAtKey);
+        let userInfo: AuthenticateResponseDto = this.userInfoStorage.getUserInfo();
 
-        if (expiresAtStr != null && expiresAtStr != "") {
-            let expiresAt: Number = Date.parse(expiresAtStr);
-            if (expiresAt < Date.now()) {
+        if (userInfo != null) {
+            if (userInfo.expiresAt < new Date()) {
                 this.logout();
                 return false
             }
 
-            return localStorage.getItem(this._accesTokenKey) != "";
+            return userInfo.accesToken != "";
         }
         return false;
     }
