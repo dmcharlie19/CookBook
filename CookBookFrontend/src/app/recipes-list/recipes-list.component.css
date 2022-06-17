@@ -63,6 +63,11 @@
 }
 
 /*----------searchBar---------------------------------*/
+input.ng-touched.ng-invalid {
+	background-color: var(--error-display-pink);
+	border-color: red;
+}
+
 .searchBar {
 	display: flex;
 	flex-direction: row;

@@ -95,7 +95,7 @@ namespace CookBook.Api.Controllers
 
         [HttpPut]
         [Route( "delete" )]
-        // [Authorize]
+        [Authorize]
         public void DeleteRecipe( [FromBody] int recipeId )
         {
             string? userIdString = User.FindFirst( UserClaim.UserId )?.Value;
@@ -104,6 +104,13 @@ namespace CookBook.Api.Controllers
 
             _recipeService.DeleteRecipe( int.Parse( userIdString ), recipeId );
             _unitOfWork.Commit();
+        }
+
+        [HttpGet]
+        [Route( "Search/{searchRequest}" )]
+        public IReadOnlyList<RecipeShortDto>? SearchRecipe( [FromRoute] string searchRequest )
+        {
+            return _recipeQuery.SearchRecipe( searchRequest );
         }
     }
 }

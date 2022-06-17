@@ -46,10 +46,10 @@ export class AddRecipeComponent implements OnInit {
     }
 
     this.addRecipeForm = new FormGroup({
-      "title": new FormControl('борщ', [Validators.required, Validators.minLength(3)]),
-      "shortDescription": new FormControl('вкусный', [Validators.required, Validators.minLength(3), Validators.maxLength(200)]),
-      "preparingTime": new FormControl('30', [Validators.required, this.numberdValidator]),
-      "personCount": new FormControl('4', [Validators.required, this.numberdValidator]),
+      "title": new FormControl('', [Validators.required, Validators.minLength(3)]),
+      "shortDescription": new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(200)]),
+      "preparingTime": new FormControl('', [Validators.required, this.numberdValidator]),
+      "personCount": new FormControl('', [Validators.required, this.numberdValidator]),
       "avatar": new FormControl()
     });
 
@@ -70,7 +70,7 @@ export class AddRecipeComponent implements OnInit {
   // Работа с тэгами
   addNewTag(): void {
     let key = 'recipeStep_' + this.recipeTagsKeys.length.toString();
-    this.addRecipeForm.addControl(key, new FormControl("вкусно", Validators.required))
+    this.addRecipeForm.addControl(key, new FormControl("", Validators.required))
     this.recipeTagsKeys.push(key);
   }
 
@@ -84,7 +84,7 @@ export class AddRecipeComponent implements OnInit {
   // Работа с шагами приготовления
   addNewRecipeStep(): void {
     let key = 'tag_' + this.recipeStepsKeys.length.toString();
-    this.addRecipeForm.addControl(key, new FormControl("сделать вкусно красиво", Validators.required))
+    this.addRecipeForm.addControl(key, new FormControl("", Validators.required))
     this.recipeStepsKeys.push(key);
   }
 
@@ -103,8 +103,8 @@ export class AddRecipeComponent implements OnInit {
     keys.bodyKey = 'recipeIngridientBody_' + this.ingridientsKeys.length.toString();
 
     this.ingridientsKeys.push(keys);
-    this.addRecipeForm.addControl(keys.titleKey, new FormControl("тесто", Validators.required))
-    this.addRecipeForm.addControl(keys.bodyKey, new FormControl("капуста\r\nмясо\r\nрыба", Validators.required))
+    this.addRecipeForm.addControl(keys.titleKey, new FormControl("", Validators.required))
+    this.addRecipeForm.addControl(keys.bodyKey, new FormControl("", Validators.required))
   }
 
   deleteIngridient(id: number): void {

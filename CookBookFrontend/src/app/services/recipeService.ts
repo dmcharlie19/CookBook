@@ -6,9 +6,10 @@ import { AddRecipeRequestDto } from '../models/recipe';
 @Injectable()
 export class RecipeService {
 
+    private readonly url = "/api/Recipes";
     private readonly getRecipesUrl = "/api/Recipes/getRecipes";
     private readonly recipesByUserUrl = "/api/Recipes/User";
-    private readonly recipeFullUrl = "/api/Recipes/User";
+    private readonly recipeFullUrl = "/api/Recipes";
     private readonly addRecipeUrl = "/api/Recipes/AddRecipe";
     private readonly imageUrl = "/api/Recipes/Image";
     private readonly deleteUrl = "/api/Recipes/delete";
@@ -45,5 +46,9 @@ export class RecipeService {
 
     deleteRecipe(id: Number) {
         return this.http.put(this.deleteUrl, id);
+    }
+
+    searchRecipe(searchRequest: string) {
+        return this.http.get(`${this.url}/Search/${searchRequest}`);
     }
 }

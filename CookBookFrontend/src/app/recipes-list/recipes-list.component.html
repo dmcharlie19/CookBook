@@ -35,10 +35,10 @@
         </div>
     </div>
 
-    <div class="searchBar">
+    <form class="searchBar" [formGroup]="searchForm">
         <p class="searchBar-searchRecipe">Поиск рецепта</p>
         <div class="searchBar-center">
-            <input class="searchBar-inputRecipe" placeholder="Название блюда..." />
+            <input class="searchBar-inputRecipe" placeholder="Название блюда..." formControlName="searchRequest" />
             <div class="searchBar-tags">
                 <p class="searchBar-tag hovered-bg-color-light">мясо</p>
                 <p class="searchBar-tag hovered-bg-color-light">деликатесы</p>
@@ -47,14 +47,14 @@
                 <p class="searchBar-tag hovered-bg-color-light">пост</p>
             </div>
         </div>
-        <button class="searchBar-searchButton hovered-bg-color-light"> Поиск</button>
-    </div>
+        <button class="searchBar-searchButton hovered-bg-color-light" (click)="onSearchClick()"> Поиск</button>
+    </form>
 
     <div class="recipeList" *ngFor="let recipe of recipes;">
         <app-recipe-card [recipe]=recipe></app-recipe-card>
     </div>
     <div class="loadMore">
-        <button class="loadMore-button hovered-bg-color-light" (click)="onLoadMore()">Загрузить еще</button>
+        <button class="loadMore-button hovered-bg-color-light" (click)="onLoadMoreClick()">Загрузить еще</button>
     </div>
 
     <app-footer></app-footer>
