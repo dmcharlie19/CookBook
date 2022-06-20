@@ -413,3 +413,5 @@ FodyWeavers.xsd
 /CookBookBackend/wwwroot
 CookBookBackend/CookBook.Api/libman.json
 Resources
+/CookBookBackend/CookBook.Api/wwwroot
+/dbDump
