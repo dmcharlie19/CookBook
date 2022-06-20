@@ -1,0 +1,36 @@
+.top-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: left;
+    min-height: 50px;
+    margin: 50px 0 0 0;
+    border: inherit;
+    border-radius: inherit;
+}
+
+.top-bar-back {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 5px;
+}
+
+.top-bar-back img {
+    width: 18px;
+    height: 12px;
+}
+
+.top-bar-back p {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: var(--yellow);
+    margin-left: 10px;
+}
+
+.top-bar-title {
+    font-weight: 700;
+    font-size: 42px;
+    flex-grow: 1;
+}

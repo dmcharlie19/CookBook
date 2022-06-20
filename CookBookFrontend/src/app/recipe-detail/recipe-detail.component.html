@@ -3,19 +3,19 @@
     <app-error-display></app-error-display>
 
     <div *ngIf="recipeFullInfoResponceDto != null">
-        <div class="topBar">
+        <div class="top-bar">
             <div class="flex-row">
-                <div class="topBar-back hovered-bg-color-light" routerLink="/">
+                <div (click)="navigation.back()" class="top-bar-back hovered-bg-color-light">
                     <img src=" assets/img/back.png">
                     <p>Назад</p>
                 </div>
             </div>
             <div class="flex-row">
-                <p class="topBar-title">{{recipeFullInfoResponceDto.recipeShortInfo.title}}</p>
-                <div class="topBar-delete">
+                <p class="top-bar-title">{{recipeFullInfoResponceDto.recipeShortInfo.title}}</p>
+                <div class="top-bar-delete">
                     <img src="assets/img/delete.png">
                 </div>
-                <button class="topBar-edit hovered-bg-color-light" routerLink="addRecipe">
+                <button class="top-bar-edit hovered-bg-color-light" routerLink="addRecipe">
                     <img class="edit-img" src="assets/img/edit.png">
                     <p>Редактировать</p>
                 </button>

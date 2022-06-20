@@ -15,7 +15,6 @@ export class RecipeFullInfoResponceDto {
     public recipeShortInfo: RecipeShortInfoResponceDto;
     public cookingSteps: string[];
     public recipeIngridients: RecipeIngredient[];
-
 }
 
 export class RecipeIngredient {

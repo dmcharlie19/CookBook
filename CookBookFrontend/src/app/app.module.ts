@@ -11,11 +11,20 @@ import { FooterComponent } from './footer/footer.component';
 import { RecipeCardComponent } from './recipe-card/recipe-card.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ErrorInterceptor } from './interceptors/error-interceptor';
+
 import { ErrorDisplayComponent } from './error-display/error-display.component'
 import { AccountService } from './services/AccountService';
 import { ErrorService } from './services/errorService';
+import { NavigationService } from './services/navigationSrvice';
 import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
+import { MyRecipesComponent } from './my-recipes/my-recipes.component';
+import { UserCardComponent } from './user-card/user-card.component';
+import { NotAtentificateComponent } from './not-atentificate/not-atentificate.component';
+
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { MatDialogModule } from "@angular/material/dialog";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 // Определение маршрутов
 const appRoutes: Routes = [
@@ -24,11 +33,19 @@ const appRoutes: Routes = [
   { path: 'register', component: RegistrationComponent },
   { path: 'addRecipe', component: AddRecipeComponent },
   { path: 'recipeDetail/:id', component: RecipeDetailComponent },
+  { path: 'myRecipes', component: MyRecipesComponent },
   { path: '**', redirectTo: '/' }
 ];
 
 @NgModule({
-  imports: [BrowserModule, ReactiveFormsModule, HttpClientModule, RouterModule.forRoot(appRoutes)],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes),
+    MatDialogModule
+  ],
   declarations: [
     AppComponent,
     AuthenticationComponent,
@@ -40,12 +57,16 @@ const appRoutes: Routes = [
     RegistrationComponent,
     ErrorDisplayComponent,
     AddRecipeComponent,
-    RecipeDetailComponent
+    RecipeDetailComponent,
+    MyRecipesComponent,
+    UserCardComponent,
+    NotAtentificateComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     AccountService,
-    ErrorService
+    ErrorService,
+    NavigationService
   ],
   bootstrap: [AppComponent]
 })

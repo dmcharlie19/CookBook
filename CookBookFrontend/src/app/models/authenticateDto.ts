@@ -6,6 +6,7 @@ export class AuthenticateRequestDto {
 
 export class AuthenticateResponseDto {
     constructor(
+        public id: Number,
         public accesToken: string,
         public userName: string,
         public expiresAt: Date) { }

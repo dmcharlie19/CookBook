@@ -4,6 +4,7 @@ using CookBook.Api.Dto;
 using CookBook.Application.Mappers;
 using CookBook.Application.Queries;
 using CookBook.Application.Queries.Dto;
+using CookBook.Core.Exceptions;
 using CookBook.Infrastructure.Foundation;
 
 namespace CookBook.Infrastructure.Queries
@@ -20,7 +21,7 @@ namespace CookBook.Infrastructure.Queries
 
         public IReadOnlyList<RecipeShortDto> GetAll()
         {
-            var recipeQuerry = _dbContext.Recipes.
+            var recipeQuery = _dbContext.Recipes.
                 Join( _dbContext.Users, recipe => recipe.UserId, user => user.Id, ( recipe, user ) =>
                 new
                 {
@@ -29,7 +30,7 @@ namespace CookBook.Infrastructure.Queries
                 } )
                 .ToList();
 
-            return recipeQuerry.ConvertAll( rq =>
+            return recipeQuery.ConvertAll( rq =>
               {
                   var recipeDto = rq.Recipe.Map();
                   recipeDto.AuthorId = rq.User.Id;
@@ -58,6 +59,26 @@ namespace CookBook.Infrastructure.Queries
             } ).ToArray();
 
             return recipeFull;
+        }
+
+        public IReadOnlyList<RecipeShortDto> GetByUserId( int userId )
+        {
+            var user = _dbContext.Users.FirstOrDefault( u => u.Id == userId );
+            if ( user == null )
+                throw new InvalidClientParameterException( "пользователь не найден" );
+
+            return _dbContext.Recipes.
+                Where( r => r.UserId == userId )
+                .ToList().
+                ConvertAll( r =>
+                    {
+                        var recipeDto = r.Map();
+                        recipeDto.AuthorId = user.Id;
+                        recipeDto.AuthorName = user.Name;
+                        recipeDto.Tags = GetTags( r.Id );
+                        return recipeDto;
+                    }
+                 );
         }
 
         private string[] GetTags( int recipeId )

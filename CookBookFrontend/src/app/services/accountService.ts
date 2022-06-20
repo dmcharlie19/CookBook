@@ -10,6 +10,7 @@ export class AccountService {
 
     private _accesTokenKey = "accesToken";
     private _userNameKey = "userName";
+    private _userIdKey = "userId";
     private _expiresAtKey = "expiresAt";
 
     private loginUrl = "/api/account/login";
@@ -24,6 +25,10 @@ export class AccountService {
 
     public getUserName(): string {
         return localStorage.getItem(this._userNameKey);
+    }
+
+    public getUserId(): Number {
+        return Number(localStorage.getItem(this._userIdKey));
     }
 
     login(authenticate: AuthenticateRequestDto): Observable<Boolean> {
@@ -52,6 +57,7 @@ export class AccountService {
         localStorage.setItem(this._accesTokenKey, authResponse.accesToken);
         localStorage.setItem(this._userNameKey, authResponse.userName);
         localStorage.setItem(this._expiresAtKey, authResponse.expiresAt.toString());
+        localStorage.setItem(this._userIdKey, authResponse.id.toString());
 
         return true;
     }
@@ -72,12 +78,14 @@ export class AccountService {
                 return false
             }
 
+            console.log(localStorage.getItem(this._accesTokenKey));
+
             return localStorage.getItem(this._accesTokenKey) != "";
         }
         return false;
     }
 
     isLoggedOut(): Boolean {
-        return !this.isLoggedIn;
+        return !this.isLoggedIn();
     }
 }

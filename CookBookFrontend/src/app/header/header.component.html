@@ -10,7 +10,7 @@
             <div class="elipse">
                 <img src="assets/img/user.png">
             </div>
-            <p class="userName">Привет, {{userName}}</p>
+            <p class="userName hovered-underline" (click)="onMyRecipes()">Привет, {{userName}}</p>
             <div class="rectangle"></div>
             <img class="exit-icon hovered-bg-color-light" src="assets/img/exit.png" (click)="this.authServise.logout()">
         </div>

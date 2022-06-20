@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AddRecipeRequestDto, RecipeIngredient } from '../models/recipe';
+import { NotAtentificateComponent } from '../not-atentificate/not-atentificate.component';
+import { AccountService } from '../services/AccountService';
+import { NavigationService } from '../services/navigationSrvice';
 import { RecipeService } from '../services/recipeService';
 
 class RecipeIngridientKeys {
@@ -22,13 +26,25 @@ export class AddRecipeComponent implements OnInit {
   public recipeStepsKeys: Array<string> = [];
   public ingridientsKeys: RecipeIngridientKeys[] = [];
 
-  constructor(private recipeService: RecipeService, private router: Router) {
+  constructor(private recipeService: RecipeService,
+    private router: Router,
+    public navigation: NavigationService,
+    private accountService: AccountService,
+    private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
+
+    if (this.accountService.isLoggedOut()) {
+      this.dialog.open(NotAtentificateComponent, { disableClose: true });
+    }
+    else {
+      this.router.navigateByUrl("/addRecipe")
+    }
+
     this.addRecipeForm = new FormGroup({
       "title": new FormControl('борщ', [Validators.required, Validators.minLength(3)]),
-      "shortDescription": new FormControl('вкусный', [Validators.required, Validators.minLength(3)]),
+      "shortDescription": new FormControl('вкусный', [Validators.required, Validators.minLength(3), Validators.maxLength(200)]),
       "preparingTime": new FormControl('30', [Validators.required, this.numberdValidator]),
       "personCount": new FormControl('4', [Validators.required, this.numberdValidator])
     });
