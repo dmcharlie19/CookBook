@@ -39,8 +39,7 @@ builder.Services.AddAuthentication( JwtBearerDefaults.AuthenticationScheme )
 
 // Хранение
 string connection = builder.Configuration.GetConnectionString( "DefaultConnection" );
-//builder.Services.AddDbContext<CookBookDbContext>( x => x.UseSqlServer( connection, b => b.MigrationsAssembly( "CookBook.Api" ) ) );
-builder.Services.AddDbContext<CookBookDbContext>( x => x.UseSqlite( "Data Source=CookBook.db" ) );
+builder.Services.AddDbContext<CookBookDbContext>( x => x.UseSqlServer( connection, b => b.MigrationsAssembly( "CookBook.Api" ) ) );
 
 // Контроллеры
 builder.Services.AddControllers();

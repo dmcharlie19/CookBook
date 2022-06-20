@@ -15,8 +15,6 @@ namespace CookBook.Infrastructure.Foundation
 
         public CookBookDbContext( DbContextOptions options ) : base( options )
         {
-            Database.EnsureCreated();
-
             Recipes = Set<Recipe>();
             RecipeSteps = Set<RecipeStep>();
             RecipeIngredients = Set<RecipeIngredient>();
