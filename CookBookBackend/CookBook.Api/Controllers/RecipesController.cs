@@ -57,10 +57,10 @@ namespace CookBook.Api.Controllers
             _unitOfWork.Commit();
         }
 
-        [HttpGet, Route( "User/{userId}" )]
+        [HttpGet, Route( "users/{userId}" )]
         public IReadOnlyList<RecipeShortDto>? GetRecipesByUserId( [FromRoute] int userId )
         {
-            return _recipeQuery.GetRecipesByUserId( userId );
+            return _recipeQuery.GetByUserId( userId );
         }
     }
 }

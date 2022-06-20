@@ -1,4 +1,4 @@
-.topBar {
+.top-bar {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -9,19 +9,19 @@
     border-radius: inherit;
 }
 
-.topBar-back {
+.top-bar-back {
     display: flex;
     justify-content: left;
     align-items: center;
     padding: 5px;
 }
 
-.topBar-back img {
+.top-bar-back img {
     width: 18px;
     height: 12px;
 }
 
-.topBar-back p {
+.top-bar-back p {
     font-weight: 500;
     font-size: 18px;
     line-height: 22px;
@@ -29,7 +29,7 @@
     margin-left: 10px;
 }
 
-.topBar-title {
+.top-bar-title {
     font-weight: 700;
     font-size: 42px;
     flex-grow: 1;

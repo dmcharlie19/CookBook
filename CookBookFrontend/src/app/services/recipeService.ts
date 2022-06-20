@@ -7,7 +7,7 @@ import { AddRecipeRequestDto } from '../models/recipe';
 export class RecipeService {
 
     private readonly url = "/api/Recipes";
-    private readonly recipesByUserUrl = "/api/Recipes/User";
+    private readonly recipesByUserUrl = "/api/Recipes/users";
     private readonly addRecipeUrl = "/api/Recipes/AddRecipe";
 
     constructor(private http: HttpClient) {

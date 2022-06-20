@@ -11,7 +11,6 @@ import { RecipeService } from '../services/recipeService';
 })
 export class MyRecipesComponent implements OnInit {
 
-  // Массив рецептов
   recipes: RecipeShortInfoResponceDto[];
 
   constructor(public accountServise: AccountService, private recipeService: RecipeService) {
@@ -19,7 +18,7 @@ export class MyRecipesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let userId = this.accountServise.getUserId();
+    let userId: Number = this.accountServise.getUserId();
 
     this.recipeService.getRecipesByUserId(userId).subscribe(
       (data: RecipeShortInfoResponceDto[]) => {

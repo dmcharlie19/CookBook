@@ -2,16 +2,16 @@
     <app-header [isRecipesList]="1"></app-header>
     <app-error-display></app-error-display>
 
-    <div class="topBar">
+    <div class="top-bar">
         <div class="flex-row">
-            <div (click)="navigation.back()" class="topBar-back hovered-bg-color-light">
+            <div (click)="navigation.back()" class="top-bar-back hovered-bg-color-light">
                 <img src=" assets/img/back.png">
                 <p>Назад</p>
             </div>
         </div>
         <div class="flex-row">
-            <p class="topBar-title">Добавить новый рецепт</p>
-            <button class="topBar-publish hovered-bg-color-dark" (click)="publishRecipe()">Опубликовать</button>
+            <p class="top-bar-title">Добавить новый рецепт</p>
+            <button class="top-bar-publish hovered-bg-color-dark" (click)="publishRecipe()">Опубликовать</button>
         </div>
     </div>
     <form [formGroup]="addRecipeForm">

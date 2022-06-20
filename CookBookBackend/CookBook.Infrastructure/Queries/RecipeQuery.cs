@@ -61,7 +61,7 @@ namespace CookBook.Infrastructure.Queries
             return recipeFull;
         }
 
-        public IReadOnlyList<RecipeShortDto> GetRecipesByUserId( int userId )
+        public IReadOnlyList<RecipeShortDto> GetByUserId( int userId )
         {
             var user = _dbContext.Users.FirstOrDefault( u => u.Id == userId );
             if ( user == null )
