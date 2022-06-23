@@ -6,6 +6,7 @@ namespace CookBook.Application.Services
 {
     public interface IRecipeService
     {
-        void AddRecipe( int userId, AddRecipeRequestDto addRecipeRequest, List<Tag> tags );
+        void AddRecipe( int userId, AddRecipeRequestDto addRecipeRequest, List<Tag> tags, string imgPath );
+        void DeleteRecipe( int userId, int recipeId );
     }
 }

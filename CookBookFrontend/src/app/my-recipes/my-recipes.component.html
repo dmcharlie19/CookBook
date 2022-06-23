@@ -1,19 +1,22 @@
 <div class="main">
     <app-header [isRecipesList]="1"></app-header>
+    <app-error-display></app-error-display>
 
-    <div class="top-bar">
+    <div class="topBar">
         <div class="flex-row">
-            <div class="top-bar-back hovered-bg-color-light" routerLink="/">
+            <div class="topBar-back hovered-bg-color-light" routerLink="/">
                 <img src=" assets/img/back.png">
                 <p>Назад</p>
             </div>
         </div>
-        <div class="flex-row">
-            <p class="top-bar-title">Мой профиль</p>
+        <div class="flex-row" *ngIf="accountServise.isLoggedIn()">
+            <p class="topBar-title">Мой профиль</p>
         </div>
     </div>
+    <div *ngIf="isLoaded == true">
 
-    <app-user-card></app-user-card>
+        <app-user-card></app-user-card>
+    </div>
 
     <div class="recipeList" *ngFor="let recipe of recipes;">
         <app-recipe-card [recipe]=recipe></app-recipe-card>

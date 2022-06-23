@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { DeleteRecipeDialogComponent } from '../dialog-components/delete-recipe-dialog/delete-recipe-dialog.component';
 import { RecipeFullInfoResponceDto, RecipeIngredient, RecipeShortInfoResponceDto } from '../models/recipe';
+import { AccountService } from '../services/AccountService';
 import { NavigationService } from '../services/navigationSrvice';
 import { RecipeService } from '../services/recipeService';
 
@@ -14,25 +17,41 @@ export class RecipeDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private recipeService: RecipeService,
-    public navigation: NavigationService) { }
+    public navigation: NavigationService,
+    private accountServise: AccountService,
+    private dialog: MatDialog) { }
 
   public recipeFullInfoResponceDto: RecipeFullInfoResponceDto = null;
-
+  public isMyRecipe: Boolean = false;
   private recipeId: Number;
 
   ngOnInit(): void {
 
-    this.recipeId = this.recipeId = this.route.snapshot.params['id'];
+    this.recipeId = this.route.snapshot.params['id'];
 
     this.recipeService.getRecipeFullInfo(this.recipeId).subscribe(
       (data: RecipeFullInfoResponceDto) => {
         this.recipeFullInfoResponceDto = data;
+
+        this.isMyRecipe = (this.accountServise.isLoggedIn() &&
+          this.accountServise.getUserId() == this.recipeFullInfoResponceDto.recipeShortInfo.authorId)
       }
     )
   }
 
   back(): void {
     this.navigation.back()
+  }
+
+  onDeleteRecipe() {
+    let dialogRef = this.dialog.open(DeleteRecipeDialogComponent, { disableClose: true });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.event == 'delete') {
+        this.recipeService.deleteRecipe(this.recipeFullInfoResponceDto.recipeShortInfo.id)
+          .subscribe(() => this.back());
+      }
+    });
   }
 
   getTestData(): RecipeFullInfoResponceDto {
@@ -59,4 +78,3 @@ export class RecipeDetailComponent implements OnInit {
   }
 
 }
-

@@ -17,6 +17,7 @@ export class ErrorDisplayComponent implements OnInit {
       this.error = e;
     });
 
-    this._errorService.onErrorClear.subscribe(x => this.error = "")
+    this._errorService.onErrorClear.subscribe(() => this.error = "")
   }
 }
+

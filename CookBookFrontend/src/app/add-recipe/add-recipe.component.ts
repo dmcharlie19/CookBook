@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { NotAtentificateComponent } from '../dialog-components/not-atentificate/not-atentificate.component';
 import { AddRecipeRequestDto, RecipeIngredient } from '../models/recipe';
-import { NotAtentificateComponent } from '../not-atentificate/not-atentificate.component';
 import { AccountService } from '../services/AccountService';
 import { NavigationService } from '../services/navigationSrvice';
 import { RecipeService } from '../services/recipeService';
@@ -25,6 +25,9 @@ export class AddRecipeComponent implements OnInit {
   public recipeTagsKeys: Array<string> = [];
   public recipeStepsKeys: Array<string> = [];
   public ingridientsKeys: RecipeIngridientKeys[] = [];
+  private imageFile: File;
+  public imageUrl: String = "";
+  public isImageAdded: Boolean = false;
 
   constructor(private recipeService: RecipeService,
     private router: Router,
@@ -43,10 +46,11 @@ export class AddRecipeComponent implements OnInit {
     }
 
     this.addRecipeForm = new FormGroup({
-      "title": new FormControl('борщ', [Validators.required, Validators.minLength(3)]),
-      "shortDescription": new FormControl('вкусный', [Validators.required, Validators.minLength(3), Validators.maxLength(200)]),
-      "preparingTime": new FormControl('30', [Validators.required, this.numberdValidator]),
-      "personCount": new FormControl('4', [Validators.required, this.numberdValidator])
+      "title": new FormControl('', [Validators.required, Validators.minLength(3)]),
+      "shortDescription": new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(200)]),
+      "preparingTime": new FormControl('', [Validators.required, this.numberdValidator]),
+      "personCount": new FormControl('', [Validators.required, this.numberdValidator]),
+      "avatar": new FormControl()
     });
 
     this.addNewTag();
@@ -66,7 +70,7 @@ export class AddRecipeComponent implements OnInit {
   // Работа с тэгами
   addNewTag(): void {
     let key = 'recipeStep_' + this.recipeTagsKeys.length.toString();
-    this.addRecipeForm.addControl(key, new FormControl("вкусно", Validators.required))
+    this.addRecipeForm.addControl(key, new FormControl("", Validators.required))
     this.recipeTagsKeys.push(key);
   }
 
@@ -80,7 +84,7 @@ export class AddRecipeComponent implements OnInit {
   // Работа с шагами приготовления
   addNewRecipeStep(): void {
     let key = 'tag_' + this.recipeStepsKeys.length.toString();
-    this.addRecipeForm.addControl(key, new FormControl("сделать вкусно красиво", Validators.required))
+    this.addRecipeForm.addControl(key, new FormControl("", Validators.required))
     this.recipeStepsKeys.push(key);
   }
 
@@ -99,8 +103,8 @@ export class AddRecipeComponent implements OnInit {
     keys.bodyKey = 'recipeIngridientBody_' + this.ingridientsKeys.length.toString();
 
     this.ingridientsKeys.push(keys);
-    this.addRecipeForm.addControl(keys.titleKey, new FormControl("тесто", Validators.required))
-    this.addRecipeForm.addControl(keys.bodyKey, new FormControl("капуста\r\nмясо\r\nрыба", Validators.required))
+    this.addRecipeForm.addControl(keys.titleKey, new FormControl("", Validators.required))
+    this.addRecipeForm.addControl(keys.bodyKey, new FormControl("", Validators.required))
   }
 
   deleteIngridient(id: number): void {
@@ -143,9 +147,27 @@ export class AddRecipeComponent implements OnInit {
       request.cookingSteps.push(this.addRecipeForm.controls[this.recipeStepsKeys[i]].value);
     }
 
-    this.recipeService.addRecipe(request).subscribe(
+    this.recipeService.addRecipe(request, this.imageFile).subscribe(
       () => this.router.navigateByUrl('/')
     )
+  }
+
+  showImagePreview(event) {
+    this.imageFile = (event.target as HTMLInputElement).files[0];
+
+    // File Preview
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageUrl = reader.result as string;
+      this.isImageAdded = true;
+      console.log(this.imageUrl);
+
+    }
+    reader.readAsDataURL(this.imageFile)
+  }
+
+  onDeleteImageClick(): void {
+    this.isImageAdded = false;
   }
 
 }

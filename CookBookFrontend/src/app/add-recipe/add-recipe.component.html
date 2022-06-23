@@ -17,10 +17,22 @@
     <form [formGroup]="addRecipeForm">
         <div class="short-info">
             <div class="picture">
-                <div class="dashed">
-                    <img src="assets/img/cloud.png">
-                    <img class="download" src="assets/img/download.png">
-                    <p>Загрузите фото готового блюда</p>
+                <div *ngIf="isImageAdded == true">
+                    <div class="image-delete">
+                        <div class="white-back" (click)="onDeleteImageClick()">
+                            <img class=" close-bar-img" src="assets/img/x.png">
+                        </div>
+                    </div>
+                    <img class="image-preview" [src]="imageUrl">
+                </div>
+                <div *ngIf="isImageAdded == false">
+                    <label for="file-input" class="dashed">
+                        <input type="file" class="upload-file-input" id="file-input" name="myfile" accept="image/*"
+                            (change)="showImagePreview($event)" multiple>
+                        <img src=" assets/img/cloud.png">
+                        <img class="download" src="assets/img/download.png">
+                        <p>Загрузите фото готового блюда</p>
+                    </label>
                 </div>
             </div>
             <div class="short-info-form">

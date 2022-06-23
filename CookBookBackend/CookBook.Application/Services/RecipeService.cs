@@ -15,7 +15,7 @@ namespace CookBook.Application.Services
         {
             _recipeRepository = recipeRepository;
         }
-        public void AddRecipe( int userId, AddRecipeRequestDto addRecipeRequest, List<Tag> tags )
+        public void AddRecipe( int userId, AddRecipeRequestDto addRecipeRequest, List<Tag> tags, string imgPath )
         {
             if ( addRecipeRequest is null )
                 throw new InvalidClientParameterException( "запрос не должен быть Null" );
@@ -25,7 +25,8 @@ namespace CookBook.Application.Services
                 addRecipeRequest.ShortDescription,
                 addRecipeRequest.PreparingTime,
                 addRecipeRequest.PersonCount,
-                userId );
+                userId,
+                imgPath );
 
             recipe.AddRecipeSteps( addRecipeRequest.CookingSteps
               .Select( recipeStep => new RecipeStep( recipeStep ) )
@@ -41,6 +42,19 @@ namespace CookBook.Application.Services
             recipe.Validate();
 
             _recipeRepository.Add( recipe );
+        }
+
+        public void DeleteRecipe( int userId, int recipeId )
+        {
+            var recipe = _recipeRepository.Get( recipeId );
+
+            if ( recipe is null )
+                throw new InvalidClientParameterException( "Рецепт не найден" );
+
+            if ( recipe.User.Id != userId )
+                throw new InvalidClientParameterException( "Удалить рецепт может только автор рецепта" );
+
+            _recipeRepository.Delete( recipe );
         }
     }
 }

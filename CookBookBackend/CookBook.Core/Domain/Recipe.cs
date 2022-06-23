@@ -25,6 +25,9 @@ namespace CookBook.Core.Domain
         public int PersonCount { get; set; }
 
         [Required]
+        public string ImagePath { get; protected set; }
+
+        [Required]
         public List<TagRecipe> Tags { get; set; }
 
         [Required]
@@ -47,58 +50,57 @@ namespace CookBook.Core.Domain
             string shortDescription,
             int preparingTime,
             int personCount,
-            int userId )
+            int userId,
+            string imagePath )
         {
             Title = title;
             ShortDescription = shortDescription;
             PreparingTime = preparingTime;
             PersonCount = personCount;
             UserId = userId;
-
-            RecipeIngredients = new();
-            RecipeSteps = new();
-            Tags = new();
+            ImagePath = imagePath;
         }
 
         public void AddRecipeSteps( List<RecipeStep> steps )
         {
             if ( steps == null ||
                 steps.Count == 0 )
-                throw new InvalidClientParameterException( "РЁР°РіРё РїСЂРёРіРѕС‚РѕРІР»РµРЅРёСЏ РЅРµ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ РїСѓСЃС‚С‹РјРё" );
+                throw new InvalidClientParameterException( "Шаги приготовления не должны быть пустыми" );
 
             if ( steps.Count >= _maxStepsCount )
-                throw new InvalidClientParameterException( "РџСЂРµРІС‹С€РµРЅРѕ РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ С€Р°РіРѕРІ РїСЂРёРіРѕС‚РѕРІР»РµРЅРёСЏ" );
+                throw new InvalidClientParameterException( "Превышено максимальное количество шагов приготовления" );
 
             foreach ( var step in steps )
                 step.Validate();
 
-            RecipeSteps.AddRange( steps );
+            RecipeSteps = steps;
         }
 
         public void AddRecipeIngredients( List<RecipeIngredient> ingredients )
         {
             if ( ingredients == null ||
                 ingredients.Count == 0 )
-                throw new InvalidClientParameterException( "РРЅРіСЂРёРґРµРЅС‚С‹ СЂРµС†РµРїС‚Р° РЅРµ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ РїСѓСЃС‚С‹РјРё" );
+                throw new InvalidClientParameterException( "Ингриденты рецепта не должны быть пустыми" );
 
             if ( ingredients.Count >= _maxIngredientsCount )
-                throw new InvalidClientParameterException( "РџСЂРµРІС‹С€РµРЅРѕ РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РёРЅРіСЂРµРґРёРµРЅС‚РѕРІ" );
+                throw new InvalidClientParameterException( "Превышено максимальное количество ингредиентов" );
 
             foreach ( var ingredient in ingredients )
                 ingredient.Validate();
 
-            RecipeIngredients.AddRange( ingredients );
+            RecipeIngredients = ingredients;
         }
 
         public void AddTags( List<Tag> tags )
         {
             if ( tags == null ||
                 tags.Count == 0 )
-                throw new InvalidClientParameterException( "С‚СЌРіРё РЅРµ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ РїСѓСЃС‚С‹РјРё" );
+                throw new InvalidClientParameterException( "тэги не должны быть пустыми" );
 
             if ( tags.Count >= _maxTagsCount )
-                throw new InvalidClientParameterException( "РџСЂРµРІС‹С€РµРЅРѕ РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ С‚СЌРіРѕРІ" );
+                throw new InvalidClientParameterException( "Превышено максимальное количество тэгов" );
 
+            Tags = new();
             foreach ( Tag tag in tags )
             {
                 Tags.Add( new TagRecipe( tag.Id ) );

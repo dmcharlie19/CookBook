@@ -1,6 +1,6 @@
 <div class="recipeBox">
     <div class="recipeBox-picture">
-        <p>фото рецепта</p>
+        <img class="image-preview" [src]="imageUrl">
     </div>
     <div class="recipeBox-mainField">
         <div class="recipeBox-tags-likes">
@@ -42,7 +42,7 @@
                 </div>
             </div>
         </div>
-        <div class="recipeBox-author ho">
+        <div class="recipeBox-author" (click)="onRecipeAuthor()">
             <p class="recipeBox-author-title">Автор:</p>
             <p class="hovered-underline">{{recipe.authorName}}</p>
         </div>

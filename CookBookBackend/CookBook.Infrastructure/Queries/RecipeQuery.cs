@@ -6,6 +6,7 @@ using CookBook.Application.Queries;
 using CookBook.Application.Queries.Dto;
 using CookBook.Core.Exceptions;
 using CookBook.Infrastructure.Foundation;
+using Microsoft.EntityFrameworkCore;
 
 namespace CookBook.Infrastructure.Queries
 {
@@ -13,29 +14,26 @@ namespace CookBook.Infrastructure.Queries
     {
 
         private readonly CookBookDbContext _dbContext;
+        private readonly int _pageSize = 3;   // количество элементов на странице
 
         public RecipeQuery( CookBookDbContext dbContext )
         {
             _dbContext = dbContext;
         }
 
-        public IReadOnlyList<RecipeShortDto> GetAll()
+        public IReadOnlyList<RecipeShortDto> GetAll( int page )
         {
-            var recipeQuery = _dbContext.Recipes.
-                Join( _dbContext.Users, recipe => recipe.UserId, user => user.Id, ( recipe, user ) =>
-                new
-                {
-                    Recipe = recipe,
-                    User = user
-                } )
+            var recipeQuery = _dbContext.Recipes.Include( r => r.User );
+            var items = recipeQuery.Skip( ( page - 1 ) * _pageSize )
+                .Take( _pageSize )
                 .ToList();
 
-            return recipeQuery.ConvertAll( rq =>
+            return items.ConvertAll( r =>
               {
-                  var recipeDto = rq.Recipe.Map();
-                  recipeDto.AuthorId = rq.User.Id;
-                  recipeDto.AuthorName = rq.User.Name;
-                  recipeDto.Tags = GetTags( rq.Recipe.Id );
+                  var recipeDto = r.Map();
+                  recipeDto.AuthorId = r.User.Id;
+                  recipeDto.AuthorName = r.User.Name;
+                  recipeDto.Tags = GetTags( r.Id );
                   return recipeDto;
               }
              );
@@ -69,18 +67,48 @@ namespace CookBook.Infrastructure.Queries
 
             return _dbContext.Recipes.
                 Where( r => r.UserId == userId )
+                .Include( r => r.User )
                 .ToList().
                 ConvertAll( r =>
                     {
                         var recipeDto = r.Map();
-                        recipeDto.AuthorId = user.Id;
-                        recipeDto.AuthorName = user.Name;
                         recipeDto.Tags = GetTags( r.Id );
                         return recipeDto;
                     }
                  );
         }
 
+        public string GetRecipeImagePath( int recipeId )
+        {
+            var recipe = _dbContext.Recipes.FirstOrDefault( r => r.Id == recipeId );
+
+            return recipe.ImagePath;
+        }
+
+        public IReadOnlyList<RecipeShortDto> SearchRecipe( string searchRequest )
+        {
+            var tagsQuerry = _dbContext.Tags.Where( t => t.Name == searchRequest )
+                    .Join( _dbContext.TagRecipes, tag => tag.Id, tagRecipe => tagRecipe.TagId, ( tag, tagRecipe ) => tagRecipe.RecipeId )
+                    .ToArray();
+
+            var recipeQuery = _dbContext.Recipes
+                .Where( recipe => ( recipe.Title.Contains( searchRequest ) | tagsQuerry.Contains( recipe.Id ) ) )
+                .Include( r => r.User );
+
+            var items = recipeQuery
+                .Take( _pageSize )
+                .ToList();
+
+            return items.ConvertAll( r =>
+            {
+                var recipeDto = r.Map();
+                recipeDto.AuthorId = r.User.Id;
+                recipeDto.AuthorName = r.User.Name;
+                recipeDto.Tags = GetTags( r.Id );
+                return recipeDto;
+            }
+             );
+        }
         private string[] GetTags( int recipeId )
         {
             return _dbContext.TagRecipes

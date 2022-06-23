@@ -1,15 +1,15 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.EntityFrameworkCore;
-using CookBook.Infrastructure.Foundation;
-using CookBook.Application.Repositories;
-using CookBook.Infrastructure.Repositories;
-using CookBook.Application.Queries;
-using CookBook.Infrastructure.Queries;
-using CookBook.Application.Entities.Users;
-using Microsoft.AspNetCore.Http.Features;
-using CookBook.Application.Services;
 using CookBook.Api.Middleware;
+using CookBook.Application.Entities.Users;
+using CookBook.Application.Queries;
+using CookBook.Application.Repositories;
+using CookBook.Application.Services;
+using CookBook.Infrastructure.Foundation;
+using CookBook.Infrastructure.Queries;
+using CookBook.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder( args );
 
@@ -49,6 +49,7 @@ builder.Services.AddScoped<IRecipeQuery, RecipeQuery>();
 builder.Services.AddScoped<IRecipeService, RecipeService>();
 builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IImageService, ImageService>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();

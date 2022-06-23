@@ -1,6 +1,6 @@
 export class RecipeShortInfoResponceDto {
     constructor(
-        public id: Number,
+        public id: number,
         public title: string,
         public shortDescription: string,
         public preparingTime: Number,
