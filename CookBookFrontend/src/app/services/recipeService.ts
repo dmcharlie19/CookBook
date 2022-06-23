@@ -6,49 +6,50 @@ import { AddRecipeRequestDto } from '../models/recipe';
 @Injectable()
 export class RecipeService {
 
-    private readonly url = "/api/Recipes";
-    private readonly getRecipesUrl = "/api/Recipes/getRecipes";
-    private readonly recipesByUserUrl = "/api/Recipes/User";
-    private readonly recipeFullUrl = "/api/Recipes";
-    private readonly addRecipeUrl = "/api/Recipes/AddRecipe";
-    private readonly imageUrl = "/api/Recipes/Image";
-    private readonly deleteUrl = "/api/Recipes/delete";
+    private readonly recipesUrl = "/api/Recipes";
 
     constructor(private http: HttpClient) {
     }
 
     getRecipes(page: Number) {
-        return this.http.get(`${this.getRecipesUrl}/${page}`);
+        const url = `${this.recipesUrl}/getRecipes/${page}`;
+        return this.http.get(url);
     }
 
     getRecipesByUserId(userId: Number) {
-        return this.http.get(`${this.recipesByUserUrl}/${userId}`);
+        const url = `${this.recipesUrl}/users/${userId}`;
+        return this.http.get(url);
     }
 
     getRecipeFullInfo(id: Number) {
-        return this.http.get(`${this.recipeFullUrl}/${id}`);
+        const url = `${this.recipesUrl}/getRecipeFull/${id}`;
+        return this.http.get(url);
     }
 
-    addRecipe(registrationDto: AddRecipeRequestDto, imageFile: File): Observable<Object> {
+    addRecipe(addRecipeRequest: AddRecipeRequestDto, imageFile: File): Observable<Object> {
 
         const formData = new FormData();
         formData.append('image', imageFile);
 
-        const data: string = JSON.stringify(registrationDto);
+        const data: string = JSON.stringify(addRecipeRequest);
         formData.append('data', data);
 
-        return this.http.post(this.addRecipeUrl, formData);
+        const url = `${this.recipesUrl}/addRecipe`;
+        return this.http.post(url, formData);
     }
 
     getRecipeImage(id: Number): Observable<Blob> {
-        return this.http.get(`${this.imageUrl}/${id}`, { responseType: 'blob' });
+        const url = `${this.recipesUrl}/images/${id}`;
+        return this.http.get(url, { responseType: 'blob' });
     }
 
     deleteRecipe(id: Number) {
-        return this.http.put(this.deleteUrl, id);
+        const url = `${this.recipesUrl}/delete/${id}`;
+        return this.http.delete(url);
     }
 
     searchRecipe(searchRequest: string) {
-        return this.http.get(`${this.url}/Search/${searchRequest}`);
+        const url = `${this.recipesUrl}/search/${searchRequest}`;
+        return this.http.get(url);
     }
 }

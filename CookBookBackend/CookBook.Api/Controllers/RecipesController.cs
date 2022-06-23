@@ -43,13 +43,13 @@ namespace CookBook.Api.Controllers
             return _recipeQuery.GetAll( page );
         }
 
-        [HttpGet, Route( "{recipeId}" )]
+        [HttpGet, Route( "getRecipeFull/{recipeId}" )]
         public RecipeFullDto GetRecipeDetail( [FromRoute] int recipeId )
         {
             return _recipeQuery.GetRecipeDetail( recipeId );
         }
 
-        [HttpPost, Authorize, Route( "AddRecipe" )]
+        [HttpPost, Authorize, Route( "addRecipe" )]
         [DisableRequestSizeLimit]
         public void AddRecipe()
         {
@@ -58,11 +58,11 @@ namespace CookBook.Api.Controllers
                 throw new InvalidClientParameterException( "user id not found" );
 
             if ( Request.Form.Files.Count != 1 )
-                throw new InvalidClientParameterException( "Неверное количество файлов" );
+                throw new InvalidClientParameterException( "РќРµРІРµСЂРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ С„Р°Р№Р»РѕРІ" );
             IFormFile imgFile = Request.Form.Files[ 0 ];
 
             if ( Request.Form.Keys.Count != 1 )
-                throw new InvalidClientParameterException( "Недостаточно данных" );
+                throw new InvalidClientParameterException( "РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РґР°РЅРЅС‹С…" );
             AddRecipeRequestDto addRecipeRequest = JsonConvert.DeserializeObject<AddRecipeRequestDto>( Request.Form[ "data" ] );
 
             string imgPath = _imageService.SaveImage( imgFile.OpenReadStream(), imgFile.FileName );
@@ -75,28 +75,27 @@ namespace CookBook.Api.Controllers
 
         }
 
-        [HttpGet, Route( "User/{userId}" )]
+        [HttpGet, Route( "users/{userId}" )]
         public IReadOnlyList<RecipeShortDto>? GetRecipesByUserId( [FromRoute] int userId )
         {
             return _recipeQuery.GetRecipesByUserId( userId );
         }
 
-        [HttpGet, Route( "Image/{recipeId}" )]
+        [HttpGet, Route( "images/{recipeId}" )]
         public void GetRecipeImage( [FromRoute] int recipeId )
         {
             var path = _recipeQuery.GetRecipeImagePath( recipeId );
             if ( path != "" )
             {
-                // var file = _imageService.LoadImage( path );
                 Response.ContentType = "image/jpeg";
                 Response.SendFileAsync( path ).Wait();
             }
         }
 
-        [HttpPut]
-        [Route( "delete" )]
+        [HttpDelete]
+        [Route( "delete/{recipeId}" )]
         [Authorize]
-        public void DeleteRecipe( [FromBody] int recipeId )
+        public void DeleteRecipe( [FromRoute] int recipeId )
         {
             string? userIdString = User.FindFirst( UserClaim.UserId )?.Value;
             if ( userIdString == null )
@@ -107,7 +106,7 @@ namespace CookBook.Api.Controllers
         }
 
         [HttpGet]
-        [Route( "Search/{searchRequest}" )]
+        [Route( "search/{searchRequest}" )]
         public IReadOnlyList<RecipeShortDto>? SearchRecipe( [FromRoute] string searchRequest )
         {
             return _recipeQuery.SearchRecipe( searchRequest );

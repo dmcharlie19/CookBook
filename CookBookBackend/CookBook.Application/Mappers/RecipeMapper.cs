@@ -14,7 +14,8 @@ namespace CookBook.Application.Mappers
                 ShortDescription = recipe.ShortDescription,
                 PreparingTime = recipe.PreparingTime,
                 PersonCount = recipe.PersonCount,
-                AuthorId = recipe.UserId
+                AuthorId = recipe.UserId,
+                AuthorName = recipe.User.Name
             };
         }
     }

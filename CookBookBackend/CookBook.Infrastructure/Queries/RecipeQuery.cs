@@ -67,12 +67,11 @@ namespace CookBook.Infrastructure.Queries
 
             return _dbContext.Recipes.
                 Where( r => r.UserId == userId )
+                .Include( r => r.User )
                 .ToList().
                 ConvertAll( r =>
                     {
                         var recipeDto = r.Map();
-                        recipeDto.AuthorId = user.Id;
-                        recipeDto.AuthorName = user.Name;
                         recipeDto.Tags = GetTags( r.Id );
                         return recipeDto;
                     }
