@@ -20,6 +20,10 @@ namespace CookBook.Core.Domain
         [StringLength( 100, MinimumLength = 3 )]
         public string Name { get; protected set; }
 
+        public List<UserFavorite> UserFavorites { get; set; }
+
+        public List<UserLike> UserLikes { get; set; }
+
         public User(
             string login,
             string password,
