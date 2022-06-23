@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using CookBook.Api.Dto;
+using CookBook.Application.Dto;
 using CookBook.Core.Domain;
 
 namespace CookBook.Application.Services

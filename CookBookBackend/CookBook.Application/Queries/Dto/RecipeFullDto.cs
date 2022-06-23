@@ -1,4 +1,4 @@
-using CookBook.Api.Dto;
+using CookBook.Application.Dto;
 
 namespace CookBook.Application.Queries.Dto
 {

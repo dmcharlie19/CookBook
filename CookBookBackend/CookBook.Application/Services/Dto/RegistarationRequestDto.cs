@@ -1,9 +1,9 @@
-namespace CookBook.Api.Dto
+namespace CookBook.Application.Dto
 {
-  public class RegistarationRequestDto
-  {
-    public string? Login { get; set; }
-    public string? Password { get; set; }
-    public string? Name { get; set; }
-  }
+    public class RegistarationRequestDto
+    {
+        public string? Login { get; set; }
+        public string? Password { get; set; }
+        public string? Name { get; set; }
+    }
 }

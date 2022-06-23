@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using CookBook.Api.Dto;
+using CookBook.Application.Dto;
 using CookBook.Application.Mappers;
 using CookBook.Application.Queries;
 using CookBook.Application.Queries.Dto;

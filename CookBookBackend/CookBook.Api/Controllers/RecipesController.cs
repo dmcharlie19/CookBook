@@ -1,5 +1,5 @@
-using CookBook.Api.Dto;
-using CookBook.Application.Entities.Users;
+using CookBook.Api.Utils;
+using CookBook.Application.Dto;
 using CookBook.Application.Queries;
 using CookBook.Application.Queries.Dto;
 using CookBook.Application.Repositories;
@@ -53,10 +53,6 @@ namespace CookBook.Api.Controllers
         [DisableRequestSizeLimit]
         public void AddRecipe()
         {
-            string? userIdString = User.FindFirst( UserClaim.UserId )?.Value;
-            if ( userIdString == null )
-                throw new InvalidClientParameterException( "user id not found" );
-
             if ( Request.Form.Files.Count != 1 )
                 throw new InvalidClientParameterException( "Неверное количество файлов" );
             IFormFile imgFile = Request.Form.Files[ 0 ];
@@ -70,7 +66,7 @@ namespace CookBook.Api.Controllers
             var tags = _tagService.AddTags( addRecipeRequest.Tags );
             _unitOfWork.Commit();
 
-            _recipeService.AddRecipe( int.Parse( userIdString ), addRecipeRequest, tags, imgPath );
+            _recipeService.AddRecipe( UserIdQualifier.GetUserId( this ), addRecipeRequest, tags, imgPath );
             _unitOfWork.Commit();
 
         }
@@ -97,11 +93,7 @@ namespace CookBook.Api.Controllers
         [Authorize]
         public void DeleteRecipe( [FromRoute] int recipeId )
         {
-            string? userIdString = User.FindFirst( UserClaim.UserId )?.Value;
-            if ( userIdString == null )
-                throw new InvalidClientParameterException( "user id not found" );
-
-            _recipeService.DeleteRecipe( int.Parse( userIdString ), recipeId );
+            _recipeService.DeleteRecipe( UserIdQualifier.GetUserId( this ), recipeId );
             _unitOfWork.Commit();
         }
 

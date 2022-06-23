@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using CookBook.Api.Dto;
+using CookBook.Application.Dto;
 using CookBook.Application.Repositories;
 using CookBook.Core.Domain;
 using CookBook.Core.Exceptions;

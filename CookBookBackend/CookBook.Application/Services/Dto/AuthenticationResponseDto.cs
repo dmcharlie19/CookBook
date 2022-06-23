@@ -1,6 +1,6 @@
 using System;
 
-namespace CookBook.Api.Dto
+namespace CookBook.Application.Dto
 {
     public class AuthenticationResponseDto
     {

@@ -1,4 +1,4 @@
-﻿namespace CookBook.Api.Dto
+﻿namespace CookBook.Application.Dto
 {
     public class RecipeIngridientDto
     {
