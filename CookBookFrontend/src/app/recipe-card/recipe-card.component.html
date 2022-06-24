@@ -11,11 +11,11 @@
             </div>
             <div class="flex-row">
                 <div class="recipeBox-likes-favor" (click)="onLike()">
-                    <img src="assets/img/like.png">
+                    <img [src]="likeUrl">
                     <p class="recipeBox-likes-favor-font">{{recipe.likesCount}}</p>
                 </div>
                 <div class="recipeBox-likes-favor" (click)="onFavorite()">
-                    <img src="assets/img/star.png">
+                    <img [src]="starUrl">
                     <p class="recipeBox-likes-favor-font">{{recipe.favoritesCount}}</p>
                 </div>
             </div>

@@ -38,9 +38,9 @@ namespace CookBook.Api.Controllers
 
         [HttpGet]
         [Route( "getRecipes/{page}" )]
-        public IReadOnlyList<RecipeShortDto>? GetAll( [FromRoute] int page )
+        public IReadOnlyList<RecipeShortDto>? GetRecipesPage( [FromRoute] int page )
         {
-            return _recipeQuery.GetAll( page );
+            return _recipeQuery.GetRecipesPage( page );
         }
 
         [HttpGet, Route( "getRecipeFull/{recipeId}" )]
@@ -53,6 +53,30 @@ namespace CookBook.Api.Controllers
         public RecipeShortDto GetRecipeShort( [FromRoute] int recipeId )
         {
             return _recipeQuery.GetRecipeShort( recipeId );
+        }
+
+        [HttpGet, Route( "users/{userId}" )]
+        public IReadOnlyList<RecipeShortDto>? GetRecipesByUserId( [FromRoute] int userId )
+        {
+            return _recipeQuery.GetByUserId( userId );
+        }
+
+        [HttpGet]
+        [Route( "search/{searchRequest}" )]
+        public IReadOnlyList<RecipeShortDto>? SearchRecipe( [FromRoute] string searchRequest )
+        {
+            return _recipeQuery.SearchRecipe( searchRequest );
+        }
+
+        [HttpGet, Route( "images/{recipeId}" )]
+        public void GetRecipeImage( [FromRoute] int recipeId )
+        {
+            var path = _recipeQuery.GetRecipeImagePath( recipeId );
+            if ( path != "" )
+            {
+                Response.ContentType = "image/jpeg";
+                Response.SendFileAsync( path ).Wait();
+            }
         }
 
         [HttpPost, Authorize, Route( "addRecipe" )]
@@ -74,42 +98,9 @@ namespace CookBook.Api.Controllers
             var tags = _tagService.AddTags( addRecipeRequest.Tags );
             _unitOfWork.Commit();
 
-            _recipeService.AddRecipe( UserIdQualifier.GetUserId( this ), addRecipeRequest, tags, imgPath );
+            _recipeService.AddRecipe( UserIdQualifier.GetUserId( this.HttpContext ), addRecipeRequest, tags, imgPath );
             _unitOfWork.Commit();
 
-        }
-
-        [HttpGet, Route( "users/{userId}" )]
-        public IReadOnlyList<RecipeShortDto>? GetRecipesByUserId( [FromRoute] int userId )
-        {
-            return _recipeQuery.GetByUserId( userId );
-        }
-
-        [HttpGet, Route( "images/{recipeId}" )]
-        public void GetRecipeImage( [FromRoute] int recipeId )
-        {
-            var path = _recipeQuery.GetRecipeImagePath( recipeId );
-            if ( path != "" )
-            {
-                Response.ContentType = "image/jpeg";
-                Response.SendFileAsync( path ).Wait();
-            }
-        }
-
-        [HttpDelete]
-        [Route( "delete/{recipeId}" )]
-        [Authorize]
-        public void DeleteRecipe( [FromRoute] int recipeId )
-        {
-            _recipeService.DeleteRecipe( UserIdQualifier.GetUserId( this ), recipeId );
-            _unitOfWork.Commit();
-        }
-
-        [HttpGet]
-        [Route( "search/{searchRequest}" )]
-        public IReadOnlyList<RecipeShortDto>? SearchRecipe( [FromRoute] string searchRequest )
-        {
-            return _recipeQuery.SearchRecipe( searchRequest );
         }
 
         [HttpPost]
@@ -117,7 +108,7 @@ namespace CookBook.Api.Controllers
         [Authorize]
         public IActionResult AddLike( [FromRoute] int recipeId )
         {
-            int userId = UserIdQualifier.GetUserId( this );
+            int userId = UserIdQualifier.GetUserId( this.HttpContext );
             _recipeService.AddLike( userId, recipeId );
             _unitOfWork.Commit();
             return Ok();
@@ -128,10 +119,19 @@ namespace CookBook.Api.Controllers
         [Authorize]
         public IActionResult AddFavorite( [FromRoute] int recipeId )
         {
-            int userId = UserIdQualifier.GetUserId( this );
+            int userId = UserIdQualifier.GetUserId( this.HttpContext );
             _recipeService.AddFavorite( userId, recipeId );
             _unitOfWork.Commit();
             return Ok();
+        }
+
+        [HttpDelete]
+        [Route( "delete/{recipeId}" )]
+        [Authorize]
+        public void DeleteRecipe( [FromRoute] int recipeId )
+        {
+            _recipeService.DeleteRecipe( UserIdQualifier.GetUserId( this.HttpContext ), recipeId );
+            _unitOfWork.Commit();
         }
     }
 }

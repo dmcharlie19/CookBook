@@ -5,7 +5,7 @@ namespace CookBook.Application.Queries
 {
     public interface IRecipeQuery
     {
-        IReadOnlyList<RecipeShortDto> GetAll( int page );
+        IReadOnlyList<RecipeShortDto> GetRecipesPage( int page );
         RecipeFullDto GetRecipeDetail( int id );
         IReadOnlyList<RecipeShortDto> GetByUserId( int userId );
         IReadOnlyList<RecipeShortDto> SearchRecipe( string searchRequest );

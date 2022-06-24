@@ -1,8 +1,10 @@
 using CookBook.Api.Middleware;
+using CookBook.Api.Utils;
 using CookBook.Application.Entities.Users;
 using CookBook.Application.Queries;
 using CookBook.Application.Repositories;
 using CookBook.Application.Services;
+using CookBook.Application.Utils;
 using CookBook.Infrastructure.Foundation;
 using CookBook.Infrastructure.Queries;
 using CookBook.Infrastructure.Repositories;
@@ -55,6 +57,10 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
 builder.Services.AddScoped<ITagRepository, TagRepository>();
+
+//builder.Services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IUserIdQualifier, UserIdQualifier>();
 
 // Swagger UI
 builder.Services.AddSwaggerGen();

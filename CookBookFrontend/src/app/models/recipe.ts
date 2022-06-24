@@ -9,7 +9,9 @@ export class RecipeShortInfoResponceDto {
         public likesCount: Number,
         public favoritesCount: Number,
         public authorId: Number,
-        public authorName: string) { }
+        public authorName: string,
+        public isUserFavoriteRecipe: boolean,
+        public isUserLikeRecipe: boolean,) { }
 }
 
 export class RecipeFullInfoResponceDto {
