@@ -10,5 +10,6 @@ namespace CookBook.Application.Queries
         IReadOnlyList<RecipeShortDto> GetByUserId( int userId );
         IReadOnlyList<RecipeShortDto> SearchRecipe( string searchRequest );
         string GetRecipeImagePath( int recipeId );
+        RecipeShortDto GetRecipeShort( int id );
     }
 }

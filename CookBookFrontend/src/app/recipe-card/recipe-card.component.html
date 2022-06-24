@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="flex-row">
-                <div class="recipeBox-likes-favor">
+                <div class="recipeBox-likes-favor" (click)="onLike()">
                     <img src="assets/img/like.png">
                     <p class="recipeBox-likes-favor-font">{{recipe.likesCount}}</p>
                 </div>
@@ -38,7 +38,7 @@
                 <img class="recipeBox-svg" src="assets/img/person.svg">
                 <div>
                     <p class="recipeBox-info-title">Рецепт на:</p>
-                    <p class="recipeBox-info-number">{{recipe.preparingTime}} персон</p>
+                    <p class="recipeBox-info-number">{{recipe.personCount}} персон</p>
                 </div>
             </div>
         </div>

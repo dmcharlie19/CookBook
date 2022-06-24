@@ -49,19 +49,27 @@ namespace CookBook.Api.Controllers
             return _recipeQuery.GetRecipeDetail( recipeId );
         }
 
+        [HttpGet, Route( "getRecipeShort/{recipeId}" )]
+        public RecipeShortDto GetRecipeShort( [FromRoute] int recipeId )
+        {
+            return _recipeQuery.GetRecipeShort( recipeId );
+        }
+
         [HttpPost, Authorize, Route( "addRecipe" )]
         [DisableRequestSizeLimit]
         public void AddRecipe()
         {
-            if ( Request.Form.Files.Count != 1 )
-                throw new InvalidClientParameterException( "Неверное количество файлов" );
-            IFormFile imgFile = Request.Form.Files[ 0 ];
-
-            if ( Request.Form.Keys.Count != 1 )
+            if ( Request.Form.Keys.FirstOrDefault( key => key == "data" ) == null )
                 throw new InvalidClientParameterException( "Недостаточно данных" );
-            AddRecipeRequestDto addRecipeRequest = JsonConvert.DeserializeObject<AddRecipeRequestDto>( Request.Form[ "data" ] );
 
-            string imgPath = _imageService.SaveImage( imgFile.OpenReadStream(), imgFile.FileName );
+            string imgPath = "";
+            if ( Request.Form.Files.Count != 0 )
+            {
+                IFormFile imgFile = Request.Form.Files[ 0 ];
+                imgPath = _imageService.SaveImage( imgFile.OpenReadStream(), imgFile.FileName );
+            }
+
+            AddRecipeRequestDto addRecipeRequest = JsonConvert.DeserializeObject<AddRecipeRequestDto>( Request.Form[ "data" ] );
 
             var tags = _tagService.AddTags( addRecipeRequest.Tags );
             _unitOfWork.Commit();
@@ -102,6 +110,28 @@ namespace CookBook.Api.Controllers
         public IReadOnlyList<RecipeShortDto>? SearchRecipe( [FromRoute] string searchRequest )
         {
             return _recipeQuery.SearchRecipe( searchRequest );
+        }
+
+        [HttpPost]
+        [Route( "addLike/{recipeId}" )]
+        [Authorize]
+        public IActionResult AddLike( [FromRoute] int recipeId )
+        {
+            int userId = UserIdQualifier.GetUserId( this );
+            _recipeService.AddLike( userId, recipeId );
+            _unitOfWork.Commit();
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route( "addFavorite/{recipeId}" )]
+        [Authorize]
+        public IActionResult AddFavorite( [FromRoute] int recipeId )
+        {
+            int userId = UserIdQualifier.GetUserId( this );
+            _recipeService.AddFavorite( userId, recipeId );
+            _unitOfWork.Commit();
+            return Ok();
         }
     }
 }

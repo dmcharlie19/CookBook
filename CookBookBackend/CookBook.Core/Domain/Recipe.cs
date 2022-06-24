@@ -24,7 +24,6 @@ namespace CookBook.Core.Domain
         [Range( 1, 1000 )]
         public int PersonCount { get; set; }
 
-        [Required]
         public string ImagePath { get; protected set; }
 
         [Required]
@@ -34,12 +33,15 @@ namespace CookBook.Core.Domain
         public List<RecipeStep> RecipeSteps { get; protected set; }
 
         [Required]
+        public List<RecipeIngredient> RecipeIngredients { get; protected set; }
+
+        [Required]
         public int UserId { get; protected set; }
 
         public User User { get; protected set; }
 
-        [Required]
-        public List<RecipeIngredient> RecipeIngredients { get; protected set; }
+        public List<UserLike> UserLikes { get; set; }
+        public List<UserFavorite> UserFavorites { get; set; }
 
         private const int _maxStepsCount = 50;
         private const int _maxIngredientsCount = 10;

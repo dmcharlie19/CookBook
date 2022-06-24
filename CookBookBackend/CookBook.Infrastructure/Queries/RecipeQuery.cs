@@ -25,16 +25,18 @@ namespace CookBook.Infrastructure.Queries
 
         public IReadOnlyList<RecipeShortDto> GetAll( int page )
         {
-            var recipeQuery = _dbContext.Recipes.Include( r => r.User );
-            var items = recipeQuery.Skip( ( page - 1 ) * _pageSize )
-                .Take( _pageSize )
+            var recipeQuery = _dbContext.Recipes.Skip( ( page - 1 ) * _pageSize )
+                .Take( _pageSize );
+
+            var items = recipeQuery
+                .Include( r => r.User )
+                .Include( r => r.UserLikes )
+                .Include( r => r.UserFavorites )
                 .ToList();
 
             return items.ConvertAll( r =>
               {
                   var recipeDto = r.Map();
-                  recipeDto.AuthorId = r.User.Id;
-                  recipeDto.AuthorName = r.User.Name;
                   recipeDto.Tags = GetTags( r.Id );
                   return recipeDto;
               }
@@ -44,13 +46,8 @@ namespace CookBook.Infrastructure.Queries
         public RecipeFullDto GetRecipeDetail( int id )
         {
             RecipeFullDto recipeFull = new();
-            RecipeShortDto recipeShort = new();
+            recipeFull.RecipeShortInfo = GetRecipeShort( id );
 
-            recipeShort = _dbContext.Recipes.FirstOrDefault( recipe => recipe.Id == id ).Map();
-            recipeShort.AuthorName = _dbContext.Users.FirstOrDefault( user => user.Id == recipeShort.AuthorId ).Name;
-            recipeShort.Tags = GetTags( id );
-
-            recipeFull.RecipeShortInfo = recipeShort;
             recipeFull.CookingSteps = _dbContext.RecipeSteps.Where( step => step.RecipeId == id ).Select( step => step.Content ).ToArray();
             recipeFull.RecipeIngridients = _dbContext.RecipeIngredients.Where( ingr => ingr.RecipeId == id ).Select( ingr => new RecipeIngridientDto
             {
@@ -59,6 +56,19 @@ namespace CookBook.Infrastructure.Queries
             } ).ToArray();
 
             return recipeFull;
+        }
+
+        public RecipeShortDto GetRecipeShort( int id )
+        {
+            var recipeShort = _dbContext.Recipes
+                .Include( r => r.User )
+                .Include( r => r.UserLikes )
+                .Include( r => r.UserFavorites )
+                .FirstOrDefault( r => r.Id == id )
+                .Map();
+
+            recipeShort.Tags = GetTags( id );
+            return recipeShort;
         }
 
         public IReadOnlyList<RecipeShortDto> GetByUserId( int userId )
@@ -70,6 +80,8 @@ namespace CookBook.Infrastructure.Queries
             return _dbContext.Recipes.
                 Where( r => r.UserId == userId )
                 .Include( r => r.User )
+                .Include( r => r.UserLikes )
+                .Include( r => r.UserFavorites )
                 .ToList().
                 ConvertAll( r =>
                     {
@@ -98,14 +110,14 @@ namespace CookBook.Infrastructure.Queries
                 .Include( r => r.User );
 
             List<Recipe> items = recipeQuery
+                .Include( r => r.UserLikes )
+                .Include( r => r.UserFavorites )
                 .Take( _pageSize )
                 .ToList();
 
             return items.ConvertAll( r =>
             {
                 var recipeDto = r.Map();
-                recipeDto.AuthorId = r.User.Id;
-                recipeDto.AuthorName = r.User.Name;
                 recipeDto.Tags = GetTags( r.Id );
                 return recipeDto;
             }

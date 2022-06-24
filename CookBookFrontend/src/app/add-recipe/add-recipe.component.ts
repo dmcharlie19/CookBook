@@ -167,6 +167,7 @@ export class AddRecipeComponent implements OnInit {
   }
 
   onDeleteImageClick(): void {
+    this.imageFile = null;
     this.isImageAdded = false;
   }
 

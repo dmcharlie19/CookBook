@@ -1,5 +1,4 @@
-﻿using CookBook.Api.Utils;
-using CookBook.Application.Dto;
+﻿using CookBook.Application.Dto;
 using CookBook.Application.Repositories;
 using CookBook.Application.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -34,28 +33,5 @@ namespace CookBook.Api.Controllers
 
             return Ok();
         }
-
-        [HttpPost]
-        [Route( "addLike/{recipeId}" )]
-        [Authorize]
-        public IActionResult AddLike( [FromRoute] int recipeId )
-        {
-            int userId = UserIdQualifier.GetUserId( this );
-            _accountService.AddLike( userId, recipeId );
-            _unitOfWork.Commit();
-            return Ok();
-        }
-
-        [HttpPost]
-        [Route( "addFavorite" )]
-        [Authorize]
-        public IActionResult AddFavorite( [FromRoute] int recipeId )
-        {
-            int userId = UserIdQualifier.GetUserId( this );
-            _accountService.AddFavorite( userId, recipeId );
-            _unitOfWork.Commit();
-            return Ok();
-        }
-
     }
 }

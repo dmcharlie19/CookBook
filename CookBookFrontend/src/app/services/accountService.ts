@@ -34,8 +34,8 @@ export class UserInfoStorage {
 @Injectable()
 export class AccountService {
 
-    private loginUrl = "/api/account/login";
-    private registrationUrl = "/api/account/registration";
+    private baseUrl = "/api/account"
+
     private userInfoStorage: UserInfoStorage;
 
     constructor(private http: HttpClient) {
@@ -59,7 +59,8 @@ export class AccountService {
     }
 
     login(authenticate: AuthenticateRequestDto): Observable<Boolean> {
-        return this.http.post(this.loginUrl, authenticate).pipe(
+        const url = this.baseUrl + "/login"
+        return this.http.post(url, authenticate).pipe(
             map(
                 (res: AuthenticateResponseDto) => {
                     return this.startSession(res)
@@ -68,7 +69,8 @@ export class AccountService {
     }
 
     registrate(registrationDto: RegistrationRequestDto): Observable<Object> {
-        return this.http.post(this.registrationUrl, registrationDto);
+        const url = this.baseUrl + "/registration";
+        return this.http.post(url, registrationDto);
     }
 
     private startSession(authResponse: AuthenticateResponseDto): Boolean {
@@ -104,7 +106,17 @@ export class AccountService {
         return false;
     }
 
-    isLoggedOut(): Boolean {
+    public isLoggedOut(): Boolean {
         return !this.isLoggedIn();
+    }
+
+    public addLike(recipeId: Number): Observable<Object> {
+        const url = `${this.baseUrl}/addLike/${recipeId}`;
+        return this.http.post(url, null);
+    }
+
+    public addFavorite(recipeId: Number): Observable<Object> {
+        const url = `${this.baseUrl}/addFavorite/${recipeId}`;
+        return this.http.post(url, null);
     }
 }

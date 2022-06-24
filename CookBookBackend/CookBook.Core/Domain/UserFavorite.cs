@@ -10,9 +10,10 @@
         public Recipe Recipe { get; protected set; }
         public int RecipeId { get; protected set; }
 
-        public UserFavorite( int recipeId )
+        public UserFavorite( int recipeId, int userId )
         {
             RecipeId = recipeId;
+            UserId = userId;
         }
     }
 }

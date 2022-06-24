@@ -26,6 +26,11 @@ export class RecipeService {
         return this.http.get(url);
     }
 
+    getRecipeShort(id: Number) {
+        const url = `${this.recipesUrl}/getRecipeShort/${id}`;
+        return this.http.get(url);
+    }
+
     addRecipe(addRecipeRequest: AddRecipeRequestDto, imageFile: File): Observable<Object> {
 
         const formData = new FormData();

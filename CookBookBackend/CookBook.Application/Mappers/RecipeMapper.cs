@@ -15,7 +15,8 @@ namespace CookBook.Application.Mappers
                 PreparingTime = recipe.PreparingTime,
                 PersonCount = recipe.PersonCount,
                 AuthorId = recipe.UserId,
-                AuthorName = recipe.User.Name
+                AuthorName = recipe.User.Name,
+                LikesCount = recipe.UserLikes.Count,
             };
         }
     }

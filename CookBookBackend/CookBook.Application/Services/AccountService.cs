@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using CookBook.Application.Dto;
 using CookBook.Application.Entities.Users;
@@ -73,22 +72,6 @@ namespace CookBook.Application.Services
 
             user.Validate();
             _userRepository.Add( user );
-        }
-
-        public void AddLike( int userId, int recipeId )
-        {
-            var user = _userRepository.Get( userId );
-
-            if ( user.UserLikes.FirstOrDefault( ul => ul.RecipeId == recipeId ) == null )
-                user.UserLikes.Add( new UserLike( recipeId ) );
-        }
-
-        public void AddFavorite( int userId, int recipeId )
-        {
-            var user = _userRepository.Get( userId );
-
-            if ( user.UserFavorites.FirstOrDefault( uf => uf.RecipeId == recipeId ) == null )
-                user.UserFavorites.Add( new UserFavorite( recipeId ) );
         }
     }
 }

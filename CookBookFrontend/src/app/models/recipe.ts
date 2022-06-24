@@ -4,6 +4,7 @@ export class RecipeShortInfoResponceDto {
         public title: string,
         public shortDescription: string,
         public preparingTime: Number,
+        public personCount: Number,
         public tags: string[],
         public likesCount: Number,
         public favoritesCount: Number,

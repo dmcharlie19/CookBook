@@ -56,5 +56,27 @@ namespace CookBook.Application.Services
 
             _recipeRepository.Delete( recipe );
         }
+
+        public void AddLike( int userId, int recipeId )
+        {
+            Recipe recipe = _recipeRepository.Get( recipeId );
+
+            UserLike userLike = recipe.UserLikes.FirstOrDefault( ul => ul.UserId == userId );
+            if ( userLike == null )
+                recipe.UserLikes.Add( new UserLike( recipeId, userId ) );
+            else
+                recipe.UserLikes.Remove( userLike );
+        }
+
+        public void AddFavorite( int userId, int recipeId )
+        {
+            Recipe recipe = _recipeRepository.Get( recipeId );
+
+            UserFavorite userFavorite = recipe.UserFavorites.FirstOrDefault( ul => ul.UserId == userId );
+            if ( userFavorite == null )
+                recipe.UserFavorites.Add( new UserFavorite( recipeId, userId ) );
+            else
+                recipe.UserFavorites.Remove( userFavorite );
+        }
     }
 }

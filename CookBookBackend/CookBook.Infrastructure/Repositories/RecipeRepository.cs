@@ -22,7 +22,11 @@ namespace CookBook.Infrastructure.Repositories
 
         public Recipe Get( int id )
         {
-            return _dbContext.Recipes.Include( r => r.User ).FirstOrDefault( r => r.Id == id );
+            return _dbContext.Recipes
+                .Include( r => r.User )
+                .Include( r => r.UserLikes )
+                .Include( r => r.UserFavorites )
+                .FirstOrDefault( r => r.Id == id );
         }
 
         public void Delete( Recipe recipe )
