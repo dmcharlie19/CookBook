@@ -42,8 +42,13 @@ export class RecipeCardComponent implements OnInit {
   }
 
   onLike(): void {
-    this.accountService.addLike(this.recipe.id).subscribe(() => this.updateRecipe());
+    this.recipeService.addLike(this.recipe.id).subscribe(() => this.updateRecipe());
   }
+
+  onFavorite(): void {
+    this.recipeService.addFavorite(this.recipe.id).subscribe(() => this.updateRecipe());
+  }
+
 
   onRecipeDetail(): void {
     this.router.navigate(["/recipeDetail", this.recipe.id])

@@ -57,4 +57,14 @@ export class RecipeService {
         const url = `${this.recipesUrl}/search/${searchRequest}`;
         return this.http.get(url);
     }
+
+    public addLike(recipeId: Number): Observable<Object> {
+        const url = `${this.recipesUrl}/addLike/${recipeId}`;
+        return this.http.post(url, null);
+    }
+
+    public addFavorite(recipeId: Number): Observable<Object> {
+        const url = `${this.recipesUrl}/addFavorite/${recipeId}`;
+        return this.http.post(url, null);
+    }
 }

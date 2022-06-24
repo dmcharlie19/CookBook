@@ -109,14 +109,4 @@ export class AccountService {
     public isLoggedOut(): Boolean {
         return !this.isLoggedIn();
     }
-
-    public addLike(recipeId: Number): Observable<Object> {
-        const url = `${this.baseUrl}/addLike/${recipeId}`;
-        return this.http.post(url, null);
-    }
-
-    public addFavorite(recipeId: Number): Observable<Object> {
-        const url = `${this.baseUrl}/addFavorite/${recipeId}`;
-        return this.http.post(url, null);
-    }
 }

@@ -14,7 +14,7 @@
                     <img src="assets/img/like.png">
                     <p class="recipeBox-likes-favor-font">{{recipe.likesCount}}</p>
                 </div>
-                <div class="recipeBox-likes-favor">
+                <div class="recipeBox-likes-favor" (click)="onFavorite()">
                     <img src="assets/img/star.png">
                     <p class="recipeBox-likes-favor-font">{{recipe.favoritesCount}}</p>
                 </div>

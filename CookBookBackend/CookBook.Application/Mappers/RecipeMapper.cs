@@ -17,6 +17,7 @@ namespace CookBook.Application.Mappers
                 AuthorId = recipe.UserId,
                 AuthorName = recipe.User.Name,
                 LikesCount = recipe.UserLikes.Count,
+                FavoritesCount = recipe.UserFavorites.Count,
             };
         }
     }
