@@ -415,3 +415,4 @@ CookBookBackend/CookBook.Api/libman.json
 Resources
 /CookBookBackend/CookBook.Api/wwwroot
 /dbDump
+CookBookBackend/CookBook.Api/.config/dotnet-tools.json

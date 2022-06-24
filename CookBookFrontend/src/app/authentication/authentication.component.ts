@@ -17,8 +17,8 @@ export class AuthenticationComponent {
 
   constructor(private authService: AccountService, private router: Router, private errorService: ErrorService) {
     this._loginForm = new FormGroup({
-      "login": new FormControl('admin', [Validators.required, Validators.minLength(3)]),
-      "password": new FormControl('admin', [Validators.required, Validators.minLength(3)])
+      "login": new FormControl('', [Validators.required, Validators.minLength(3)]),
+      "password": new FormControl('', [Validators.required, Validators.minLength(3)])
     });
 
     this.errorService.onErrorOcured.subscribe(e => {

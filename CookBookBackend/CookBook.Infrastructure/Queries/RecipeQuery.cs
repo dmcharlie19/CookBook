@@ -4,9 +4,11 @@ using CookBook.Application.Dto;
 using CookBook.Application.Mappers;
 using CookBook.Application.Queries;
 using CookBook.Application.Queries.Dto;
+using CookBook.Core.Domain;
 using CookBook.Core.Exceptions;
 using CookBook.Infrastructure.Foundation;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace CookBook.Infrastructure.Queries
 {
@@ -87,15 +89,15 @@ namespace CookBook.Infrastructure.Queries
 
         public IReadOnlyList<RecipeShortDto> SearchRecipe( string searchRequest )
         {
-            var tagsQuerry = _dbContext.Tags.Where( t => t.Name == searchRequest )
+            int[] tagsQuerry = _dbContext.Tags.Where( t => t.Name == searchRequest )
                     .Join( _dbContext.TagRecipes, tag => tag.Id, tagRecipe => tagRecipe.TagId, ( tag, tagRecipe ) => tagRecipe.RecipeId )
                     .ToArray();
 
-            var recipeQuery = _dbContext.Recipes
-                .Where( recipe => ( recipe.Title.Contains( searchRequest ) | tagsQuerry.Contains( recipe.Id ) ) )
+            IIncludableQueryable<Recipe, User> recipeQuery = _dbContext.Recipes
+                .Where( recipe => ( recipe.Title.Contains( searchRequest ) || tagsQuerry.Contains( recipe.Id ) ) )
                 .Include( r => r.User );
 
-            var items = recipeQuery
+            List<Recipe> items = recipeQuery
                 .Take( _pageSize )
                 .ToList();
 
