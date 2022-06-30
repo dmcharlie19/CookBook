@@ -73,6 +73,11 @@ export class AccountService {
         return this.http.post(url, registrationDto);
     }
 
+    getUserInfo(userId: number): Observable<Object> {
+        const url = `${this.baseUrl}/getUserInfo/${userId}`;
+        return this.http.get(url);
+    }
+
     private startSession(authResponse: AuthenticateResponseDto): Boolean {
         if (authResponse.accesToken == null)
             return false;

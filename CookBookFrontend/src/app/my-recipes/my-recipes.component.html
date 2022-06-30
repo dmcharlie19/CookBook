@@ -2,15 +2,15 @@
     <app-header [isRecipesList]="1"></app-header>
     <app-error-display></app-error-display>
 
-    <div class="topBar">
+    <div class="top-bar">
         <div class="flex-row">
-            <div class="topBar-back hovered-bg-color-light" routerLink="/">
+            <div class="top-bar-back hovered-bg-color-light" routerLink="/">
                 <img src=" assets/img/back.png">
                 <p>Назад</p>
             </div>
         </div>
         <div class="flex-row" *ngIf="accountServise.isLoggedIn()">
-            <p class="topBar-title">Мой профиль</p>
+            <p class="top-bar-title">Мой профиль</p>
         </div>
     </div>
     <div *ngIf="isLoaded == true">

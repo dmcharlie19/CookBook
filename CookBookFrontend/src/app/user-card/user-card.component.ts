@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { UserInfo } from '../models/userInfo';
+import { AccountService } from '../services/AccountService';
 
 @Component({
   selector: 'app-user-card',
@@ -8,21 +10,22 @@ import { UserInfo } from '../models/userInfo';
 })
 export class UserCardComponent implements OnInit {
 
-  userInfo: UserInfo;
-  registrDateStr: string;
+  public userInfo: UserInfo = null;;
+  public registrDateStr: string = "";
+  private userId: number;
 
-  constructor() {
-    this.userInfo = new UserInfo();
-    this.userInfo = {
-      id: 1, userName: "Иван",
-      userDescription: "позитивный человек, повар, любит десерты и мясо \r\n позитивный человек, повар, любит десерты и мясопозитивный человек, повар, любит десерты и мясо \r\n позитивный человек, повар, любит десерты и мясо",
-      RecipesCount: 5,
-      RegistrationDate: new Date()
-    };
+  constructor(
+    private route: ActivatedRoute,
+    private accountService: AccountService) {
   }
 
   ngOnInit(): void {
-    this.registrDateStr = this.userInfo.RegistrationDate.toLocaleDateString();
+    this.userId = this.route.snapshot.params['id'];
+    this.accountService.getUserInfo(this.userId).subscribe(
+      (data: UserInfo) => {
+        this.userInfo = data;
+        this.registrDateStr = new Date(this.userInfo.registrationDate).toLocaleDateString();
+      });
 
   }
 }
